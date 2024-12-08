@@ -85,14 +85,6 @@ router
 //   );
 
 router
-  .route('/:id')
-  .get(
-    authMiddleware.protect,
-    authMiddleware.restrictTo('super-admin'),
-    userController.getUser
-  );
-
-router
   .route('/role/:id')
   .patch(
     authMiddleware.protect,
@@ -106,6 +98,14 @@ router
     authMiddleware.protect,
     authMiddleware.restrictTo('super-admin'),
     userController.restrictUser
+  );
+
+router
+  .route('/:id')
+  .get(
+    authMiddleware.protect,
+    authMiddleware.restrictTo('super-admin'),
+    userController.getUser
   );
 
 export default router;

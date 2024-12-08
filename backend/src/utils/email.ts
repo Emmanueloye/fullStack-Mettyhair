@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import ejs from 'ejs';
 import { convert } from 'html-to-text';
 import brevo, { TransactionalEmailsApiApiKeys } from '@getbrevo/brevo';
+import path from 'path';
 
 class Email {
   constructor() {}
@@ -26,28 +27,31 @@ class Email {
       },
     });
   }
+
   async send(template: string, subject: string, data: any) {
-    ejs.renderFile(
-      `${__dirname}/../view/emails/${template}.ejs`,
-      { ...data },
-      (err, result) => {
-        if (err) {
-          throw err;
-        } else {
-          const mailOptions = {
-            from:
-              process.env.NODE_ENV === 'development'
-                ? process.env.EMAIL_SENDER
-                : process.env.SENDER_EMAIL,
-            to: data.email,
-            subject,
-            html: result,
-            text: convert(result),
-          };
-          return this.transporter().sendMail(mailOptions);
-        }
+    // This Code will be in build folder in production which excludes the ejs files thereby changing the directory of the view. The file path is to ensure that we are able to reach the ejs file in production.
+    const filepath =
+      process.env.NODE_ENV === 'production'
+        ? path.resolve(__dirname, `../../src/view/emails/${template}.ejs`)
+        : path.resolve(__dirname, `../view/emails/${template}.ejs`);
+
+    ejs.renderFile(filepath, { ...data }, (err, result) => {
+      if (err) {
+        throw err;
+      } else {
+        const mailOptions = {
+          from:
+            process.env.NODE_ENV === 'development'
+              ? process.env.EMAIL_SENDER
+              : process.env.SENDER_EMAIL,
+          to: data.email,
+          subject,
+          html: result,
+          text: convert(result),
+        };
+        return this.transporter().sendMail(mailOptions);
       }
-    );
+    });
   }
   async sendVerificationEmail(data: any) {
     await this.send('emailVerification', 'Email Verification', data);
