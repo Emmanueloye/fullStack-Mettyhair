@@ -1,0 +1,615 @@
+[
+  {
+    "productName": "wig new age",
+    "slug": "wig-new-age",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 10,
+    "sellingPrice": 300000,
+    "discountPrice": 290000,
+    "costPrice": 260000,
+    "color": "brown,blonde",
+    "size": "14 inches, 20 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800839/cld-sample-5.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630746/g8gfhzlzh29r8vibn9x9.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig big thing",
+    "slug": "wig-big-thing",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 6,
+    "sellingPrice": 400000,
+    "discountPrice": 390000,
+    "costPrice": 340000,
+    "color": "black,blonde",
+    "size": "24 inches, 30 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800837/cld-sample.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800836/samples/woman-on-a-football-field.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig next level",
+    "slug": "wig-next-level",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig i need traffic",
+    "slug": "wig-i-need-traffic",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 16,
+    "sellingPrice": 140000,
+    "costPrice": 120000,
+    "color": "brown, pink",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig iremide",
+    "slug": "wig-iremide",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 8,
+    "sellingPrice": 800000,
+    "costPrice": 720000,
+    "color": "black,brown, pink",
+    "size": "16 inches,18 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig otilo",
+    "slug": "wig-otilo",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 12,
+    "sellingPrice": 340000,
+    "discountPrice": 320000,
+    "costPrice": 300000,
+    "color": "brown,blonde",
+    "size": "14 inches, 20 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800839/cld-sample-5.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630746/g8gfhzlzh29r8vibn9x9.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig igbayi lola",
+    "slug": "wig-igbayi-lola",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig igbalode",
+    "slug": "wig-igalode",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 6,
+    "sellingPrice": 400000,
+    "discountPrice": 390000,
+    "costPrice": 340000,
+    "color": "black,blonde",
+    "size": "24 inches, 30 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800837/cld-sample.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800836/samples/woman-on-a-football-field.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig lodelode",
+    "slug": "wig-lodelode",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 8,
+    "sellingPrice": 800000,
+    "costPrice": 720000,
+    "color": "black,brown, pink",
+    "size": "16 inches,18 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig enugbe",
+    "slug": "wig-enugbe",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+
+  {
+    "productName": "wig igbeyinloju",
+    "slug": "wig-igeyinloju",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 10,
+    "sellingPrice": 300000,
+    "discountPrice": 290000,
+    "costPrice": 260000,
+    "color": "brown,blonde",
+    "size": "14 inches, 20 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800839/cld-sample-5.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630746/g8gfhzlzh29r8vibn9x9.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig ifeoluwa",
+    "slug": "wig-ifeoluwa",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 6,
+    "sellingPrice": 400000,
+    "discountPrice": 390000,
+    "costPrice": 340000,
+    "color": "black,blonde",
+    "size": "24 inches, 30 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800837/cld-sample.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800836/samples/woman-on-a-football-field.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig ayelabowo",
+    "slug": "wig-ayelabowo",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig wasere",
+    "slug": "wig-wasere",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 16,
+    "sellingPrice": 140000,
+    "costPrice": 120000,
+    "color": "brown, pink",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig titi lailai",
+    "slug": "wig-titi-lailai",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 8,
+    "sellingPrice": 800000,
+    "costPrice": 720000,
+    "color": "black,brown, pink",
+    "size": "16 inches,18 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig sabi",
+    "slug": "wig-sabi",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 12,
+    "sellingPrice": 340000,
+    "discountPrice": 320000,
+    "costPrice": 300000,
+    "color": "brown,blonde",
+    "size": "14 inches, 20 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800839/cld-sample-5.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630746/g8gfhzlzh29r8vibn9x9.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig omo to damo",
+    "slug": "wig-omo-to-damo",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig jami si",
+    "slug": "wig-jami-si",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 6,
+    "sellingPrice": 400000,
+    "discountPrice": 390000,
+    "costPrice": 340000,
+    "color": "black,blonde",
+    "size": "24 inches, 30 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800837/cld-sample.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800836/samples/woman-on-a-football-field.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig best de best",
+    "slug": "wig-best-de-best",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 8,
+    "sellingPrice": 800000,
+    "costPrice": 720000,
+    "color": "black,brown, pink",
+    "size": "16 inches,18 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig jeun lo",
+    "slug": "wig-jeun-lo",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig lobatan",
+    "slug": "wig-lobatan",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 10,
+    "sellingPrice": 300000,
+    "discountPrice": 290000,
+    "costPrice": 260000,
+    "color": "brown,blonde",
+    "size": "14 inches, 20 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800839/cld-sample-5.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630746/g8gfhzlzh29r8vibn9x9.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig iderade",
+    "slug": "wig-iderade",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 6,
+    "sellingPrice": 400000,
+    "discountPrice": 390000,
+    "costPrice": 340000,
+    "color": "black,blonde",
+    "size": "24 inches, 30 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800837/cld-sample.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800836/samples/woman-on-a-football-field.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig wasobia",
+    "slug": "wig-wasobia",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig omo o ranyan",
+    "slug": "wig-omo-o-ranyan",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 16,
+    "sellingPrice": 140000,
+    "costPrice": 120000,
+    "color": "brown, pink",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig me and my wife",
+    "slug": "wig-me-and-my-wife",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 8,
+    "sellingPrice": 800000,
+    "costPrice": 720000,
+    "color": "black,brown, pink",
+    "size": "16 inches,18 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig ma geshilo",
+    "slug": "wig-ma-geshilo",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 12,
+    "sellingPrice": 340000,
+    "discountPrice": 320000,
+    "costPrice": 300000,
+    "color": "brown,blonde",
+    "size": "14 inches, 20 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800839/cld-sample-5.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630746/g8gfhzlzh29r8vibn9x9.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig soda mo",
+    "slug": "wig-soda-mo",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig last last",
+    "slug": "wig-last-last",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85be17b9a67172c15177c",
+    "quantity": 6,
+    "sellingPrice": 400000,
+    "discountPrice": 390000,
+    "costPrice": 340000,
+    "color": "black,blonde",
+    "size": "24 inches, 30 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800837/cld-sample.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800836/samples/woman-on-a-football-field.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig breakfast",
+    "slug": "wig-breakfast",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f85bb97b9a67172c151774",
+    "quantity": 8,
+    "sellingPrice": 800000,
+    "costPrice": 720000,
+    "color": "black,brown, pink",
+    "size": "16 inches,18 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  },
+  {
+    "productName": "wig Je kanmo",
+    "slug": "wig-je-kanmo",
+    "category": "66f82c829d523dea489dc941",
+    "subcategory": "66f91cf9717a551a25536628",
+    "quantity": 16,
+    "sellingPrice": 190000,
+    "costPrice": 160000,
+    "color": "black,brown",
+    "size": "14 inches",
+    "appearance": "",
+    "productImage": "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800830/samples/two-ladies.jpg",
+    "thumbnails": [
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1727630752/ictjb3x36ekbveuitctt.png",
+      "https://res.cloudinary.com/dcwhfc4c6/image/upload/v1696800838/cld-sample-3.jpg"
+    ],
+    "isActive": true,
+    "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+  }
+]
