@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { AdminSection } from '../../../features/adminNavLayouts/AdminUtils';
+import {
+  AdminHeader,
+  AdminSection,
+} from '../../../features/adminNavLayouts/AdminUtils';
+import { Link } from 'react-router-dom';
 
 const SalesJournal = () => {
   const [journalEntries, setJournalEntries] = useState([
@@ -68,6 +72,11 @@ const SalesJournal = () => {
 
   return (
     <AdminSection>
+      {/* Header */}
+      <AdminHeader>
+        <h4>Create order</h4>
+        <Link to='/admin/account'>Account dashboard</Link>
+      </AdminHeader>
       <form>
         <div className='header-section'>
           <label htmlFor='journal-date'>Journal Date:</label>

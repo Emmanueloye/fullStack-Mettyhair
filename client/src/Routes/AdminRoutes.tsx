@@ -89,7 +89,7 @@ import Setting, {
   loader as settingLoader,
   action as settingAction,
 } from '../pages/adminClient/Settings/Setting';
-import SalesReport from '../pages/adminClient/Accounting/SalesReport';
+// import SalesReport from '../pages/adminClient/Accounting/SalesReport';
 import SalesJournal from '../pages/adminClient/Accounting/SalesJournal';
 import CustomerReport from '../pages/adminClient/Accounting/CustomerReport';
 import AccessManager from '../pages/adminClient/Settings/AccessManager';
@@ -117,6 +117,7 @@ import EditSlider, {
 import ViewSlider, {
   loader as viewSliderLoader,
 } from '../pages/adminClient/Sliders/ViewSlider';
+import Account from '../pages/adminClient/Accounting/Account';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
 
@@ -401,8 +402,14 @@ const adminRoutes = [
       },
       { path: 'manage-access', element: <AccessManager /> },
       // Accounting routes
-      { path: 'sales-report', element: <SalesReport /> },
-      { path: 'sales-journal', element: <SalesJournal /> },
+      {
+        path: 'account',
+        children: [
+          { index: true, element: <Account /> },
+          { path: 'create-order', element: <SalesJournal /> },
+        ],
+      },
+
       { path: 'customers-report', element: <CustomerReport /> },
     ],
   },

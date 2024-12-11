@@ -14,29 +14,27 @@ const PriceFilter = () => {
       <p>clear</p>
       <li className='list'>
         <NavLink
-          to={`/products?price=<50000`}
+          to={`/products?price<50000`}
           className={({ isActive }) =>
             isActive ? 'btn-list active' : 'btn-list'
           }
         >
-          <span>Under &#8358;{formatNumber(50_000)}</span>
+          <span>Less than &#8358;{formatNumber(50_000)}</span>
         </NavLink>
       </li>
       <li className='list'>
         <NavLink
-          to={`/products?price`}
+          to={`/products?price<100000`}
           className={({ isActive }) =>
             isActive ? 'btn-list active' : 'btn-list'
           }
         >
-          <span className={''}>
-            &#8358;{formatNumber(50_001)} - &#8358;{formatNumber(100_000)}
-          </span>
+          <span className={''}>Less than &#8358;{formatNumber(100_000)}</span>
         </NavLink>
       </li>
       <li className='list'>
         <NavLink
-          to={`/products/price`}
+          to={`/products/price<200000`}
           className={({ isActive }) =>
             isActive ? 'btn-list active' : 'btn-list'
           }

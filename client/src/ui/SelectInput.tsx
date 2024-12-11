@@ -4,7 +4,8 @@ export const Select = styled.select<{ $bg?: string; $width?: string }>`
   display: block;
   background-color: ${(props) => (props.$bg ? props.$bg : 'var(--grey)')};
   border: none;
-  color: var(--admin-sec-text-color);
+  color: ${(props) =>
+    props.$bg ? 'var(--admin-sec-text-color)' : 'var(--primary-text-black)'};
   font-family: 'Lato', sans-serif;
   font-size: 1.4rem;
   padding: 0.3rem 2rem;

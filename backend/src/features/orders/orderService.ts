@@ -1,8 +1,7 @@
 import Order from './orderModel';
 import OrderItems from './orderItemsModel';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import * as util from '../../utils';
-import statusCodes from '../../errors/statusCodes';
 import * as AppError from '../../errors/appError';
 
 export const getCurrentUserOrders = async (req: Request) => {

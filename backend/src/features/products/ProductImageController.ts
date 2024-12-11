@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import * as utils from '../../utils';
 import sharp from 'sharp';
 import { v2 as cloudinary } from 'cloudinary';
-import fs from 'fs/promises';
 import Product from './productModel';
 
 type ImageTypes = {
@@ -12,15 +11,14 @@ type ImageTypes = {
   format: 'jpeg' | 'png';
 };
 const processImage = async ({ image, width, height, format }: ImageTypes) => {
-  // Create the filename
-  const filename = `public/upload/${utils
-    .generateToken({ type: 'plain' })
-    .slice(0, 10)}.${format}`;
-
   // Process the image the file
-  await sharp(image).resize(width, height).toFormat(format).toFile(filename);
+  const processedBuffer = await sharp(image)
+    .resize(width, height)
+    .toFormat(format)
+    .toBuffer();
 
-  return filename;
+  // Convert the buffer from sharp to image uri path.
+  return utils.formatImageURI(format, processedBuffer);
 };
 
 export const processProductImages = async (
@@ -38,9 +36,7 @@ export const processProductImages = async (
     });
 
     // Save to cloudinary
-    const resp = await cloudinary.uploader.upload(filename);
-    // Delete the file from file system
-    await fs.unlink(filename);
+    const resp = await cloudinary.uploader.upload(filename as string);
 
     // Put the returned image link on request body.
     req.body.productImage = resp.secure_url;
@@ -59,9 +55,7 @@ export const processProductImages = async (
         format: 'png',
       });
 
-      const resp = await cloudinary.uploader.upload(filename);
-      // Delete the file from file system
-      await fs.unlink(filename);
+      const resp = await cloudinary.uploader.upload(filename as string);
 
       req.body.thumbnails.push(resp.secure_url);
       req.body.thumbnailsPublicId.push(resp.public_id);
@@ -88,8 +82,8 @@ export const updateProductImage = async (
     if (product?.productImagePublicId) {
       await cloudinary.uploader.destroy(product.productImagePublicId);
     }
-    const resp = await cloudinary.uploader.upload(filename);
-    await fs.unlink(filename);
+    const resp = await cloudinary.uploader.upload(filename as string);
+
     req.body.productImage = resp.secure_url;
     req.body.productImagePublicId = resp.public_id;
   }
@@ -108,8 +102,8 @@ export const updateProductImage = async (
     if (product?.thumbnailsPublicId) {
       await cloudinary.uploader.destroy(product.thumbnailsPublicId[0]);
     }
-    const resp = await cloudinary.uploader.upload(filename);
-    await fs.unlink(filename);
+    const resp = await cloudinary.uploader.upload(filename as string);
+
     req.body.thumbnails[0] = resp.secure_url;
     req.body.thumbnailsPublicId[0] = resp.public_id;
   }
@@ -125,8 +119,8 @@ export const updateProductImage = async (
     if (product?.thumbnailsPublicId) {
       await cloudinary.uploader.destroy(product.thumbnailsPublicId[1]);
     }
-    const resp = await cloudinary.uploader.upload(filename);
-    await fs.unlink(filename);
+    const resp = await cloudinary.uploader.upload(filename as string);
+
     req.body.thumbnails[1] = resp.secure_url;
     req.body.thumbnailsPublicId[1] = resp.public_id;
   }

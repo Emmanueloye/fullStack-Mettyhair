@@ -72,19 +72,18 @@ export const processImage = async (
 
   if (!req.file) return next();
 
-  const fileName = `${req.file.originalname.split('.').at(0)}.png`;
-
-  await sharp(req.file!.buffer)
+  const processedBuffer = await sharp(req.file!.buffer)
     .resize(500, 500)
     .toFormat('png')
-    .toFile(`public/upload/${fileName}`);
+    .toBuffer();
 
   if (currentSlider?.imagePublicId) {
     await cloudinary.uploader.destroy(currentSlider.imagePublicId);
   }
 
-  const resp = await cloudinary.uploader.upload(`public/upload/${fileName}`);
-  await fs.unlink(`public/upload/${fileName}`);
+  const file = utils.formatImageURI('png', processedBuffer);
+  const resp = await cloudinary.uploader.upload(file as string);
+
   req.body.image = resp.secure_url;
   req.body.imagePublicId = resp.public_id;
 

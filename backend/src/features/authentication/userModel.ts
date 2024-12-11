@@ -47,6 +47,8 @@ const userSchema = new Schema(
     passwordChangedAt: Date,
     photo: String,
     photoPublicId: String,
+    creditLimit: Number,
+    creditDays: Number,
     role: {
       type: String,
       enum: {

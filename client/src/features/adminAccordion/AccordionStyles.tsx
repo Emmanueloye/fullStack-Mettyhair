@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const AccordionLink = styled.div`
-  .btn {
+  .btn,
+  .btn-acc-main {
     display: flex;
     align-items: center;
     font-family: 'Quicksand', sans-serif;
@@ -26,7 +27,8 @@ export const AccordionLink = styled.div`
       border-radius: var(--border-radius-sm);
     }
   }
-  .btn-plus {
+  .btn-plus,
+  .btn-acc {
     background-color: transparent;
     border-top: none;
     border-left: none;
@@ -37,6 +39,13 @@ export const AccordionLink = styled.div`
         text-align: left;
       }
     }
+  }
+  .btn-acc-main {
+    border-bottom: 1px solid var(--main-red-300);
+  }
+  .btn-acc {
+    color: var(--main-red-400);
+    font-weight: 700;
   }
   .active {
     background-color: var(--main-red-600);
@@ -70,5 +79,14 @@ export const AccordionSubLink = styled.div<{ $isOpen?: boolean }>`
   }
   .active {
     color: var(--white);
+  }
+  .gen-active {
+    color: var(--admin-sec-text-color);
+    &:hover {
+      color: var(--main-red-300);
+    }
+  }
+  .list {
+    border-bottom: 1px solid var(--main-red-400);
   }
 `;

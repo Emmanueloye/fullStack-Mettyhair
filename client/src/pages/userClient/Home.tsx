@@ -5,6 +5,7 @@ import ProductDisplay from '../../features/products/ProductDisplay';
 import SpecialDeal from '../../features/products/SpecialDeal';
 import { getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const {
@@ -46,6 +47,9 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Home - MettyHair</title>
+      </Helmet>
       {/* Hero section */}
       <Hero slides={sliders} />
       {/* category section */}

@@ -103,6 +103,7 @@ export const verifyTransaction = async (
           subtotal: data.metadata.subtotal,
           discount: data.metadata.discount,
           totalAmount: data.amount / 100,
+          amountPaid: data.amount / 100,
           customerName: data.metadata.customerName,
           orderName: data.metadata.orderName,
           user: data.metadata.user,

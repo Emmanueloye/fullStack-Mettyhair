@@ -17,6 +17,7 @@ const orderSchema = new Schema({
     type: Number,
     required: true,
   },
+  amountPaid: Number,
   customerName: {
     type: String,
     required: true,

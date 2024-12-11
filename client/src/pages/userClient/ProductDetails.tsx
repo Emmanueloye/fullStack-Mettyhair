@@ -27,12 +27,6 @@ const TwoColumnGrid = styled.div`
 `;
 
 const ProductDetails = () => {
-  // Temporary product variables. This will be loaded from the react router loader.
-  // const params = useParams();
-  // const product = products.filter(
-  //   (item) => slugifyText(item.product) === params.slug
-  // )[0];
-
   const params = useLoaderData() as { slug: string; id: string };
 
   const { tabIndex } = useAppSelector((state) => state.ui);
@@ -43,16 +37,6 @@ const ProductDetails = () => {
     queryKey: ['fetchProduct', 'productDetails', params.id],
     queryFn: () => getData({ url: `/products/${params.id}` }),
   });
-
-  // const {
-  //   data: { reviews },
-  // } = useQuery({
-  //   queryKey: ['fetchProduct', 'reviews', params.id],
-  //   queryFn: () =>
-  //     getData({
-  //       url: `/products/${params.id}/reviews?isApproved=true&sort=-createdAt&limit=6`,
-  //     }),
-  // });
 
   const {
     data: { products: relatedProducts },
@@ -104,14 +88,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     queryKey: ['fetchProduct', 'productDetails', params.id],
     queryFn: () => getData({ url: `/products/${params.id}` }),
   });
-
-  // await queryClient.ensureQueryData({
-  //   queryKey: ['fetchProduct', 'reviews', params.id],
-  //   queryFn: () =>
-  //     getData({
-  //       url: `/products/${params.id}/reviews?isApproved=true&sort=-createdAt&limit=6`,
-  //     }),
-  // });
 
   const categoryId = resp.product.category._id;
   await queryClient.ensureQueryData({

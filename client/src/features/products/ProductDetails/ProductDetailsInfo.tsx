@@ -2,8 +2,8 @@ import Button from '../../../ui/Button';
 import Rating from '../../../ui/Rating';
 import { formatNumber } from '../../../utilities/HelperFunc';
 import { IoMdCart } from 'react-icons/io';
-import { FcMoneyTransfer } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+// import { FcMoneyTransfer } from 'react-icons/fc';
+// import { Link } from 'react-router-dom';
 import ProductInfoWrapper from './ProductDetailsInfoStyles';
 import SelectInput from '../../../ui/SelectInput';
 import { ProductTypes } from '../../../dtos/productsDto';
@@ -36,6 +36,11 @@ const ProductDetailsInfo = ({ product }: { product: ProductTypes }) => {
       toast.error(resp.message);
     }
   };
+
+  // const handleBuyNow = () => {
+  //   navigate(`/checkout?id=${product._id}`);
+  // };
+
   return (
     <form id='form' onSubmit={handleAddToCart}>
       <ProductInfoWrapper>
@@ -117,14 +122,14 @@ const ProductDetailsInfo = ({ product }: { product: ProductTypes }) => {
               marginBottom='2rem'
               type='submit'
             />
-            <Link to='/'>
-              <Button
-                btnText='Buy now'
-                icon={<FcMoneyTransfer />}
-                bg='var(--main-red-400)'
-                color='var(--main-light-blue)'
-              />
-            </Link>
+
+            {/* <Button
+              btnText='Buy now'
+              icon={<FcMoneyTransfer />}
+              bg='var(--main-red-400)'
+              color='var(--main-light-blue)'
+              onBtnTrigger={handleBuyNow}
+            /> */}
           </div>
         </div>
       </ProductInfoWrapper>

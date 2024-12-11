@@ -6,9 +6,8 @@ import * as factory from '../../utils/handlerFactory';
 import * as utils from '../../utils';
 import sharp from 'sharp';
 import { v2 as cloudinary } from 'cloudinary';
-import fs from 'fs/promises';
 import { checkForErrors } from '../../utils/validate';
-import { body, check } from 'express-validator';
+import { body } from 'express-validator';
 
 // To upload user image using multer.
 export const uploadPhoto = utils.upload.single('photo');
@@ -109,22 +108,20 @@ export const processImage = async (
   // If user does not update image, move on to the next middleware.
   if (!req.file) return next();
 
-  //   Put the file path on the body
-  const fileName = `${req.user!.id}-${req.file.originalname
-    .split('.')
-    .at(0)}.jpeg`;
-
-  await sharp(req.file!.buffer)
+  // Instead of saving to file, convert to buffer and then convert it to uri using datauri package before sending to cloudinary.
+  const newFile = await sharp(req.file!.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
-    .toFile(`public/upload/${fileName}`);
+    .toBuffer();
 
   if (currentUser?.photoPublicId) {
     await cloudinary.uploader.destroy(currentUser.photoPublicId);
   }
 
-  const resp = await cloudinary.uploader.upload(`public/upload/${fileName}`);
-  await fs.unlink(`public/upload/${fileName}`);
+  const file = utils.formatImageURI('jpeg', newFile);
+
+  const resp = await cloudinary.uploader.upload(file as string);
+
   req.body.photo = resp.secure_url;
   req.body.photoPublicId = resp.public_id;
 

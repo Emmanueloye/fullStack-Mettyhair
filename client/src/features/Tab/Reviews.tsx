@@ -4,6 +4,7 @@ import Rating from '../../ui/Rating';
 import styled from 'styled-components';
 import { ReviewTypes } from '../../dtos/productsDto';
 import { formatDate } from '../../utilities/HelperFunc';
+import { DEFAULT_USER_IMG } from '../../utilities/constant';
 
 const ReviewWrapper = styled.article`
   display: flex;
@@ -71,7 +72,12 @@ const Reviews = ({ review }: { review: ReviewTypes }) => {
   return (
     <ReviewWrapper>
       <div className='review-header'>
-        <img src={review.user.photo} width={50} height={50} alt='user' />
+        <img
+          src={review.user.photo || DEFAULT_USER_IMG}
+          width={50}
+          height={50}
+          alt='user'
+        />
         <div className='user'>
           <h4 className='capitalize'>{review.user.fullName}</h4>
           <Rating

@@ -1,7 +1,7 @@
 export { default as generateToken } from './cryptoToken';
 export { default as Email } from './email';
 export { verifyJWT, sendCookies, RefreshPayload, logoutToken } from './jwt';
-export { getPathText, slugify } from './utilFunctions';
+export { getPathText, slugify, formatImageURI } from './utilFunctions';
 export { default as fieldFilter } from './reqBodyFilter';
 export { default as upload } from './multerConfig';
 export { slugifyInput } from './helperFunctions';

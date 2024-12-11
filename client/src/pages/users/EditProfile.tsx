@@ -3,6 +3,7 @@ import { TabContentWrapper } from '../../features/Tab/TabContentWrapper';
 import {
   ActionFunctionArgs,
   Form,
+  useActionData,
   useNavigation,
   useOutletContext,
 } from 'react-router-dom';
@@ -13,6 +14,8 @@ import Button from '../../ui/Button';
 import { GrDocumentUpdate } from 'react-icons/gr';
 import { User } from '../../dtos/userDto';
 import { updateData } from '../../api/requests';
+import FormError from '../../ui/FormError';
+import { InfoType } from '../../dtos/utilsDto';
 
 export const EditProfileWrapper = styled.div`
   form {
@@ -43,6 +46,7 @@ export const ProfileHeader = styled.h4`
 `;
 
 const EditProfile = () => {
+  const data = useActionData() as InfoType;
   const user = useOutletContext<User>();
   const { state } = useNavigation();
   return (
@@ -50,6 +54,7 @@ const EditProfile = () => {
       <TabContentWrapper>
         <ProfileHeader>Update profile</ProfileHeader>
         <Form id='form' method='patch' encType='multipart/form-data'>
+          {data && <FormError info={data.message} />}
           <InputGroup
             type='text'
             name='fullName'

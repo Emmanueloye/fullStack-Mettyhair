@@ -53,14 +53,7 @@ export const sidebarLinks: LinksType[] = [
   {
     id: 5,
     title: 'accounting - in dev',
-    links: [
-      'sales report',
-      'sales journal',
-      'stockout notice',
-      'customers report',
-      'payment details',
-      'financial statement',
-    ],
+    links: ['account'],
     icon: <FaChartBar />,
   },
   {
