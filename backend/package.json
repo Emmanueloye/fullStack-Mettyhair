@@ -29,8 +29,7 @@
     "@types/node": "^22.5.5",
     "@types/nodemailer": "^6.4.15",
     "@types/validator": "^13.12.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@getbrevo/brevo": "^2.2.0",
@@ -55,6 +54,7 @@
     "nodemailer": "^6.9.15",
     "sharp": "^0.33.5",
     "short-unique-id": "^5.2.0",
+    "typescript": "^5.7.2",
     "validator": "^13.12.0"
   }
 }
