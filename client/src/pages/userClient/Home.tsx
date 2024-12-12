@@ -5,7 +5,7 @@ import ProductDisplay from '../../features/products/ProductDisplay';
 import SpecialDeal from '../../features/products/SpecialDeal';
 import { getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
-import { Helmet } from 'react-helmet-async';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 const Home = () => {
   const {
@@ -47,9 +47,13 @@ const Home = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Home - MettyHair</title>
-      </Helmet>
+      <HelmetSEO
+        title='Home - MettyHair'
+        description='The best hair vendor in Lagos Nigeria. Buy hair online at MettyHair'
+        name='Home - MettyHair'
+        type='MettyHair'
+        keyword='best hair vendor in lagos, affordable hairs, quality hair seller'
+      />
       {/* Hero section */}
       <Hero slides={sliders} />
       {/* category section */}
