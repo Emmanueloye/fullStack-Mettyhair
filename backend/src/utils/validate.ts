@@ -1,12 +1,12 @@
 import { body, validationResult, param } from 'express-validator';
 import * as AppError from '../errors/appError';
-import { NextFunction, Request } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Types } from 'mongoose';
 
 export const checkForErrors = (validatedInputs: any, errType = 400) => {
   return [
     validatedInputs,
-    (req: Request, next: NextFunction) => {
+    (req: Request, res: Response, next: NextFunction) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         if (errType === 400) {
