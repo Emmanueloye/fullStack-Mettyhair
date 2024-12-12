@@ -22,6 +22,7 @@ const HelmetSEO = ({
       <title>{title}</title>
       <meta name='description' content={description} />
       <meta name='keyword' content={keyword} />
+      <link rel='image_src' href={image} />
       {/* Facebook tags */}
       <meta property='og:type' content={type} />
       <meta property='og:title' content={title} />
