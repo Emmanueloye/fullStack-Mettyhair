@@ -14,6 +14,7 @@ import CustomersReviews from '../../features/Tab/CustomersReviews';
 import { getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import { ProductTypes } from '../../dtos/productsDto';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 const TwoColumnGrid = styled.div`
   display: grid;
@@ -53,31 +54,41 @@ const ProductDetails = () => {
     .slice(0, 4);
 
   return (
-    <section style={{ paddingTop: '3rem' }}>
-      <Container>
-        <TwoColumnGrid className='scaleIn'>
-          {/* Product image */}
-          <ProductImage product={product} />
-          {/* Product information */}
-          <ProductDetailsInfo product={product} />
-        </TwoColumnGrid>
-        {/* Tab */}
-        <div className='scaleIn'>
-          <Tab btnLabels={['description', 'add review', 'review']}>
-            {tabIndex === 0 && <DescriptionTab product={product} />}
-            {tabIndex === 1 && <ReviewTab product={product} />}
-            {tabIndex === 2 && <CustomersReviews reviews={product.reviews} />}
-          </Tab>
-        </div>
-        {/* Related products */}
-        {filteredRelatedProducts.length > 0 && (
-          <ProductDisplay
-            products={filteredRelatedProducts}
-            title='related products'
-          />
-        )}
-      </Container>
-    </section>
+    <>
+      <HelmetSEO
+        title={product.productName}
+        description={product.description}
+        name={product.productName}
+        type='MettyHair'
+        keyword='best hair vendor in lagos, affordable hairs, quality hair seller'
+        image={product.productImage}
+      />
+      <section style={{ paddingTop: '3rem' }}>
+        <Container>
+          <TwoColumnGrid className='scaleIn'>
+            {/* Product image */}
+            <ProductImage product={product} />
+            {/* Product information */}
+            <ProductDetailsInfo product={product} />
+          </TwoColumnGrid>
+          {/* Tab */}
+          <div className='scaleIn'>
+            <Tab btnLabels={['description', 'add review', 'review']}>
+              {tabIndex === 0 && <DescriptionTab product={product} />}
+              {tabIndex === 1 && <ReviewTab product={product} />}
+              {tabIndex === 2 && <CustomersReviews reviews={product.reviews} />}
+            </Tab>
+          </div>
+          {/* Related products */}
+          {filteredRelatedProducts.length > 0 && (
+            <ProductDisplay
+              products={filteredRelatedProducts}
+              title='related products'
+            />
+          )}
+        </Container>
+      </section>
+    </>
   );
 };
 
