@@ -59,7 +59,7 @@ const ProductDetails = () => {
         title={product.productName}
         description={product.description}
         name={product.productName}
-        type='MettyHair'
+        type='article'
         keyword='best hair vendor in lagos, affordable hairs, quality hair seller'
         image={product.productImage}
       />
