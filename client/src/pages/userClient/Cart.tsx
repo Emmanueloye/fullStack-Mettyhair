@@ -10,6 +10,7 @@ import { MdOutlineShoppingBag } from 'react-icons/md';
 import { getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import { CartTypes } from '../../dtos/productsDto';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 const CartWrapper = styled.section`
   padding-top: 5rem;
@@ -62,34 +63,44 @@ const Cart = () => {
   );
 
   return (
-    <CartWrapper>
-      <Container>
-        <div className='grid'>
-          <div>
-            <Header $mb='1rem'>
-              <h4>Shopping cart</h4>
-            </Header>
-            {carts?.length > 0 ? (
-              carts.map((cart: CartTypes) => (
-                <CartProduct key={cart._id} cart={cart} />
-              ))
-            ) : (
-              <Empty
-                icon={<MdOutlineShoppingBag />}
-                message='You cart is Empty.'
-                btnText='Continue shopping'
-                url='/'
-              />
+    <>
+      <HelmetSEO
+        title='Shopping cart'
+        description='Shopping cart'
+        name='Shopping cart'
+        type='article'
+        keyword='best hair vendor in lagos, affordable hairs, quality hair seller'
+        // image={product.productImage}
+      />
+      <CartWrapper>
+        <Container>
+          <div className='grid'>
+            <div>
+              <Header $mb='1rem'>
+                <h4>Shopping cart</h4>
+              </Header>
+              {carts?.length > 0 ? (
+                carts.map((cart: CartTypes) => (
+                  <CartProduct key={cart._id} cart={cart} />
+                ))
+              ) : (
+                <Empty
+                  icon={<MdOutlineShoppingBag />}
+                  message='You cart is Empty.'
+                  btnText='Continue shopping'
+                  url='/'
+                />
+              )}
+              {carts.length > 0 && <Coupon />}
+            </div>
+            {/* Update to receive data dynamically from the parent. */}
+            {carts.length > 0 && (
+              <ProductTotal showHeader={true} productTotal={productTotalCalc} />
             )}
-            {carts.length > 0 && <Coupon />}
           </div>
-          {/* Update to receive data dynamically from the parent. */}
-          {carts.length > 0 && (
-            <ProductTotal showHeader={true} productTotal={productTotalCalc} />
-          )}
-        </div>
-      </Container>
-    </CartWrapper>
+        </Container>
+      </CartWrapper>
+    </>
   );
 };
 
