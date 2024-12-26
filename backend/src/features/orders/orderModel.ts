@@ -80,6 +80,10 @@ const orderSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  salesOrderStatus: {
+    type: String,
+    enum: ['pending', 'invoiced', 'paid', 'unpaid'],
+  },
 });
 
 type IOrder = InferSchemaType<typeof orderSchema>;

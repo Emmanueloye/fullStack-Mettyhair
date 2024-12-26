@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import { CategoriesType, SubcategoriesType } from '../../../dtos/categoriesDto';
 import { NavLink } from 'react-router-dom';
+import { slugifyText } from '../../../utilities/HelperFunc';
 
 const ProductAccordion = ({
   category,
@@ -10,7 +12,13 @@ const ProductAccordion = ({
 }) => {
   return (
     <ul className='section'>
-      <h4>{category.category}</h4>
+      <Link
+        to={`/products/category/${slugifyText(category.category)}/${
+          category._id
+        }`}
+      >
+        <h4>{category.category}</h4>
+      </Link>
       {subcategories
         .filter((item) => item.category._id === category._id)
         .map((subcategory) => {

@@ -1,5 +1,6 @@
 import { BsBoxes } from 'react-icons/bs';
 import {
+  FaBlog,
   FaBookOpen,
   FaBoxes,
   FaChartBar,
@@ -52,19 +53,25 @@ export const sidebarLinks: LinksType[] = [
   },
   {
     id: 5,
+    title: 'blog manager',
+    links: ['blogs'],
+    icon: <FaBlog />,
+  },
+  {
+    id: 6,
     title: 'accounting - in dev',
     links: ['account'],
     icon: <FaChartBar />,
   },
   {
-    id: 6,
+    id: 7,
     title: 'user manager',
-    links: ['all users', 'new users report', 'create admin'],
+    links: ['all users', 'new users report', 'create admin', 'contacts'],
     icon: <FaUserAlt />,
   },
 
   {
-    id: 7,
+    id: 8,
     title: 'site settings',
     links: ['settings'],
     icon: <IoSettings />,

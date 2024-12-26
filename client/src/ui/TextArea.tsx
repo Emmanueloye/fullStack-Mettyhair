@@ -11,6 +11,7 @@ const TextArea = styled.textarea<{ $dark?: boolean }>`
   padding: 1rem 2rem;
   outline: none;
   width: 100%;
+  white-space: pre-wrap; //pre-line
   &:disabled {
     background-color: ${(props) =>
       props.$dark ? 'var(--admin-input-bg)' : '#F5F5F5'};

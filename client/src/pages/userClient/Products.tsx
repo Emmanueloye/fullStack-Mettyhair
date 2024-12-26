@@ -12,7 +12,8 @@ import Pagination from '../../features/products/allProducts/Pagination';
 import { extractParams, getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
-import { ProductTypes } from '../../dtos/productsDto';
+import { PageTypes, ProductTypes } from '../../dtos/productsDto';
+import { useEffect, useState } from 'react';
 
 export const GridWrapper = styled.div`
   position: relative;
@@ -50,14 +51,42 @@ export const ProductSection = styled.section`
 `;
 
 const Products = () => {
+  const [allProducts, setAllProducts] = useState<ProductTypes[]>([]);
+  const [pages, setPages] = useState<PageTypes>();
   const dispatch = useAppDispatch();
-  const { page } = useLoaderData() as { page: number };
+  const { page, range, limit } = useLoaderData() as {
+    page: number;
+    range: string;
+    limit: number;
+  };
+
+  // To alternate the url for product depending on filter for price
+  let newURL: string;
+
+  if (!range) {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}`;
+  } else if (range?.includes('less')) {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}&sellingPrice[lte]=${range.split(',')[1]}`;
+  } else if (range?.includes('above')) {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}&sellingPrice[gte]=${range.split(',')[1]}`;
+  } else {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}&range=sellingPrice,${range}`;
+  }
 
   const { data } = useQuery({
-    queryKey: ['fetchProduct', 'products', page ?? 1],
+    queryKey: ['fetchProduct', 'products', page ?? 1, range],
     queryFn: () =>
       getData({
-        url: `/products?quantity[gt]=0&isActive=true&page=${page || 1}&limit=9`,
+        url: newURL,
+        // url: `/products?quantity[gt]=0&isActive=true&page=${page || 1}&limit=9`,
       }),
   });
 
@@ -77,6 +106,11 @@ const Products = () => {
 
   const { products }: { products: ProductTypes[] } = data;
   const { totalPages, currentPage, nextPage, previousPage } = data.page;
+
+  useEffect(() => {
+    setAllProducts(products);
+    setPages({ totalPages, currentPage, nextPage, previousPage });
+  }, [currentPage, data.page, nextPage, previousPage, products, totalPages]);
 
   return (
     <ProductSection>
@@ -103,14 +137,14 @@ const Products = () => {
             subcategories={subcategories}
           />
           {/* Main product grid */}
-          <MainProduct products={products} />
+          <MainProduct products={allProducts} />
         </GridWrapper>
         {totalPages > 1 && (
           <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            nextPage={nextPage}
-            previousPage={previousPage}
+            totalPages={pages!.totalPages}
+            currentPage={pages!.currentPage}
+            nextPage={pages?.nextPage}
+            previousPage={pages?.previousPage}
             pageLink='/products'
             marginTop='5rem'
           />
@@ -124,14 +158,36 @@ export default Products;
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const params = extractParams(request);
-  // console.log(params);
 
-  const { page } = params;
+  const { page, range } = params;
+  const limit = 12;
+
+  let newURL;
+
+  if (!range) {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}`;
+  } else if (range?.includes('less')) {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}&sellingPrice[lte]=${range.split(',')[1]}`;
+  } else if (range?.includes('above')) {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}&sellingPrice[gte]=${range.split(',')[1]}`;
+  } else {
+    newURL = `/products?quantity[gt]=0&isActive=true&page=${
+      page || 1
+    }&limit=${limit}&range=sellingPrice,${range}`;
+  }
+
   await queryClient.ensureQueryData({
-    queryKey: ['fetchProduct', 'products', page ?? 1],
+    queryKey: ['fetchProduct', 'products', page ?? 1, range],
     queryFn: () =>
       getData({
-        url: `/products?quantity[gt]=0&isActive=true&page=${page || 1}&limit=9`,
+        url: newURL,
+        // url: `/products?quantity[gt]=0&isActive=true&page=${page || 1}&limit=9`,
       }),
   });
 
@@ -145,5 +201,5 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     queryFn: () => getData({ url: `/subcategories?sort=createdAt` }),
   });
 
-  return params;
+  return { ...params, limit };
 };

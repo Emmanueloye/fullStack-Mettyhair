@@ -58,6 +58,7 @@ const userSchema = new Schema(
       default: 'user',
     },
     address: String,
+    phone: String,
     state: String,
     country: String,
     createdAt: {

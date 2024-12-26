@@ -55,6 +55,13 @@ import SubcategoriesProducts, {
 import CategoriesProducts, {
   loader as CategoryProductsLoader,
 } from '../pages/userClient/CategoriesProducts';
+import SearchResult from '../pages/userClient/SearchResult';
+import Contact, {
+  loader as contactLoader,
+  action as contactAction,
+} from '../pages/userClient/Contact';
+import Blog from '../pages/userClient/Blog';
+import BlogDetails from '../pages/userClient/BlogDetails';
 
 const userClientRoutes = [
   {
@@ -169,6 +176,24 @@ const userClientRoutes = [
         path: '/checkout/confirm',
         element: <PaymentConfirmation />,
         loader: PaymentConfirmationLoader,
+      },
+      {
+        path: '/search/result',
+        element: <SearchResult />,
+      },
+      {
+        path: 'contact',
+        element: <Contact />,
+        loader: contactLoader,
+        action: contactAction,
+      },
+      // Blog routes
+      {
+        path: 'blog',
+        children: [
+          { index: true, element: <Blog /> },
+          { path: ':slug/:id', element: <BlogDetails /> },
+        ],
       },
     ],
   },

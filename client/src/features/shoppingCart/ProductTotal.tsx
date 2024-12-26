@@ -14,12 +14,14 @@ const ProductTotal = ({
   btnType = 'link',
   isOrder,
   isDark,
+  hideBtn = false,
 }: {
   showHeader: boolean;
   marginTop?: string;
   btnType?: string;
   isOrder?: boolean;
   isDark?: boolean;
+  hideBtn?: boolean;
   productTotal: { subtotal: number; totalDiscount: number };
 }) => {
   return (
@@ -67,10 +69,12 @@ const ProductTotal = ({
           ) : (
             // can still make this a order cancel btn
             <div style={{ marginTop: '3rem' }}>
-              <Button
-                btnText={`${isOrder ? 'Thank you' : 'place order'}`}
-                icon={isOrder ? <MdThumbUp /> : <FaRegCreditCard />}
-              />
+              {!hideBtn && (
+                <Button
+                  btnText={`${isOrder ? 'Thank you' : 'place order'}`}
+                  icon={isOrder ? <MdThumbUp /> : <FaRegCreditCard />}
+                />
+              )}
             </div>
           )}
         </div>

@@ -118,7 +118,32 @@ import ViewSlider, {
   loader as viewSliderLoader,
 } from '../pages/adminClient/Sliders/ViewSlider';
 import Account from '../pages/adminClient/Accounting/Account';
-import CreateOrder from '../pages/adminClient/Accounting/CreateOrder';
+import CreateOrder, {
+  loader as createOrderLoader,
+  action as createOrderAction,
+} from '../pages/adminClient/Accounting/CreateOrder';
+import ContactMails, {
+  loader as contactMailLoader,
+  action as contactMailAction,
+} from '../pages/adminClient/Mails/ContactMails';
+import ContactView, {
+  loader as contactViewLoader,
+  action as contactViewAction,
+} from '../pages/adminClient/Mails/ContactView';
+import BlogList, {
+  loader as blogListLoader,
+  action as blogListAction,
+} from '../pages/adminClient/Blogs/BlogList';
+import AdminBlogView, {
+  loader as blogViewLoader,
+} from '../pages/adminClient/Blogs/AdminBlogView';
+import AddBlog, {
+  action as AddBlogAction,
+} from '../pages/adminClient/Blogs/AddBlog';
+import EditBlog, {
+  loader as EditBlogLoader,
+  action as EditBlogAction,
+} from '../pages/adminClient/Blogs/EditBlog';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
 
@@ -402,12 +427,59 @@ const adminRoutes = [
         action: settingAction,
       },
       { path: 'manage-access', element: <AccessManager /> },
+      // contact routes
+      {
+        path: 'contacts',
+        children: [
+          {
+            index: true,
+            element: <ContactMails />,
+            loader: contactMailLoader,
+            action: contactMailAction,
+          },
+          {
+            path: 'view/:id',
+            element: <ContactView />,
+            loader: contactViewLoader,
+            action: contactViewAction,
+          },
+        ],
+      },
+      // Blogs
+      {
+        path: 'blogs',
+        children: [
+          {
+            index: true,
+            element: <BlogList />,
+            loader: blogListLoader,
+            action: blogListAction,
+          },
+          { path: 'add', element: <AddBlog />, action: AddBlogAction },
+          {
+            path: 'edit/:id',
+            element: <EditBlog />,
+            loader: EditBlogLoader,
+            action: EditBlogAction,
+          },
+          {
+            path: 'view/:id',
+            element: <AdminBlogView />,
+            loader: blogViewLoader,
+          },
+        ],
+      },
       // Accounting routes
       {
         path: 'account',
         children: [
           { index: true, element: <Account /> },
-          { path: 'create-order', element: <CreateOrder /> },
+          {
+            path: 'create-order',
+            element: <CreateOrder />,
+            loader: createOrderLoader,
+            action: createOrderAction,
+          },
         ],
       },
 

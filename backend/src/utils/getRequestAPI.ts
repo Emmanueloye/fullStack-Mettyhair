@@ -3,7 +3,7 @@ import { Query } from 'mongoose';
 
 class GetRequestAPI {
   public pageDetails: any;
-  private totalCounts: any;
+
   constructor(public query: Query<any, any>, private reqQuery: any) {
     this.query = query;
     this.reqQuery = reqQuery;
@@ -14,7 +14,15 @@ class GetRequestAPI {
     const queryObj = { ...this.reqQuery };
 
     // Create list of what should be excluded from request query.
-    const excludedList = ['sort', 'fields', 'limit', 'page', 'search', 'value'];
+    const excludedList = [
+      'sort',
+      'fields',
+      'limit',
+      'page',
+      'search',
+      'value',
+      'range',
+    ];
 
     // Delete the excluded list from request query
     excludedList.forEach((el) => delete queryObj[el]);
@@ -26,7 +34,7 @@ class GetRequestAPI {
     queryStr = queryStr.replace(/\b(gt|lt|gte|lte)\b/g, (match) => `$${match}`);
 
     // Parse the string back to object
-    const newQueryStr = JSON.parse(queryStr);
+    let newQueryStr = JSON.parse(queryStr);
 
     // if there is search and value on the query request, search keyword specified in the value using the field specify in the search query params.
     if (this.reqQuery.search && this.reqQuery.value) {
@@ -35,9 +43,16 @@ class GetRequestAPI {
         $options: 'i',
       };
     }
+
+    if (this.reqQuery.range) {
+      const [field, min, max] = this.reqQuery.range.split(',');
+
+      newQueryStr[field] = { $gte: min, $lte: max };
+    }
     this.query = this.query.find(newQueryStr);
     return this;
   }
+
   sort() {
     // If the request query has a sort parameter, sort the data based on it.
     if (this.reqQuery.sort) {
@@ -48,6 +63,7 @@ class GetRequestAPI {
     }
     return this;
   }
+
   limitFields() {
     // If the request query has a fields parameter, limit the fields based on what was specified.
     if (this.reqQuery.fields) {

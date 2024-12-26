@@ -94,7 +94,9 @@ const EditProduct = () => {
           {/* top form inputs */}
           <ThreeGrid>
             <AFormGroup>
-              <Label htmlFor='productName'>product name</Label>
+              <Label htmlFor='productName' type='dark'>
+                product name
+              </Label>
               <Input
                 id='productName'
                 type='text'
@@ -106,7 +108,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='category'>category</Label>
+              <Label htmlFor='category' type='dark'>
+                category
+              </Label>
               <Select
                 name='category'
                 id='category'
@@ -130,7 +134,9 @@ const EditProduct = () => {
               </Select>
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='subcategory'>subcategory</Label>
+              <Label htmlFor='subcategory' type='dark'>
+                subcategory
+              </Label>
               <Select
                 name='subcategory'
                 id='subcategory'
@@ -158,7 +164,9 @@ const EditProduct = () => {
               </Select>
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='quantity'>quantity</Label>
+              <Label htmlFor='quantity' type='dark'>
+                quantity
+              </Label>
               <Input
                 id='quantity'
                 type='text'
@@ -169,7 +177,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='costPrice'>cost price</Label>
+              <Label htmlFor='costPrice' type='dark'>
+                cost price
+              </Label>
               <Input
                 id='costPrice'
                 type='text'
@@ -180,7 +190,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='sellingPrice'>selling price</Label>
+              <Label htmlFor='sellingPrice' type='dark'>
+                selling price
+              </Label>
               <Input
                 id='sellingPrice'
                 type='text'
@@ -191,7 +203,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='discountPrice'>discounted price</Label>
+              <Label htmlFor='discountPrice' type='dark'>
+                discounted price
+              </Label>
               <Input
                 id='discountPrice'
                 type='text'
@@ -202,7 +216,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='color'>available colors</Label>
+              <Label htmlFor='color' type='dark'>
+                available colors
+              </Label>
               <Input
                 id='color'
                 type='text'
@@ -214,7 +230,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='size'>available sizes</Label>
+              <Label htmlFor='size' type='dark'>
+                available sizes
+              </Label>
               <Input
                 id='size'
                 type='text'
@@ -226,7 +244,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='appearance'>appearance</Label>
+              <Label htmlFor='appearance' type='dark'>
+                appearance
+              </Label>
               <Select
                 name='appearance'
                 id='appearance'
@@ -251,7 +271,9 @@ const EditProduct = () => {
           <ThreeGrid>
             {/* Product image section */}
             <AFormGroup>
-              <Label htmlFor='p-img'>product image</Label>
+              <Label htmlFor='p-img' type='dark'>
+                product image
+              </Label>
               <Center>
                 <img
                   src={productImg}
@@ -274,7 +296,9 @@ const EditProduct = () => {
             </AFormGroup>
             {/* Product thumbnail one */}
             <AFormGroup>
-              <Label htmlFor='thumbOne'>product thumbnail</Label>
+              <Label htmlFor='thumbOne' type='dark'>
+                product thumbnail
+              </Label>
               <Center>
                 <img
                   src={thumbOne}
@@ -297,7 +321,9 @@ const EditProduct = () => {
             </AFormGroup>
             {/* Product thumbnail two */}
             <AFormGroup>
-              <Label htmlFor='thumbTwo'>product thumbnail</Label>
+              <Label htmlFor='thumbTwo' type='dark'>
+                product thumbnail
+              </Label>
               <Center>
                 <img
                   src={thumbTwo}
@@ -322,7 +348,9 @@ const EditProduct = () => {
 
           <ThreeGrid type='full'>
             <AFormGroup>
-              <Label htmlFor='shortDesc'>short description</Label>
+              <Label htmlFor='shortDesc' type='dark'>
+                short description
+              </Label>
               <TextArea
                 $dark={true}
                 id='shortDesc'
@@ -333,7 +361,9 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='longDesc'>long description</Label>
+              <Label htmlFor='longDesc' type='dark'>
+                long description
+              </Label>
               <TextArea
                 $dark={true}
                 id='longDesc'

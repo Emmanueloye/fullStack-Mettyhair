@@ -43,7 +43,9 @@ const EditCategory = () => {
         <Form method='patch' encType='multipart/form-data'>
           {data && <FormError info={data.message} />}
           <AFormGroup>
-            <Label htmlFor='category'>Category</Label>
+            <Label htmlFor='category' type='dark'>
+              Category
+            </Label>
             <Input
               id='category'
               $dark={true}
@@ -55,7 +57,9 @@ const EditCategory = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='photo'>Category Image</Label>
+            <Label htmlFor='photo' type='dark'>
+              Category Image
+            </Label>
             <Input id='photo' $dark={true} type='file' name='photo' />
           </AFormGroup>
           <AFormGroup>

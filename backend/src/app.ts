@@ -24,6 +24,10 @@ import orderRouter from './features/orders/orderRoutes';
 import statsRouter from './features/stats/statsRoutes';
 import settingRouter from './features/settings/settingRoutes';
 import sliderRouter from './features/sliders/sliderRoutes';
+import salesOrderRouter from './features/salesOrder/salesOrderRoutes';
+import contactRouter from './features/contacts/contactRoutes';
+import contactReplyRouter from './features/contacts/contactReplyRoutes';
+import blogRouter from './features/blogs/blogRoutes';
 
 // Create express application.
 const app = express();
@@ -60,6 +64,10 @@ app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/stats', statsRouter);
 app.use('/api/v1/settings', settingRouter);
 app.use('/api/v1/sliders', sliderRouter);
+app.use('/api/v1/sales-orders', salesOrderRouter);
+app.use('/api/v1/contacts', contactRouter);
+app.use('/api/v1/contact-replies', contactReplyRouter);
+app.use('/api/v1/posts', blogRouter);
 
 // import dist from './../../client/dist';
 

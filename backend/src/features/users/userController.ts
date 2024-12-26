@@ -62,7 +62,7 @@ export const updateLoginUser = factory.updateOne({
 export const updateUserAddress = factory.updateOne({
   Model: User,
   label: 'user',
-  includedFields: ['address', 'state', 'country'],
+  includedFields: ['address', 'phone', 'state', 'country'],
 });
 
 // For super-admin only: to update admin module admin will have access to.

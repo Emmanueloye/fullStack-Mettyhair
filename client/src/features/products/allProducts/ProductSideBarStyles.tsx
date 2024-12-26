@@ -22,6 +22,15 @@ const AsideWrapper = styled.aside<{ $isOpen?: boolean }>`
     border-bottom: 1px solid var(--main-red-200);
     text-transform: capitalize;
   }
+  .clear-btn {
+    background-color: var(--primary-color);
+    border-radius: 1rem;
+    padding: 0.8rem 1rem;
+    color: var(--primary-white);
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    cursor: pointer;
+  }
   .section li {
     border-bottom: 1px solid var(--main-red-200);
   }

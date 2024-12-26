@@ -23,11 +23,11 @@ export type ProductTypes = {
   thumbnailsPublicId: string[];
   shortDesc: string;
   description: string;
-  isActive: boolean;
+  isActive?: boolean;
   numOfReview?: number;
   averageRating?: number;
-  createdAt: Date;
-  createdBy: string;
+  createdAt?: Date;
+  createdBy?: string;
   updatedAt?: Date;
   updatedBy?: string;
   reviews: ReviewTypes[];
@@ -65,4 +65,11 @@ export type CartTypes = {
   quantity: number;
   size: string;
   color: string;
+};
+
+export type PageTypes = {
+  totalPages: number;
+  currentPage: number;
+  nextPage: number;
+  previousPage: number;
 };

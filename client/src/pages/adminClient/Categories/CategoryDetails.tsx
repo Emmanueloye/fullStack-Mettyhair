@@ -37,7 +37,9 @@ const CategoryDetails = () => {
       <TabContentWrapper $dark={true}>
         <Form>
           <AFormGroup>
-            <Label htmlFor='category'>category</Label>
+            <Label htmlFor='category' type='dark'>
+              category
+            </Label>
             <Input
               id='category'
               $dark={true}
@@ -49,7 +51,9 @@ const CategoryDetails = () => {
           </AFormGroup>
           <TwoGrid type='normal'>
             <AFormGroup>
-              <Label htmlFor='createdBy'>created by</Label>
+              <Label htmlFor='createdBy' type='dark'>
+                created by
+              </Label>
               <Input
                 id='createdBy'
                 $dark={true}
@@ -60,7 +64,9 @@ const CategoryDetails = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='createdDate'>created Date</Label>
+              <Label htmlFor='createdDate' type='dark'>
+                created Date
+              </Label>
               <Input
                 id='createdDate'
                 $dark={true}
@@ -75,7 +81,9 @@ const CategoryDetails = () => {
           </TwoGrid>
           <TwoGrid type='normal'>
             <AFormGroup>
-              <Label htmlFor='editedBy'>Last Edited by</Label>
+              <Label htmlFor='editedBy' type='dark'>
+                Last Edited by
+              </Label>
               <Input
                 id='editedBy'
                 $dark={true}
@@ -86,7 +94,9 @@ const CategoryDetails = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='editedDate'>Last Edited Date</Label>
+              <Label htmlFor='editedDate' type='dark'>
+                Last Edited Date
+              </Label>
               <Input
                 id='editedDate'
                 $dark={true}

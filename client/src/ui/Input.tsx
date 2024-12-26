@@ -28,10 +28,13 @@ const Input = styled.input<{ $dark?: boolean; $capitalize?: boolean }>`
   }
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<{ type?: string }>`
   display: block;
   font-size: 1.6rem;
-  color: var(--admin-sec-text-color);
+  color: ${(props) =>
+    props.type === 'dark'
+      ? 'var(--admin-sec-text-color)'
+      : 'var(--primary-text-black)'};
   margin-bottom: 1rem;
   text-transform: capitalize;
 `;

@@ -55,7 +55,9 @@ const EditSubcategory = () => {
         <Form id='form' method='patch'>
           {actionData && <FormError info={actionData.message} />}
           <AFormGroup>
-            <Label htmlFor='category'>Category</Label>
+            <Label htmlFor='category' type='dark'>
+              Category
+            </Label>
             <Select
               id='category'
               name='category'
@@ -78,7 +80,9 @@ const EditSubcategory = () => {
             </Select>
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='subcategory'>subcategory</Label>
+            <Label htmlFor='subcategory' type='dark'>
+              subcategory
+            </Label>
             <Input
               $dark={true}
               type='text'

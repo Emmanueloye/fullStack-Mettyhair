@@ -13,8 +13,6 @@ type AccordionProps = {
 };
 
 const AccountItem = ({ menuItem }: AccordionProps) => {
-  console.log(menuItem.links);
-
   return (
     <AccordionItemBox>
       <AccordionLink>

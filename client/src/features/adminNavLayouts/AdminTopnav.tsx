@@ -3,10 +3,11 @@ import SiteMode, { ModeBtn } from './SiteMode';
 import { BrandLink } from '../../ui/Brand';
 import { Link } from 'react-router-dom';
 import AuthMenu from './AuthMenu';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaHome } from 'react-icons/fa';
 import { useAppDispatch } from '../../store/hook';
 import { adminUIActions } from '../../store/adminUI';
 import { User } from '../../dtos/userDto';
+import { MdMail } from 'react-icons/md';
 
 const AdminNavWrapper = styled.nav`
   background-color: var(--admin-primary-color);
@@ -27,6 +28,31 @@ const AdminNavWrapper = styled.nav`
     gap: 3rem;
   }
 
+  @keyframes blink {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1.1);
+    }
+  }
+
+  .mail {
+    position: relative;
+  }
+  .badge {
+    color: var(--secondary-text-white);
+    background-color: var(--primary-white);
+    border-radius: 50%;
+    font-weight: 600;
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 1rem;
+    height: 1rem;
+    animation: blink 0.4s infinite;
+  }
+
   @media screen and (min-width: 560px) {
     height: 8rem;
     padding: 2rem 3rem;
@@ -36,8 +62,10 @@ const AdminNavWrapper = styled.nav`
 const AdminTopnav = ({
   user,
   onLogout,
+  mailNotice,
 }: {
   user: User;
+  mailNotice: number;
   onLogout: () => void;
 }) => {
   const dispatch = useAppDispatch();
@@ -49,12 +77,18 @@ const AdminTopnav = ({
       </ModeBtn>
       <BrandLink>
         <Link to='/'>
-          Metty<span>Hair</span>
+          <FaHome />
         </Link>
       </BrandLink>
 
       <div className='auth'>
         <SiteMode />
+        <Link to='/admin/contacts' className='mail'>
+          <ModeBtn>
+            <MdMail />
+          </ModeBtn>
+          {mailNotice > 0 && <span className='badge'></span>}
+        </Link>
         <AuthMenu user={user} onLogout={onLogout} />
       </div>
     </AdminNavWrapper>

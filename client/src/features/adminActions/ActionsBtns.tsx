@@ -14,7 +14,7 @@ export const ActionBtnWrapper = styled.div`
   a,
   button {
     background-color: var(--main-red-600);
-    padding: 0.6rem 1rem;
+    padding: 0.4rem 0.8rem;
     font-size: 1.6rem;
     border: none;
     border-radius: var(--border-radius-sm);

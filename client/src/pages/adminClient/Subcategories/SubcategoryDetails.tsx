@@ -34,7 +34,9 @@ const SubcategoryDetails = () => {
       <TabContentWrapper $dark={true}>
         <Form id='form'>
           <AFormGroup>
-            <Label htmlFor='category'>category</Label>
+            <Label htmlFor='category' type='dark'>
+              category
+            </Label>
             <Input
               id='category'
               $dark={true}
@@ -46,7 +48,9 @@ const SubcategoryDetails = () => {
           </AFormGroup>
 
           <AFormGroup>
-            <Label htmlFor='subcategory'>subcategory</Label>
+            <Label htmlFor='subcategory' type='dark'>
+              subcategory
+            </Label>
             <Input
               id='subcategory'
               $dark={true}
@@ -57,7 +61,9 @@ const SubcategoryDetails = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='status'>status</Label>
+            <Label htmlFor='status' type='dark'>
+              status
+            </Label>
             <Input
               id='status'
               $dark={true}
@@ -69,7 +75,9 @@ const SubcategoryDetails = () => {
           </AFormGroup>
           <TwoGrid type='normal'>
             <AFormGroup>
-              <Label htmlFor='createdby'>created by</Label>
+              <Label htmlFor='createdby' type='dark'>
+                created by
+              </Label>
               <Input
                 id='createdby'
                 $dark={true}
@@ -80,7 +88,9 @@ const SubcategoryDetails = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='createdAt'>created Date</Label>
+              <Label htmlFor='createdAt' type='dark'>
+                created Date
+              </Label>
               <Input
                 id='createdAt'
                 $dark={true}
@@ -96,7 +106,9 @@ const SubcategoryDetails = () => {
           </TwoGrid>
           <TwoGrid type='normal'>
             <AFormGroup>
-              <Label htmlFor='editedBy'>Last Edited by</Label>
+              <Label htmlFor='editedBy' type='dark'>
+                Last Edited by
+              </Label>
               <Input
                 id='editedBy'
                 $dark={true}
@@ -109,7 +121,9 @@ const SubcategoryDetails = () => {
               />
             </AFormGroup>
             <AFormGroup>
-              <Label htmlFor='editedAt'>Last Edited Date</Label>
+              <Label htmlFor='editedAt' type='dark'>
+                Last Edited Date
+              </Label>
               <Input
                 id='editedAt'
                 $dark={true}

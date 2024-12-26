@@ -27,6 +27,12 @@ const AdminLayout = () => {
     queryKey: ['user'],
     queryFn: () => getOnlyData({ url: '/users/me' }),
   });
+  const {
+    data: { contacts },
+  } = useQuery({
+    queryKey: ['fetchContact', 'unreadMails'],
+    queryFn: () => getOnlyData({ url: '/contacts?isRead=false' }),
+  });
 
   const { user } = data;
 
@@ -51,7 +57,11 @@ const AdminLayout = () => {
     <>
       <Sidebar user={user} />
       <Main $isOpen={isAdminSidebarOpen}>
-        <AdminTopnav user={user} onLogout={logout} />
+        <AdminTopnav
+          user={user}
+          onLogout={logout}
+          mailNotice={contacts.length}
+        />
         {state === 'loading' && <UserLoader />}
         {state === 'submitting' && <UserLoader />}
         <Outlet context={user} />
@@ -65,6 +75,11 @@ export default AdminLayout;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const loader = async () => {
+  await queryClient.ensureQueryData({
+    queryKey: ['fetchContact', 'unreadMails'],
+    queryFn: () => getOnlyData({ url: '/contacts?isRead=false' }),
+  });
+
   const resp = await queryClient.ensureQueryData({
     queryKey: ['user'],
     queryFn: () => getOnlyData({ url: '/users/me' }),

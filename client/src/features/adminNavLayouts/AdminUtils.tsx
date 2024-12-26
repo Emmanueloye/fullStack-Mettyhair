@@ -18,6 +18,10 @@ export const AdminSection = styled.section`
   background-color: var(--admin-alt-color);
   padding: 2rem;
   min-height: 100vh;
+
+  .unread {
+    font-weight: 600;
+  }
   /* @media screen and (min-width: 1024px) {
     padding: 2rem 5rem;
   } */

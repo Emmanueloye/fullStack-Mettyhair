@@ -35,7 +35,7 @@ export const updateOrder = factory.updateOne({
   ],
 });
 
-export const returnOrder = async (req: Request, res: Response) => {};
+// export const returnOrder = async (req: Request, res: Response) => {};
 
 export const setOrderUpdate = (
   req: Request,

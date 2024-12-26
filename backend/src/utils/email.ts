@@ -1,7 +1,6 @@
 import nodemailer from 'nodemailer';
 import ejs from 'ejs';
 import { convert } from 'html-to-text';
-import brevo, { TransactionalEmailsApiApiKeys } from '@getbrevo/brevo';
 import path from 'path';
 
 class Email {
@@ -45,6 +44,7 @@ class Email {
               ? process.env.EMAIL_SENDER
               : process.env.SENDER_EMAIL,
           to: data.email,
+          bcc: data.bcc,
           subject,
           html: result,
           text: convert(result),
@@ -69,6 +69,12 @@ class Email {
       'You have being made an Admin of Mettyhair',
       data
     );
+  }
+  async sendContactNotification(data: any) {
+    await this.send('contactNotification', 'New Contact Notification.', data);
+  }
+  async sendContactReply(data: any) {
+    await this.send('contactResponse', data.subject, data);
   }
 }
 

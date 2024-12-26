@@ -37,7 +37,9 @@ const ProductView = () => {
         {/* top form inputs */}
         <ThreeGrid>
           <AFormGroup>
-            <Label htmlFor='status'>status</Label>
+            <Label htmlFor='status' type='dark'>
+              status
+            </Label>
             <Input
               id='status'
               type='text'
@@ -48,7 +50,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='product'>Product name</Label>
+            <Label htmlFor='product' type='dark'>
+              Product name
+            </Label>
             <Input
               id='product'
               type='text'
@@ -59,7 +63,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='category'>category</Label>
+            <Label htmlFor='category' type='dark'>
+              category
+            </Label>
             <Input
               id='category'
               type='text'
@@ -70,7 +76,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='subcategory'>subcategory</Label>
+            <Label htmlFor='subcategory' type='dark'>
+              subcategory
+            </Label>
             <Input
               id='subcategory'
               type='text'
@@ -81,7 +89,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='quantity'>Available Quantity</Label>
+            <Label htmlFor='quantity' type='dark'>
+              Available Quantity
+            </Label>
             <Input
               id='quantity'
               type='text'
@@ -91,7 +101,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='sellingPrice'>selling Price</Label>
+            <Label htmlFor='sellingPrice' type='dark'>
+              selling Price
+            </Label>
             <Input
               id='sellingPrice'
               type='text'
@@ -101,7 +113,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='costPrice'>cost Price</Label>
+            <Label htmlFor='costPrice' type='dark'>
+              cost Price
+            </Label>
             <Input
               id='costPrice'
               type='text'
@@ -113,7 +127,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='discountPrice'>discount Price</Label>
+            <Label htmlFor='discountPrice' type='dark'>
+              discount Price
+            </Label>
             <Input
               id='discountPrice'
               type='text'
@@ -125,7 +141,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='color'>available colors</Label>
+            <Label htmlFor='color' type='dark'>
+              available colors
+            </Label>
             <Input
               id='color'
               type='text'
@@ -136,7 +154,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='size'>available sizes</Label>
+            <Label htmlFor='size' type='dark'>
+              available sizes
+            </Label>
             <Input
               id='size'
               type='text'
@@ -146,7 +166,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='appearance'>product appearance</Label>
+            <Label htmlFor='appearance' type='dark'>
+              product appearance
+            </Label>
             <Input
               id='appearance'
               type='text'
@@ -159,7 +181,9 @@ const ProductView = () => {
         <ThreeGrid>
           {/* Product image section */}
           <AFormGroup>
-            <Label htmlFor='p-img'>product image</Label>
+            <Label htmlFor='p-img' type='dark'>
+              product image
+            </Label>
             <Center>
               <img
                 src={product.productImage}
@@ -181,7 +205,9 @@ const ProductView = () => {
           {/* Product thumbnails */}
           {product.thumbnails.map((image: string, index: number) => (
             <AFormGroup key={index}>
-              <Label htmlFor='thumbOne'>product thumbnail</Label>
+              <Label htmlFor='thumbOne' type='dark'>
+                product thumbnail
+              </Label>
               <Center>
                 <img
                   src={image}
@@ -205,7 +231,9 @@ const ProductView = () => {
 
         <ThreeGrid type='full'>
           <AFormGroup>
-            <Label htmlFor='shortDesc'>short description</Label>
+            <Label htmlFor='shortDesc' type='dark'>
+              short description
+            </Label>
             <TextArea
               $dark={true}
               id='shortDesc'
@@ -217,7 +245,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='longDesc'>long description</Label>
+            <Label htmlFor='longDesc' type='dark'>
+              long description
+            </Label>
             <TextArea
               $dark={true}
               id='longDesc'
@@ -230,7 +260,9 @@ const ProductView = () => {
         </ThreeGrid>
         <ThreeGrid type='two'>
           <AFormGroup>
-            <Label htmlFor='createdBy'>created by</Label>
+            <Label htmlFor='createdBy' type='dark'>
+              created by
+            </Label>
             <Input
               id='createdBy'
               type='text'
@@ -241,7 +273,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='createdDate'>created Date</Label>
+            <Label htmlFor='createdDate' type='dark'>
+              created Date
+            </Label>
             <Input
               id='createdDate'
               type='text'
@@ -254,7 +288,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='editedBy'>last edited by</Label>
+            <Label htmlFor='editedBy' type='dark'>
+              last edited by
+            </Label>
             <Input
               id='editedBy'
               type='text'
@@ -265,7 +301,9 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='editedDate'>last edited Date</Label>
+            <Label htmlFor='editedDate' type='dark'>
+              last edited Date
+            </Label>
             <Input
               id='editedDate'
               type='text'

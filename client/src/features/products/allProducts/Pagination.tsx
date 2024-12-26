@@ -69,8 +69,8 @@ const Pagination = ({
 }: {
   totalPages: number;
   currentPage: number;
-  nextPage: number;
-  previousPage: number;
+  nextPage?: number;
+  previousPage?: number;
   pageLink: string;
   marginTop?: string;
 }) => {

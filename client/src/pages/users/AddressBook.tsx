@@ -8,7 +8,7 @@ import {
   useOutletContext,
 } from 'react-router-dom';
 import InputGroup from '../../features/authComponent/InputGroup';
-import { FaFlag, FaMapMarker } from 'react-icons/fa';
+import { FaFlag, FaMapMarker, FaPhone } from 'react-icons/fa';
 import { FaHouse } from 'react-icons/fa6';
 import Button from '../../ui/Button';
 import { GrDocumentUpdate } from 'react-icons/gr';
@@ -64,6 +64,17 @@ const AddressBook = () => {
               name='address'
               icon={<FaMapMarker />}
               defaultValue={user.address}
+              mb='2rem'
+              capitalize={true}
+            />
+          </AFormGroup>
+          <AFormGroup>
+            <Label htmlFor='phone'>phone*</Label>
+            <InputGroup
+              type='text'
+              name='phone'
+              icon={<FaPhone />}
+              defaultValue={user.phone}
               mb='2rem'
               capitalize={true}
             />

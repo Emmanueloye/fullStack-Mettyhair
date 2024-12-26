@@ -249,6 +249,9 @@ const GlobalStyle = createGlobalStyle`
     .pimg{
         border-radius:var(--border-radius-md)
     }
+    .admin-color {
+        color:var(--admin-sec-text-color)
+    }
     
     @media screen and (min-width: 1024px ) {
     h1 {
