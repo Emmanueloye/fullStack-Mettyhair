@@ -53,17 +53,11 @@ const AdminLayout = () => {
     }
   }, [dispatch, navigate, user]);
 
-  console.log(contacts.length);
-
   return (
     <>
       <Sidebar user={user} />
       <Main $isOpen={isAdminSidebarOpen}>
-        <AdminTopnav
-          user={user}
-          onLogout={logout}
-          // mailNotice={contacts.length}
-        />
+        <AdminTopnav user={user} onLogout={logout} unread={contacts.length} />
         {state === 'loading' && <UserLoader />}
         {state === 'submitting' && <UserLoader />}
         <Outlet context={user} />
