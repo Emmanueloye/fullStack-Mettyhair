@@ -62,10 +62,8 @@ const AdminNavWrapper = styled.nav`
 const AdminTopnav = ({
   user,
   onLogout,
-  mailNotice,
 }: {
   user: User;
-  mailNotice: number;
   onLogout: () => void;
 }) => {
   const dispatch = useAppDispatch();
@@ -87,7 +85,7 @@ const AdminTopnav = ({
           <ModeBtn>
             <MdMail />
           </ModeBtn>
-          {mailNotice > 0 && <span className='badge'></span>}
+          {/* {mailNotice > 0 && <span className='badge'></span>} */}
         </Link>
         <AuthMenu user={user} onLogout={onLogout} />
       </div>

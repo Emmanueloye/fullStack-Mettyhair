@@ -53,6 +53,8 @@ const AdminLayout = () => {
     }
   }, [dispatch, navigate, user]);
 
+  console.log(contacts.length);
+
   return (
     <>
       <Sidebar user={user} />
@@ -60,7 +62,7 @@ const AdminLayout = () => {
         <AdminTopnav
           user={user}
           onLogout={logout}
-          mailNotice={contacts.length}
+          // mailNotice={contacts.length}
         />
         {state === 'loading' && <UserLoader />}
         {state === 'submitting' && <UserLoader />}
