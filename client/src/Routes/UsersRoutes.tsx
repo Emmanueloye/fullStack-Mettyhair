@@ -60,8 +60,10 @@ import Contact, {
   loader as contactLoader,
   action as contactAction,
 } from '../pages/userClient/Contact';
-import Blog from '../pages/userClient/Blog';
-import BlogDetails from '../pages/userClient/BlogDetails';
+import Blog, { loader as blogLoader } from '../pages/userClient/Blog';
+import BlogDetails, {
+  loader as blogDetailsLoader,
+} from '../pages/userClient/BlogDetails';
 
 const userClientRoutes = [
   {
@@ -191,8 +193,12 @@ const userClientRoutes = [
       {
         path: 'blog',
         children: [
-          { index: true, element: <Blog /> },
-          { path: ':slug/:id', element: <BlogDetails /> },
+          { index: true, element: <Blog />, loader: blogLoader },
+          {
+            path: ':slug/:id',
+            element: <BlogDetails />,
+            loader: blogDetailsLoader,
+          },
         ],
       },
     ],

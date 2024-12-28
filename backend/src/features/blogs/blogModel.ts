@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { InferSchemaType, model, Query, Schema } from 'mongoose';
 
 const blogSchema = new Schema({
   title: {
@@ -39,5 +39,15 @@ const blogSchema = new Schema({
     ref: 'User',
   },
 });
+
+blogSchema.pre(
+  /^find/,
+  function (this: Query<{}, InferSchemaType<typeof blogSchema>>) {
+    this.populate({ path: 'createdBy', select: 'fullName' }).populate({
+      path: 'updatedBy',
+      select: 'fullName',
+    });
+  }
+);
 
 export default model('Post', blogSchema);

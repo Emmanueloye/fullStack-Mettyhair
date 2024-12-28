@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import img from '../../assets/images/hair2.webp';
 import Container from '../../ui/Container';
 import LinkBtn from '../../ui/LinkBtn';
+import { getData, queryClient } from '../../api/requests';
+import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { formatDate } from '../../utilities/HelperFunc';
 
 export const BlogDetailsBox = styled.div`
   padding-top: 4rem;
@@ -26,50 +29,31 @@ export const BlogDetailsBox = styled.div`
 `;
 
 const BlogDetails = () => {
+  const params = useLoaderData() as { id: string };
+
+  const {
+    data: { post },
+  } = useQuery({
+    queryKey: ['fetchPost', 'posts', params.id],
+    queryFn: () => getData({ url: `/posts/${params.id}` }),
+  });
+
+  // console.log(data);
+
   return (
     <BlogDetailsBox>
       <Container>
-        <img src={img} alt='blog image' className='img' />
+        <img src={post.image} alt='blog image' className='img' />
         <div className='main'>
-          <h3 className='title'>How to keep your curly hairs shining.</h3>
+          <h3 className='title'>{post.title}</h3>
 
           <div className='small'>
             <span>Created Date: </span>
-            <span>March 2, 2024</span>
+            <span>
+              {post.createdAt && formatDate(new Date(post.createdAt))}
+            </span>
           </div>
-
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos optio,
-            perspiciatis dicta accusantium quod libero necessitatibus officia
-            temporibus delectus voluptates. Consequatur, amet sit id enim
-            aspernatur, dolorem illum ab quod aliquid laborum placeat cumque ad.
-            Perferendis qui tempore illo quod doloribus dolore ducimus
-            consequuntur corporis ipsum inventore voluptatum architecto magnam
-            ex mollitia eaque est quidem nulla necessitatibus numquam, molestiae
-            excepturi?
-          </p>
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos optio,
-            perspiciatis dicta accusantium quod libero necessitatibus officia
-            temporibus delectus voluptates. Consequatur, amet sit id enim
-            aspernatur, dolorem illum ab quod aliquid laborum placeat cumque ad.
-            Perferendis qui tempore illo quod doloribus dolore ducimus
-            consequuntur corporis ipsum inventore voluptatum architecto magnam
-            ex mollitia eaque est quidem nulla necessitatibus numquam, molestiae
-            excepturi?
-          </p>
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos optio,
-            perspiciatis dicta accusantium quod libero necessitatibus officia
-            temporibus delectus voluptates. Consequatur, amet sit id enim
-            aspernatur, dolorem illum ab quod aliquid laborum placeat cumque ad.
-            Perferendis qui tempore illo quod doloribus dolore ducimus
-            consequuntur corporis ipsum inventore voluptatum architecto magnam
-            ex mollitia eaque est quidem nulla necessitatibus numquam, molestiae
-            excepturi?
-          </p>
+          <div className='preserve-whitespace'> {post.content}</div>
         </div>
         <LinkBtn btnText='back to main blog' url='/blog' />
       </Container>
@@ -78,3 +62,13 @@ const BlogDetails = () => {
 };
 
 export default BlogDetails;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  await queryClient.ensureQueryData({
+    queryKey: ['fetchPost', 'posts', params.id],
+    queryFn: () => getData({ url: `/posts/${params.id}` }),
+  });
+
+  return params;
+};

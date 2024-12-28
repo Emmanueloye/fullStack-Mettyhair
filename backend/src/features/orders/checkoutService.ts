@@ -93,7 +93,7 @@ export const verifyTransaction = async (
   try {
     if (data.status === 'success' && eventData.event === 'charge.success') {
       const uid = new ShortUniqueId({ length: 8 });
-      const orderNumber = uid.rnd();
+      const orderNumber = uid.seq();
       const session = await startSession();
 
       await session.withTransaction(async () => {
@@ -119,6 +119,7 @@ export const verifyTransaction = async (
           state: data.metadata.state,
           country: data.metadata.country,
           note: data.metadata.note,
+          isPaid: 'paid',
         });
 
         // Get cart items.

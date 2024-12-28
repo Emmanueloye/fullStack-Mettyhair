@@ -252,7 +252,11 @@ const GlobalStyle = createGlobalStyle`
     .admin-color {
         color:var(--admin-sec-text-color)
     }
-    
+    .preserve-whitespace {
+        white-space:pre-line;
+        text-align:justify;
+        font-size:1.4rem;
+    }
     @media screen and (min-width: 1024px ) {
     h1 {
         font-size:2.3rem

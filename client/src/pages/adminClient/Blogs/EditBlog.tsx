@@ -27,7 +27,7 @@ const EditBlog = () => {
   const {
     data: { post },
   } = useQuery({
-    queryKey: ['fetchPost', 'ediitPost', params.id],
+    queryKey: ['fetchPost', 'editPost', params.id],
     queryFn: () =>
       getData({
         url: `/posts/${params.id}`,
@@ -61,7 +61,7 @@ const EditBlog = () => {
           <Input id='image' type='file' $dark name='image' />
         </AFormGroup>
         <AFormGroup>
-          <Label htmlFor='post' type='dark'>
+          <Label htmlFor='content' type='dark'>
             post
           </Label>
           <TextArea

@@ -75,10 +75,8 @@ const BlogList = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      let newUrl = `/posts?search=${searchField}&value=${searchValue}`;
-      if (searchField !== 'productName') {
-        newUrl = `/posts?${searchField}=${searchValue}`;
-      }
+      const newUrl = `/posts?search=${searchField}&value=${searchValue}`;
+
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({
           queryKey: ['fetchPost', 'post', searchValue],

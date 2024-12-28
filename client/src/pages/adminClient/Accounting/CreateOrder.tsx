@@ -119,7 +119,6 @@ const CreateOrder = () => {
 
       changedVal[i].productId = filteredProduct._id;
     }
-    // console.log();
 
     setData(changedVal);
     calculateSubTotals();
@@ -148,8 +147,6 @@ const CreateOrder = () => {
     submit(formData, { method: 'POST' });
   };
 
-  console.log(data);
-
   return (
     <AdminSection>
       {/* Header */}
@@ -160,7 +157,7 @@ const CreateOrder = () => {
 
       <>
         {/* header */}
-        <h4>Customer Details</h4>
+        <Label type='dark'>Customer Details</Label>
         <ThreeGrid>
           <AFormGroup>
             <Label htmlFor='customer' type='dark'>
@@ -222,7 +219,7 @@ const CreateOrder = () => {
         </ThreeGrid>
 
         {/* Customer order section */}
-        <h4>Customer Order</h4>
+        <Label type='dark'>Customer order</Label>
         <BtnUI type='button' onClick={handleInputAdd}>
           Add +
         </BtnUI>
@@ -248,6 +245,7 @@ const CreateOrder = () => {
                     onChange={(e) => handleFormChange(e, index)}
                     placeholder='Search product'
                   />
+
                   <datalist id={`product-${index + 1}`}>
                     {products.map((product: ProductTypes) => {
                       return (

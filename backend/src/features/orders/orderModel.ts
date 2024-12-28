@@ -17,6 +17,11 @@ const orderSchema = new Schema({
     type: Number,
     required: true,
   },
+  isPaid: {
+    type: String,
+    default: 'paid',
+    enum: ['paid', 'partial', 'Not paid'],
+  },
   amountPaid: Number,
   customerName: {
     type: String,
@@ -36,7 +41,7 @@ const orderSchema = new Schema({
   },
   invoiceNo: {
     type: String,
-    required: true,
+    // required: true,
   },
   reference: String,
   charges: Number,
