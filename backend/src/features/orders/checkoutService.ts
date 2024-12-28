@@ -93,7 +93,7 @@ export const verifyTransaction = async (
   try {
     if (data.status === 'success' && eventData.event === 'charge.success') {
       const uid = new ShortUniqueId({ length: 8 });
-      const orderNumber = uid.seq();
+      const orderNumber = uid.rnd();
       const session = await startSession();
 
       await session.withTransaction(async () => {
