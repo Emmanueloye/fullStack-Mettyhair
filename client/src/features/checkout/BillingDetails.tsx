@@ -45,7 +45,7 @@ const BillingDetails = ({
               mb='2.5rem'
               disabled={disabled || false}
               isDark={isDark}
-              defaultValue={order.user.email}
+              defaultValue={order?.user?.email}
             />
           </div>
           <div>
