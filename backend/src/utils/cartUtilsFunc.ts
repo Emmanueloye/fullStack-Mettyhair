@@ -74,6 +74,7 @@ export type ExtendedCart = {
 type AccType = {
   subtotal: number;
   totalDiscount: number;
+  totalCost: number;
 };
 
 export const calcCartTotal = (carts: ExtendedCart[]) => {
@@ -86,10 +87,13 @@ export const calcCartTotal = (carts: ExtendedCart[]) => {
       const subtotal = (acc.subtotal +=
         cart.product.sellingPrice * cart.quantity);
 
+      const totalCost = (acc.totalCost +=
+        cart.product.costPrice * cart.quantity);
+
       const totalDiscount = (acc.totalDiscount +=
         discountPerUnit * cart.quantity);
-      return { subtotal, totalDiscount };
+      return { subtotal, totalDiscount, totalCost };
     },
-    { subtotal: 0, totalDiscount: 0 }
+    { subtotal: 0, totalDiscount: 0, totalCost: 0 }
   );
 };

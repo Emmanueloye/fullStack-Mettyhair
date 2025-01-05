@@ -4,15 +4,18 @@ export type OrderType = {
   subtotal: number;
   discount?: number;
   totalAmount: number;
+  totalCost: number;
   customerName: string;
   orderName: string;
-  user: {
+  isPaid: boolean;
+  amountPaid: number;
+  user?: {
     _id: string;
     email: string;
   };
-  transactionId: string;
-  invoiceNo: string;
-  reference: string;
+  transactionId?: string;
+  invoiceNo?: string;
+  reference?: string;
   charges?: number;
   cardType?: string;
   bank?: string;
@@ -20,9 +23,9 @@ export type OrderType = {
   paymentDate?: Date;
   orderStatus: string;
   address: string;
-  phone: string;
-  state: string;
-  country: string;
+  phone?: string;
+  state?: string;
+  country?: string;
   note?: string;
   confirmationDate?: Date;
   confirmedBy?: string;
@@ -31,8 +34,18 @@ export type OrderType = {
   deliveryDate?: Date;
   deliveredBy?: string;
   createdAt?: Date;
+  createdBy?: {
+    _id: string;
+    fullName: string;
+  };
   postedBy?: string;
   isManuel?: boolean;
+  invoiceDate?: Date;
+  invoicedBy?: {
+    _id: string;
+    fullName: string;
+  };
+  salesOrderStatus?: string;
 };
 
 export type OrderItemType = {

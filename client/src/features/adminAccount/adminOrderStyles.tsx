@@ -1,9 +1,16 @@
 import styled, { css } from 'styled-components';
 
-export const FiveGrid = styled.div`
+export const OrderGrid = styled.div<{ type?: string }>`
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr 0.3fr;
+  grid-template-columns: 1.3fr 1fr 1fr 0.7fr 1fr 1fr 0.5fr;
   gap: 1rem;
+`;
+
+export const OrderLabel = styled.p`
+  display: block;
+  font-size: 1.4rem;
+  color: var(--admin-sec-text-color);
+  text-transform: capitalize;
 `;
 
 export const BtnUI = styled.button`

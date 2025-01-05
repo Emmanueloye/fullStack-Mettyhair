@@ -144,6 +144,10 @@ import EditBlog, {
   loader as EditBlogLoader,
   action as EditBlogAction,
 } from '../pages/adminClient/Blogs/EditBlog';
+import SalesOrderList, {
+  loader as salesOrderListLoader,
+} from '../pages/adminClient/Accounting/SalesOrderList';
+// import CreateOrderV1 from '../pages/adminClient/Accounting/CreateOrderV1';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
 
@@ -479,6 +483,11 @@ const adminRoutes = [
             element: <CreateOrder />,
             loader: createOrderLoader,
             action: createOrderAction,
+          },
+          {
+            path: 'sales-orders',
+            element: <SalesOrderList />,
+            loader: salesOrderListLoader,
           },
         ],
       },

@@ -17,10 +17,11 @@ const orderSchema = new Schema({
     type: Number,
     required: true,
   },
+  totalCost: Number,
   isPaid: {
     type: String,
     default: 'paid',
-    enum: ['paid', 'partial', 'Not paid'],
+    enum: ['paid', 'partial', 'not paid'],
   },
   amountPaid: Number,
   customerName: {
@@ -37,7 +38,7 @@ const orderSchema = new Schema({
   },
   transactionId: {
     type: String,
-    required: true,
+    // required: true,
   },
   invoiceNo: {
     type: String,
@@ -77,17 +78,23 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
-  postedBy: {
+  createdBy: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  isManuel: {
+  invoiceDate: Date,
+  invoicedBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  isManual: {
     type: Boolean,
     default: false,
   },
   salesOrderStatus: {
     type: String,
-    enum: ['pending', 'invoiced', 'paid', 'unpaid'],
+    default: 'unpaid',
+    enum: ['invoiced', 'paid', 'unpaid'],
   },
 });
 

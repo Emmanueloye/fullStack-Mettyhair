@@ -11,7 +11,8 @@ import { Select } from '../../../ui/SelectInput';
 import ProductTotal from '../../../features/shoppingCart/ProductTotal';
 import {
   BtnUI,
-  FiveGrid,
+  OrderGrid,
+  OrderLabel,
 } from '../../../features/adminAccount/adminOrderStyles';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import Button from '../../../ui/Button';
@@ -25,16 +26,28 @@ import { useQuery } from '@tanstack/react-query';
 import { User } from '../../../dtos/userDto';
 import { useState } from 'react';
 import { ProductTypes } from '../../../dtos/productsDto';
-import { slugifyText } from '../../../utilities/HelperFunc';
 
 const CreateOrder = () => {
+  const [customer, setCustomer] = useState('');
+  const [customerId, setCustomerId] = useState('');
+  const [colors, setColors] = useState<string[]>([]);
+  const [sizes, setSizes] = useState<string[]>([]);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [data, setData] = useState<changedValType[]>([
-    { productId: '', product: '', quantity: '1', price: '', subtotal: '' },
+    {
+      product: '',
+      color: '',
+      size: '',
+      quantity: '1',
+      price: '',
+      subtotal: '',
+      discountPrice: '',
+    },
   ]);
   const [total, setTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
   const submit = useSubmit();
 
   const {
@@ -48,15 +61,18 @@ const CreateOrder = () => {
     data: { products },
   } = useQuery({
     queryKey: ['fetchProduct', 'products'],
-    queryFn: () => getOnlyData({ url: '/products' }),
+    queryFn: () =>
+      getOnlyData({ url: '/products?isActive=true&quantity[gt]=0' }),
   });
 
   type changedValType = {
-    productId: string;
     product: string;
+    color: string;
+    size: string;
     quantity: string;
     price: string;
     subtotal: string;
+    discountPrice?: string;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -64,6 +80,8 @@ const CreateOrder = () => {
       .filter((user: User) => user._id === e.target.value)
       .at(0);
 
+    setCustomer(filteredUser.fullName);
+    setCustomerId(filteredUser._id);
     setEmail(filteredUser.email);
     if (filteredUser.phone) {
       setPhone(filteredUser.phone);
@@ -91,6 +109,14 @@ const CreateOrder = () => {
     );
   };
 
+  const calcDiscount = () => {
+    const total = data.reduce((acc, item) => {
+      return acc + Number(item.discountPrice) * Number(item.quantity);
+    }, 0);
+
+    setDiscount(total);
+  };
+
   const calcTotal = () => {
     const total = data.reduce((acc, item) => {
       return acc + Number(item.price) * Number(item.quantity);
@@ -100,46 +126,102 @@ const CreateOrder = () => {
   };
 
   const handleFormChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>,
     i: number
   ) => {
+    // Get the name and value from the event
     const name = e.target.name as keyof changedValType;
     const value = e.target.value;
+
+    // Copy the existing order data
     const changedVal: changedValType[] = [...data];
     changedVal[i][name] = value;
 
+    // If we are changing product inputs, then we want to pre-populate other fields that are tied to the selected product.
+    let filteredProduct;
     if (e.target.name === 'product') {
-      const filteredProduct = products.filter((item: ProductTypes) => {
-        return item.slug === slugifyText(e.target.value);
+      filteredProduct = products.filter((item: ProductTypes) => {
+        return item._id === e.target.value;
       })[0];
 
-      changedVal[i].price = filteredProduct.discountPrice
-        ? filteredProduct.discountPrice
-        : filteredProduct.sellingPrice;
+      changedVal[i].price = filteredProduct?.sellingPrice;
 
-      changedVal[i].productId = filteredProduct._id;
+      changedVal[i].discountPrice = filteredProduct?.discountPrice
+        ? `${filteredProduct?.sellingPrice - filteredProduct?.discountPrice}`
+        : '';
+
+      // Get color based on the selected product.
+      const updatedColors = [...colors];
+      updatedColors[i] = filteredProduct?.color;
+      // Get sizes based on the selected product.
+      const updatedSizes = [...sizes];
+      updatedSizes[i] = filteredProduct?.size;
+
+      setColors(updatedColors);
+      setSizes(updatedSizes);
     }
-
     setData(changedVal);
+
     calculateSubTotals();
+    calcDiscount();
     calcTotal();
   };
 
   const handleInputAdd = () => {
     setData([
       ...data,
-      { productId: '', product: '', quantity: '1', price: '', subtotal: '' },
+      {
+        product: '',
+        color: '',
+        size: '',
+        quantity: '1',
+        price: '',
+        subtotal: '',
+        discountPrice: '',
+      },
     ]);
   };
 
   const handleDelete = (i: number) => {
     const deletedVal = [...data];
     deletedVal.splice(i, 1);
+
     setData(deletedVal);
+  };
+  // HTMLSelectElement;
+  const handleOtherChange = (
+    e:
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    if (e.target.name === 'color') {
+      const newData = [...data];
+      newData[i].color = e.target.value;
+      setData(newData);
+    }
+    if (e.target.name === 'size') {
+      const newData = [...data];
+      newData[i].size = e.target.value;
+      setData(newData);
+    }
+
+    if (e.target.name === 'quantity') {
+      const newData = [...data];
+      newData[i].quantity = e.target.value;
+      setData(newData);
+      calculateSubTotals();
+      calcDiscount();
+      calcTotal();
+    }
   };
 
   const handleSubmit = () => {
     const formData = new FormData();
+    formData.append('customerId', customerId);
+    formData.append('orderName', customer);
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('address', address);
@@ -225,49 +307,90 @@ const CreateOrder = () => {
         </BtnUI>
 
         <div style={{ overflowX: 'auto', margin: '2rem 0 2rem 0' }}>
-          <FiveGrid>
-            <Label type='dark'>product</Label>
-            <Label type='dark'>quantity</Label>
-            <Label type='dark'>price</Label>
-            <Label type='dark'>subtotal</Label>
-            <Label type='dark'>action</Label>
-          </FiveGrid>
+          {/* Header */}
+          <OrderGrid type='dark'>
+            <OrderLabel>product</OrderLabel>
+            <OrderLabel>color</OrderLabel>
+            <OrderLabel>size</OrderLabel>
+            <OrderLabel>quantity</OrderLabel>
+            <OrderLabel>price</OrderLabel>
+            <OrderLabel>subtotal</OrderLabel>
+            <OrderLabel>action</OrderLabel>
+          </OrderGrid>
+          {/* Dynamic inputs */}
           {data.map((val, index) => {
             return (
-              <FiveGrid key={index}>
-                <AFormGroup>
-                  <Input
-                    list={`product-${index + 1}`}
+              <OrderGrid key={index}>
+                <AFormGroup className='mb-0'>
+                  <Select
+                    $width='100%'
+                    $bg='var(--admin-input-bg)'
                     name='product'
-                    $dark
-                    $capitalize={true}
-                    value={val.product}
                     onChange={(e) => handleFormChange(e, index)}
-                    placeholder='Search product'
-                  />
-
-                  <datalist id={`product-${index + 1}`}>
-                    {products.map((product: ProductTypes) => {
-                      return (
-                        <option
-                          value={product.productName}
-                          key={product._id}
-                        ></option>
-                      );
-                    })}
-                  </datalist>
+                  >
+                    <option value='' hidden>
+                      Select products
+                    </option>
+                    {products.map((product: ProductTypes) => (
+                      <option value={product._id} key={product._id}>
+                        {product.productName}
+                      </option>
+                    ))}
+                  </Select>
                 </AFormGroup>
-                <AFormGroup>
+                {/* color */}
+                <AFormGroup className='mb-0'>
+                  <Select
+                    $width='100%'
+                    $bg='var(--admin-input-bg)'
+                    name='color'
+                    onChange={(e) => handleOtherChange(e, index)}
+                  >
+                    <option value='' hidden>
+                      Select color
+                    </option>
+                    {colors[index]
+                      ?.split(',')
+                      ?.map((color: string, index: number) => (
+                        <option value={color} key={index}>
+                          {color}
+                        </option>
+                      ))}
+                  </Select>
+                </AFormGroup>
+
+                {/* sizes */}
+                <AFormGroup className='mb-0'>
+                  <Select
+                    $width='100%'
+                    $bg='var(--admin-input-bg)'
+                    name='size'
+                    onChange={(e) => handleOtherChange(e, index)}
+                  >
+                    <option value='' hidden>
+                      Select color
+                    </option>
+                    {sizes[index]
+                      ?.split(',')
+                      ?.map((size: string, index: number) => (
+                        <option value={size} key={index}>
+                          {size}
+                        </option>
+                      ))}
+                  </Select>
+                </AFormGroup>
+
+                <AFormGroup className='mb-0'>
                   <Input
                     type='text'
                     id={`quantity-${index + 1}`}
                     $dark
                     name='quantity'
                     value={val.quantity}
-                    onChange={(e) => handleFormChange(e, index)}
+                    onChange={(e) => handleOtherChange(e, index)}
                   />
                 </AFormGroup>
-                <AFormGroup>
+                <AFormGroup className='mb-0'>
                   <Input
                     type='text'
                     id={`price-${index + 1}`}
@@ -276,7 +399,7 @@ const CreateOrder = () => {
                     defaultValue={val.price}
                   />
                 </AFormGroup>
-                <AFormGroup>
+                <AFormGroup className='mb-0'>
                   <Input
                     type='text'
                     id={`subtotal-${index + 1}`}
@@ -285,12 +408,15 @@ const CreateOrder = () => {
                     defaultValue={isNaN(+val.subtotal) ? 0 : val.subtotal}
                   />
                 </AFormGroup>
-                <AFormGroup style={{ display: 'flex', alignItems: 'center' }}>
+                <AFormGroup
+                  style={{ display: 'flex', alignItems: 'center' }}
+                  className='mb-0'
+                >
                   <BtnUI type='button' onClick={() => handleDelete(index)}>
                     <FaTimes />
                   </BtnUI>
                 </AFormGroup>
-              </FiveGrid>
+              </OrderGrid>
             );
           })}
         </div>
@@ -304,7 +430,7 @@ const CreateOrder = () => {
             hideBtn={true}
             productTotal={{
               subtotal: total,
-              totalDiscount: 0,
+              totalDiscount: discount,
             }}
           />
         )}
@@ -329,7 +455,8 @@ export const loader = async () => {
 
   await queryClient.ensureQueryData({
     queryKey: ['fetchProduct', 'products'],
-    queryFn: () => getOnlyData({ url: '/products' }),
+    queryFn: () =>
+      getOnlyData({ url: '/products?isActive=true&quantity[gt]=0' }),
   });
 
   return null;
@@ -340,6 +467,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   return postData({
     url: '/sales-orders',
     data,
+    invalidate: ['fetchOrder'],
   });
 
   return null;

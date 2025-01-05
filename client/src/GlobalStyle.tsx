@@ -169,6 +169,9 @@ const GlobalStyle = createGlobalStyle`
     .mb-1   {
         margin-bottom:1rem
     }
+    .mb-0 {
+        margin-bottom:0
+    }
     .capitalize {
         text-transform:capitalize
     }

@@ -14,7 +14,7 @@ export const initializeCheckout = async (req: Request, res: Response) => {
   // Get all cart items for the currently logged in user.
   const carts = await Cart.find<util.ExtendedCart>({ user: req.user!.id });
   // Calculate subtotal and total discount.
-  const { subtotal, totalDiscount } = util.calcCartTotal(carts);
+  const { subtotal, totalDiscount, totalCost } = util.calcCartTotal(carts);
 
   // Specify checkout data
   const checkoutData = {
@@ -29,6 +29,7 @@ export const initializeCheckout = async (req: Request, res: Response) => {
       state: req.body.state,
       country: req.body.country,
       subtotal,
+      totalCost,
       discount: totalDiscount,
       note: req.body.note,
       address: req.body.address,
@@ -67,6 +68,7 @@ type DataType = {
   metadata: {
     subtotal: number;
     discount: number;
+    totalCost: number;
     customerName: string;
     orderName: string;
     user: string;
@@ -104,6 +106,7 @@ export const verifyTransaction = async (
           discount: data.metadata.discount,
           totalAmount: data.amount / 100,
           amountPaid: data.amount / 100,
+          totalCost: data.metadata.totalCost,
           customerName: data.metadata.customerName,
           orderName: data.metadata.orderName,
           user: data.metadata.user,
@@ -159,12 +162,14 @@ export const verifyTransaction = async (
         }
       });
       await session.endSession();
-      res.status(200).json({ status: 'success' });
+      res.status(statusCodes.OK).json({ status: 'success' });
     } else {
-      res.status(400).json({ status: 'failed' });
+      res.status(statusCodes.BAD_REQUEST).json({ status: 'failed' });
     }
   } catch (error) {
-    res.status(400).json({ status: 'Something went wrong. try again later.' });
+    res
+      .status(statusCodes.BAD_REQUEST)
+      .json({ status: 'Something went wrong. try again later.' });
   }
 };
 
