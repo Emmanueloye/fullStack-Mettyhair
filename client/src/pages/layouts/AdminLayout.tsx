@@ -57,7 +57,7 @@ const AdminLayout = () => {
     <>
       <Sidebar user={user} />
       <Main $isOpen={isAdminSidebarOpen}>
-        <AdminTopnav user={user} onLogout={logout} unread={contacts.length} />
+        <AdminTopnav user={user} onLogout={logout} unread={contacts?.length} />
         {state === 'loading' && <UserLoader />}
         {state === 'submitting' && <UserLoader />}
         <Outlet context={user} />

@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 
-export const OrderGrid = styled.div<{ type?: string }>`
+export const OrderGrid = styled.div<{ type?: string; $isAction?: boolean }>`
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr 0.7fr 1fr 1fr 0.5fr;
+  grid-template-columns: 1.3fr 1fr 1fr 0.7fr 1fr 1fr ${(props) =>
+      props.$isAction ? 0 : '0.5fr'};
   gap: 1rem;
 `;
 

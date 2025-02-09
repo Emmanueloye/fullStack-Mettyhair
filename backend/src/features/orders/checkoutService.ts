@@ -105,7 +105,7 @@ export const verifyTransaction = async (
           subtotal: data.metadata.subtotal,
           discount: data.metadata.discount,
           totalAmount: data.amount / 100,
-          amountPaid: data.amount / 100,
+          amountPaid: [data.amount / 100],
           totalCost: data.metadata.totalCost,
           customerName: data.metadata.customerName,
           orderName: data.metadata.orderName,
@@ -116,13 +116,13 @@ export const verifyTransaction = async (
           charges: data.fees / 100,
           cardType: data.authorization.cardType,
           currency: data.currency,
-          paymentDate: data.paid_at,
+          paymentDate: [data.paid_at],
           address: data.metadata.address,
           phone: data.metadata.phone,
           state: data.metadata.state,
           country: data.metadata.country,
           note: data.metadata.note,
-          isPaid: 'paid',
+          paymentStatus: 'paid',
         });
 
         // Get cart items.
@@ -141,6 +141,7 @@ export const verifyTransaction = async (
             orderNo: orderNumber,
             productId: cart.product,
             color: cart.color,
+            size: cart.size,
             quantity: cart.quantity,
             sellingPrice: cart.product.sellingPrice,
             discountPrice: cart.product.discountPrice,

@@ -56,7 +56,7 @@ const OrderLists = () => {
       getData({
         url: `/orders?page=${page || 1}&sort=${
           sort || '-createdAt'
-        }&orderStatus=${pageLabel || 'pending'}`,
+        }&orderStatus=${pageLabel || 'pending'}&isManual=false`,
       }),
   });
 
@@ -257,7 +257,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       getData({
         url: `/orders?page=${page || 1}&sort=${
           sort || '-createdAt'
-        }&orderStatus=${pageLabel || 'pending'}`,
+        }&orderStatus=${pageLabel || 'pending'}&isManual=false`,
       }),
   });
 

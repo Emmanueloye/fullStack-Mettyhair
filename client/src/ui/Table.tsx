@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const TableBox = styled.div`
   border: 1px solid var(--main-red-200);
-
   font-size: 1.4rem;
   background-color: transparent;
   border-radius: 7px;
   overflow-x: auto;
+  @media screen and (min-width: 1190px) {
+    overflow-x: visible;
+  }
 `;
 // 1fr 1.8fr 2.2fr 1fr 1fr 1fr 1fr
 export const TableHeader = styled.div<{ $column?: string; $width?: string }>`

@@ -23,16 +23,16 @@ Authentication
   error pages✔
   dashboard metrics
   --endpoint for addressbook update: prevent submitting empty✔
+  Frontend
+  price filter
+  --hero section
+  email integration✔
 
 Todo:
 Backend
---hero section
 --special deal section
 return order functionality.
-email integration✔
 accounting and report module
-
-Frontend
-price filter
+validation of order creation and edit
 
 -

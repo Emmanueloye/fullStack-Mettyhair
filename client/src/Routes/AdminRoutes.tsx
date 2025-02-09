@@ -147,6 +147,18 @@ import EditBlog, {
 import SalesOrderList, {
   loader as salesOrderListLoader,
 } from '../pages/adminClient/Accounting/SalesOrderList';
+import EditSalesOrder, {
+  loader as editSalesOrderLoader,
+  action as editSalesOrderAction,
+} from '../pages/adminClient/Accounting/EditSalesOrder';
+import InvoiceSalesOrder, {
+  loader as salesInvoiceLoader,
+  action as salesInvoiceAction,
+} from '../pages/adminClient/Accounting/InvoiceSalesOrder';
+import PaySalesOrder, {
+  loader as orderPaymentLoader,
+  action as orderPaymentAction,
+} from '../pages/adminClient/Accounting/PaySalesOrder';
 // import CreateOrderV1 from '../pages/adminClient/Accounting/CreateOrderV1';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
@@ -486,8 +498,32 @@ const adminRoutes = [
           },
           {
             path: 'sales-orders',
-            element: <SalesOrderList />,
-            loader: salesOrderListLoader,
+
+            children: [
+              {
+                index: true,
+                element: <SalesOrderList />,
+                loader: salesOrderListLoader,
+              },
+              {
+                path: 'edit/:id',
+                element: <EditSalesOrder />,
+                loader: editSalesOrderLoader,
+                action: editSalesOrderAction,
+              },
+              {
+                path: 'invoice/:id',
+                element: <InvoiceSalesOrder />,
+                loader: salesInvoiceLoader,
+                action: salesInvoiceAction,
+              },
+              {
+                path: 'payment/:id',
+                element: <PaySalesOrder />,
+                loader: orderPaymentLoader,
+                action: orderPaymentAction,
+              },
+            ],
           },
         ],
       },

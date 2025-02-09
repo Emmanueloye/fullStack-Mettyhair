@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
         --main-red-600: #993d5b;
         --main-red-700: #66293d;
         --main-red-800: #441b28;
-        --main-light-blue: #F0F1FD;
+        --main-light-blue: #f4f4f8;
         --main-light-blue-1: #f1f5f9;
         --main-light-blue-2:#dbeafe;
         --main-blue: #B4BAF4;

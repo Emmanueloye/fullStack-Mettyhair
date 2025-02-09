@@ -8,7 +8,7 @@ export type OrderType = {
   customerName: string;
   orderName: string;
   isPaid: boolean;
-  amountPaid: number;
+  amountPaid: number[];
   user?: {
     _id: string;
     email: string;
@@ -20,7 +20,8 @@ export type OrderType = {
   cardType?: string;
   bank?: string;
   currency?: string;
-  paymentDate?: Date;
+  paymentDate?: Date[];
+  paymentStatus?: string;
   orderStatus: string;
   address: string;
   phone?: string;
@@ -56,6 +57,8 @@ export type OrderItemType = {
     _id: string;
     productName: string;
     productImage: string;
+    color?: string[];
+    size?: string[];
   };
   color?: string;
   size?: string;

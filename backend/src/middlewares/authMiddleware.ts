@@ -112,7 +112,9 @@ export const restrictTo = (...roles: string[]) => {
     // Check if role of the currently logged in user have permission to view the route.
 
     if (req.user && !roles.includes(req.user.role)) {
-      throw new AppError.NotFoundError('Page not found on our server here.');
+      throw new AppError.UnAuthorizedError(
+        'Page not found on our server here.'
+      );
     }
     next();
   };
