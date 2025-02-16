@@ -50,6 +50,7 @@ const PaySalesOrder = () => {
     const formData = new FormData();
     formData.append('orderid', salesOrder._id);
     formData.append('payment', amountPaid);
+    formData.append('user', salesOrder.user._id);
     submit(formData, { method: 'PATCH' });
   };
 

@@ -5,23 +5,24 @@ import {
   useLoaderData,
   useSearchParams,
 } from 'react-router-dom';
+
+import { useEffect, useState } from 'react';
+import { OrderType } from '../../dtos/orderDto';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { extractParams, getData, queryClient } from '../../api/requests';
 import {
   AdminBox,
   AdminHeader,
   AdminSection,
-} from '../../../features/adminNavLayouts/AdminUtils';
-import AppTableSearch from '../../../ui/AppTableSearch';
-import { Table, TableRow } from '../../../ui/Table';
-import Empty from '../../../ui/Empty';
-import Pagination from '../../../features/products/allProducts/Pagination';
-import { extractParams, getData, queryClient } from '../../../api/requests';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { OrderType } from '../../../dtos/orderDto';
-import { formatNumber } from '../../../utilities/HelperFunc';
-import SalesOrderAction from '../../../features/adminAccount/SalesOrderAction';
-import { useEffect, useState } from 'react';
+} from '../../features/adminNavLayouts/AdminUtils';
+import AppTableSearch from '../../ui/AppTableSearch';
+import { Table, TableRow } from '../../ui/Table';
+import { formatNumber } from '../../utilities/HelperFunc';
+import Pagination from '../../features/products/allProducts/Pagination';
+import Empty from '../../ui/Empty';
+import SalesOrderAction from '../../features/adminAccount/SalesOrderAction';
 
-const SalesOrderList = () => {
+const OpenOrderListing = () => {
   const { page, sort } = useLoaderData() as { page: number; sort: string };
   const [allSalesOrders, setAllSalesOrders] = useState<OrderType[]>([]);
   const [searchField, setSearchField] = useState('orderNo');
@@ -30,15 +31,12 @@ const SalesOrderList = () => {
   const queryClientHook = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: [
-      'fetchOrder',
-      'salesOrdersList',
-      page ?? 1,
-      sort ?? '-createdAt',
-    ],
+    queryKey: ['fetchOrder', 'openOrders', page ?? 1, sort ?? '-createdAt'],
     queryFn: () =>
       getData({
-        url: `/sales-orders?page=${page || 1}&sort=${sort || '-createdAt'}`,
+        url: `/sales-orders/wholeseller?page=${page || 1}&sort=${
+          sort || '-createdAt'
+        }&orderStatus=pending`,
       }),
   });
 
@@ -75,11 +73,11 @@ const SalesOrderList = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      const newUrl = `/sales-orders?search=${searchField}&value=${searchValue}`;
+      const newUrl = `/sales-orders/wholeseller?search=${searchField}&value=${searchValue}&orderStatus=pending`;
 
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({
-          queryKey: ['fetchOrder', 'salesOrders', searchValue],
+          queryKey: ['fetchOrder', 'openOrders', searchValue],
           queryFn: () => getData({ url: newUrl }),
         });
 
@@ -114,11 +112,11 @@ const SalesOrderList = () => {
   const column = '0.6fr 1.7fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr';
 
   return (
-    <AdminSection>
+    <AdminSection type='light'>
       {/* Header */}
       <AdminHeader>
         <h4>Manage sales orders</h4>
-        <Link to='/admin/account/create-order'>New sales Order</Link>
+        <Link to='/my-dashboard/new-order'>New sales Order</Link>
       </AdminHeader>
       {/* Table search */}
       <AppTableSearch
@@ -152,12 +150,16 @@ const SalesOrderList = () => {
                     <p>{formatNumber(order.totalAmount)}</p>
                     <p>{formatNumber(totalPayment) || '0.00'}</p>
                     <p>{order.paymentStatus}</p>
-                    <p>{order.orderStatus}</p>
+                    <p>
+                      {order.orderStatus === 'pending'
+                        ? 'open'
+                        : order.orderStatus}
+                    </p>
                     {order.isManual && (
                       <SalesOrderAction
-                        editURL={`/admin/account/sales-orders/edit/${order._id}`}
-                        invoiceURL={`/admin/account/sales-orders/invoice/${order._id}`}
-                        paymentURL={`/admin/account/sales-orders/payment/${order._id}`}
+                        editURL={`/my-dashboard/edit/${order._id}`}
+                        viewURL={`/my-dashboard/view/${order._id}`}
+                        hideEdit={order.orderStatus === 'pending'}
                       />
                     )}
                   </TableRow>
@@ -178,7 +180,7 @@ const SalesOrderList = () => {
           </>
         ) : (
           <Empty
-            message={'No product is not available'}
+            message={'No sales orders available'}
             showLink={false}
             type='dark'
           />
@@ -188,21 +190,18 @@ const SalesOrderList = () => {
   );
 };
 
-export default SalesOrderList;
+export default OpenOrderListing;
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const params = extractParams(request);
   const { page, sort } = params;
   await queryClient.ensureQueryData({
-    queryKey: [
-      'fetchOrder',
-      'salesOrdersList',
-      page ?? 1,
-      sort ?? '-createdAt',
-    ],
+    queryKey: ['fetchOrder', 'openOrders', page ?? 1, sort ?? '-createdAt'],
     queryFn: () =>
       getData({
-        url: `/sales-orders?page=${page || 1}&sort=${sort || '-createdAt'}`,
+        url: `/sales-orders/wholeseller?page=${page || 1}&sort=${
+          sort || '-createdAt'
+        }&orderStatus=pending`,
       }),
   });
   return params;

@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import * as AppError from '../errors/appError';
 
 export const calculateOrderMetrics = async (req: Request, Model: any) => {
   // Declare variables to calculate  the total costs
@@ -8,6 +9,11 @@ export const calculateOrderMetrics = async (req: Request, Model: any) => {
 
   // Calculating order totals
   for (const item of JSON.parse(req.body.orders)) {
+    if (!item.product) {
+      throw new AppError.BadRequestError(
+        'No order items. Please select the product you want to order.'
+      );
+    }
     // Get current product in the loop as we do not want to rely on pricing from frontend to prevent manupulation.
     const currentProduct = await Model.findById(item.product);
     // Calculate total selling price which will be subtotal.

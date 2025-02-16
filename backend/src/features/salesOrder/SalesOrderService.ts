@@ -4,6 +4,7 @@ import ShortUniqueId from 'short-unique-id';
 import Product from '../products/productModel';
 import Order from '../orders/orderModel';
 import OrderItems from '../orders/orderItemsModel';
+import Payment from '../accounting/paymentModel';
 import * as utils from '../../utils';
 import * as AppError from '../../errors/appError';
 import statusCodes from '../../errors/statusCodes';
@@ -153,6 +154,7 @@ export const generateInvoice = async (req: Request) => {
 };
 
 export const settleInvoice = async (req: Request) => {
+  const session = await startSession();
   const currentOrder = await Order.findById(req.params.id);
 
   if (currentOrder) {
@@ -179,12 +181,22 @@ export const settleInvoice = async (req: Request) => {
         )} more than the invoice amount.`
       );
     }
-    currentOrder.amountPaid.push(req.body.payment);
-    currentOrder.paymentDate.push(new Date(Date.now()));
-    currentOrder.paymentStatus =
-      currentOrder.totalAmount === alreadyPaidAmt + +req.body.payment
-        ? 'paid'
-        : 'partial';
-    await currentOrder.save();
+
+    await session.withTransaction(async () => {
+      await Payment.create({
+        amountPaid: req.body.payment,
+        invoiceNo: currentOrder.invoiceNo,
+        orderId: currentOrder._id,
+        user: req.body.user,
+      });
+      // Update payment on order
+      currentOrder.amountPaid.push(req.body.payment);
+      currentOrder.paymentDate.push(new Date(Date.now()));
+      currentOrder.paymentStatus =
+        currentOrder.totalAmount === alreadyPaidAmt + +req.body.payment
+          ? 'paid'
+          : 'partial';
+      await currentOrder.save();
+    });
   }
 };

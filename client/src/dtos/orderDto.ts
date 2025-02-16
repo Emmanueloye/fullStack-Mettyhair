@@ -40,7 +40,7 @@ export type OrderType = {
     fullName: string;
   };
   postedBy?: string;
-  isManuel?: boolean;
+  isManual?: boolean;
   invoiceDate?: Date;
   invoicedBy?: {
     _id: string;

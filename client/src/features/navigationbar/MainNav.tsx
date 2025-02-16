@@ -107,6 +107,7 @@ const MainNav = ({
                 blog
               </NavLink>
             </li>
+
             {isAuth && ['admin', 'super-admin'].includes(user?.role) && (
               <li>
                 <NavLink
@@ -116,6 +117,18 @@ const MainNav = ({
                   }
                 >
                   Admin
+                </NavLink>
+              </li>
+            )}
+            {isAuth && ['wholeseller'].includes(user?.role) && (
+              <li>
+                <NavLink
+                  to='/my-dashboard'
+                  className={({ isActive }) =>
+                    isActive ? 'active' : undefined
+                  }
+                >
+                  my dashboard
                 </NavLink>
               </li>
             )}

@@ -14,7 +14,7 @@ const Main = styled.main<{ $isOpen?: boolean }>`
   }
 `;
 
-export const AdminSection = styled.section`
+export const AdminSection = styled.section<{ type?: string }>`
   background-color: var(--admin-alt-color);
   padding: 2rem;
   min-height: 100vh;
@@ -22,7 +22,11 @@ export const AdminSection = styled.section`
   .unread {
     font-weight: 600;
   }
-  /* @media screen and (min-width: 1024px) {
+  ${(props) =>
+    props.type === 'light' &&
+    css`
+      background-color: var(--primary-white);
+    `}/* @media screen and (min-width: 1024px) {
     padding: 2rem 5rem;
   } */
 `;

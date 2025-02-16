@@ -41,10 +41,14 @@ const SalesOrderAction = ({
   editURL,
   invoiceURL,
   paymentURL,
+  viewURL,
+  hideEdit = true,
 }: {
-  editURL: string;
-  invoiceURL: string;
-  paymentURL: string;
+  editURL?: string;
+  invoiceURL?: string;
+  paymentURL?: string;
+  viewURL?: string;
+  hideEdit?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -59,15 +63,26 @@ const SalesOrderAction = ({
         </span>
       </div>
       <ul className={dropdownClass}>
-        <li>
-          <Link to={editURL}>Edit</Link>
-        </li>
-        <li>
-          <Link to={invoiceURL}>Invoice</Link>
-        </li>
-        <li>
-          <Link to={paymentURL}>Payment</Link>
-        </li>
+        {viewURL && (
+          <li>
+            <Link to={viewURL}>view</Link>
+          </li>
+        )}
+        {editURL && hideEdit && (
+          <li>
+            <Link to={editURL}>Edit</Link>
+          </li>
+        )}
+        {invoiceURL && (
+          <li>
+            <Link to={invoiceURL}>Invoice</Link>
+          </li>
+        )}
+        {paymentURL && (
+          <li>
+            <Link to={paymentURL}>Payment</Link>
+          </li>
+        )}
       </ul>
     </SalesOrderActionBox>
   );

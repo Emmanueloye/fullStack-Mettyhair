@@ -64,6 +64,29 @@ import Blog, { loader as blogLoader } from '../pages/userClient/Blog';
 import BlogDetails, {
   loader as blogDetailsLoader,
 } from '../pages/userClient/BlogDetails';
+import WholeSellerOrderLayout, {
+  loader as wholeSellerLoader,
+} from '../features/products/WholeSellerOrderLayout';
+import CreateClientOrder, {
+  loader as createClientOrderLoader,
+  action as CreateClientOrderAction,
+} from '../pages/userClient/CreateClientOrder';
+import ViewClientOrder, {
+  loader as viewClientOrderLoader,
+} from '../pages/userClient/ViewClientOrder';
+import EditClientOrder, {
+  loader as editClientOrderLoader,
+  action as editClientOrderAction,
+} from '../pages/userClient/EditClientOrder';
+import OpenOrderListing, {
+  loader as OrderListingLoader,
+} from '../pages/userClient/OpenOrderListing';
+import InvoicedOrderListing, {
+  loader as InvoicedSalesOrderLoader,
+} from '../pages/userClient/InvoicedOrderListing';
+import ClientStatement, {
+  loader as clientStatementLoader,
+} from '../pages/userClient/ClientStatement';
 
 const userClientRoutes = [
   {
@@ -198,6 +221,50 @@ const userClientRoutes = [
             path: ':slug/:id',
             element: <BlogDetails />,
             loader: blogDetailsLoader,
+          },
+        ],
+      },
+      {
+        path: 'my-dashboard',
+        element: <WholeSellerOrderLayout />,
+        loader: wholeSellerLoader,
+        children: [
+          {
+            index: true,
+            element: <OpenOrderListing />,
+            loader: OrderListingLoader,
+          },
+          {
+            path: 'open-orders',
+            element: <OpenOrderListing />,
+            loader: OrderListingLoader,
+          },
+          {
+            path: 'invoiced-orders',
+            element: <InvoicedOrderListing />,
+            loader: InvoicedSalesOrderLoader,
+          },
+          {
+            path: 'new-order',
+            element: <CreateClientOrder />,
+            loader: createClientOrderLoader,
+            action: CreateClientOrderAction,
+          },
+          {
+            path: 'statement',
+            element: <ClientStatement />,
+            loader: clientStatementLoader,
+          },
+          {
+            path: 'view/:id',
+            element: <ViewClientOrder />,
+            loader: viewClientOrderLoader,
+          },
+          {
+            path: 'edit/:id',
+            element: <EditClientOrder />,
+            loader: editClientOrderLoader,
+            action: editClientOrderAction,
           },
         ],
       },

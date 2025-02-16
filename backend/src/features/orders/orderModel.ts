@@ -94,6 +94,10 @@ const orderSchema = new Schema(
       default: 'unpaid',
       enum: ['paid', 'unpaid', 'partial'],
     },
+    isSettled: {
+      type: Boolean,
+      default: false,
+    },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
@@ -107,7 +111,7 @@ orderSchema.virtual('orderItems', {
 type IOrder = InferSchemaType<typeof orderSchema>;
 
 orderSchema.pre(/^find/, function (this: Query<{}, IOrder>) {
-  this.populate({ path: 'user', select: 'email' })
+  this.populate({ path: 'user', select: 'email fullName' })
     .populate({
       path: 'confirmedBy',
       select: 'fullName',

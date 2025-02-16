@@ -159,6 +159,9 @@ import PaySalesOrder, {
   loader as orderPaymentLoader,
   action as orderPaymentAction,
 } from '../pages/adminClient/Accounting/PaySalesOrder';
+import PostPayment, {
+  loader as postPaymentLoader,
+} from '../pages/adminClient/Accounting/PostPayment';
 // import CreateOrderV1 from '../pages/adminClient/Accounting/CreateOrderV1';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
@@ -524,6 +527,11 @@ const adminRoutes = [
                 action: orderPaymentAction,
               },
             ],
+          },
+          {
+            path: 'payment',
+            element: <PostPayment />,
+            loader: postPaymentLoader,
           },
         ],
       },

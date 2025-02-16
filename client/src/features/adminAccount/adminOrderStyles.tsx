@@ -7,6 +7,12 @@ export const OrderGrid = styled.div<{ type?: string; $isAction?: boolean }>`
   gap: 1rem;
 `;
 
+export const FourGrid = styled.div<{ type?: string; $isAction?: boolean }>`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+`;
+
 export const OrderLabel = styled.p`
   display: block;
   font-size: 1.4rem;

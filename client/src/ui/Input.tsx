@@ -17,7 +17,7 @@ const Input = styled.input<{ $dark?: boolean; $capitalize?: boolean }>`
   height: 4.4rem;
   &:disabled {
     background-color: ${(props) =>
-      props.$dark ? 'var(--admin-input-bg)' : '#F5F5F5'};
+      props.$dark ? 'var(--admin-input-bg)' : '#d7d4d4'};
   }
   &::placeholder {
     color: ${(props) =>
