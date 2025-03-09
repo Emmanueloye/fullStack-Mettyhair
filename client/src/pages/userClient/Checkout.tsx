@@ -15,6 +15,7 @@ import {
 import {
   extractFormData,
   getData,
+  getOnlyData,
   postData,
   queryClient,
 } from '../../api/requests';
@@ -50,6 +51,13 @@ const Checkout = () => {
       }),
   });
 
+  const {
+    data: { countries },
+  } = useQuery({
+    queryKey: ['countries'],
+    queryFn: () => getOnlyData({ url: '/locations/countries?sort=country' }),
+  });
+
   // Calculate cart subtotal and total discount from the user cart item.s
   const productTotalCalc = carts.reduce(
     (acc: { subtotal: number; totalDiscount: number }, cart: CartTypes) => {
@@ -76,7 +84,7 @@ const Checkout = () => {
       <Form method='post'>
         <Container>
           <div className='grid'>
-            <BillingAddress user={user} error={error} />
+            <BillingAddress user={user} error={error} countries={countries} />
 
             <div className='box'>
               <Header $mb='1rem'>
@@ -114,6 +122,11 @@ export const loader = async () => {
       }),
   });
 
+  await queryClient.ensureQueryData({
+    queryKey: ['countries'],
+    queryFn: () => getOnlyData({ url: '/locations/countries?sort=country' }),
+  });
+
   const userResp = await queryClient.ensureQueryData({
     queryKey: ['user'],
     queryFn: () => getData({ url: `/users/me` }),
@@ -131,6 +144,8 @@ export const loader = async () => {
 // Action
 export const action = async ({ request }: ActionFunctionArgs) => {
   const data = await extractFormData(request);
+  console.log(data);
+
   const resp = await postData({ url: `/checkout`, data });
   if (resp.status === 'success') {
     return redirect(resp.checkout.authorization_url);

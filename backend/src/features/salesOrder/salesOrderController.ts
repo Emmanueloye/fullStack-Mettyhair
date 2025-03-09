@@ -1,12 +1,7 @@
 import Order from '../orders/orderModel';
-import OrderItems from '../orders/orderItemsModel';
-import Product from '../products/productModel';
 import { Request, Response } from 'express';
-import ShortUniqueId from 'short-unique-id';
-import { startSession } from 'mongoose';
 import statusCodes from '../../errors/statusCodes';
 import * as factory from '../../utils/handlerFactory';
-import * as AppError from '../../errors/appError';
 import * as salesOrderService from './SalesOrderService';
 import * as utils from '../../utils';
 import { checkForErrors } from '../../utils/validate';
@@ -48,14 +43,6 @@ export const invoiceOrder = async (req: Request, res: Response) => {
   });
 };
 
-export const payOnInvoice = async (req: Request, res: Response) => {
-  await salesOrderService.settleInvoice(req);
-
-  res
-    .status(statusCodes.OK)
-    .json({ status: 'success', message: 'Invoice settled.' });
-};
-
 export const wholeSellerOrders = async (req: Request, res: Response) => {
   const doc = new utils.GetRequestAPI(
     Order.find({ user: req.user!.id }),
@@ -90,6 +77,11 @@ export const wholeSellerOrders = async (req: Request, res: Response) => {
   });
 };
 
+export const payCreation = async (req: Request, res: Response) => {
+  const settledInvoices = await salesOrderService.createPayment(req);
+  res.status(statusCodes.OK).json({ settledInvoices });
+};
+
 export const validateUserInput = checkForErrors([
   body('customerId').notEmpty().withMessage('Customer name field is required.'),
   body('email')
@@ -99,4 +91,9 @@ export const validateUserInput = checkForErrors([
     .withMessage('Email must be a valid email.'),
   body('phone').notEmpty().withMessage('Phone number field is required.'),
   body('address').notEmpty().withMessage('Address field is required.'),
+]);
+
+export const validatePayment = checkForErrors([
+  body('user').notEmpty().withMessage('Customer field is required.'),
+  body('payment').notEmpty().withMessage('Payment field is required.'),
 ]);

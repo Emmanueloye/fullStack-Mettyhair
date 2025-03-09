@@ -8,7 +8,7 @@ router
   .route('/')
   .post(
     authMiddleware.protect,
-    authMiddleware.restrictTo('admin', 'super-admin', 'wholeseller'),
+    authMiddleware.restrictTo('admin', 'super-admin', 'wholesaler'),
     salesOrderController.validateUserInput,
     salesOrderController.createOrder
   )
@@ -22,8 +22,17 @@ router
   .route('/wholeseller')
   .get(
     authMiddleware.protect,
-    authMiddleware.restrictTo('wholeseller'),
+    authMiddleware.restrictTo('wholesaler'),
     salesOrderController.wholeSellerOrders
+  );
+
+router
+  .route('/pay')
+  .post(
+    authMiddleware.protect,
+    authMiddleware.restrictTo('admin', 'super-admin'),
+    salesOrderController.validatePayment,
+    salesOrderController.payCreation
   );
 
 router
@@ -35,23 +44,15 @@ router
   );
 
 router
-  .route('/pay/:id')
-  .patch(
-    authMiddleware.protect,
-    authMiddleware.restrictTo('admin', 'super-admin'),
-    salesOrderController.payOnInvoice
-  );
-
-router
   .route('/:id')
   .patch(
     authMiddleware.protect,
-    authMiddleware.restrictTo('admin', 'super-admin', 'wholeseller'),
+    authMiddleware.restrictTo('admin', 'super-admin', 'wholesaler'),
     salesOrderController.updateSalesOrder
   )
   .get(
     authMiddleware.protect,
-    authMiddleware.restrictTo('admin', 'super-admin', 'wholeseller'),
+    authMiddleware.restrictTo('admin', 'super-admin', 'wholesaler'),
     salesOrderController.getSalesOrder
   )
   .delete();

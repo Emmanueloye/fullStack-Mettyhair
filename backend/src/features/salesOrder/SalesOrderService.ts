@@ -5,9 +5,12 @@ import Product from '../products/productModel';
 import Order from '../orders/orderModel';
 import OrderItems from '../orders/orderItemsModel';
 import Payment from '../accounting/paymentModel';
+import Transaction from '../accounting/transactionsModel';
 import * as utils from '../../utils';
 import * as AppError from '../../errors/appError';
 import statusCodes from '../../errors/statusCodes';
+import { checkForErrors } from '../../utils/validate';
+import { body } from 'express-validator';
 
 //
 export const createOneOrder = async (req: Request) => {
@@ -126,6 +129,12 @@ export const generateInvoice = async (req: Request) => {
   // current order
   const currentOrder = await Order.findById(req.params.id);
 
+  const unMatchedPayments = await Payment.find({
+    user: req.body.user,
+    isFullySettled: false,
+    UnsettledAmt: { $gt: 0 },
+  });
+
   // Check if we are re-invoicing already invoiced order.
   if (currentOrder?.orderStatus === 'invoiced') {
     throw new AppError.BadRequestError('Order has been invoiced already.');
@@ -147,56 +156,189 @@ export const generateInvoice = async (req: Request) => {
   for (const item of currentOrderItems) {
     const currentProduct = await Product.findById(item.productId!._id);
 
+    const quantity = item!.quantity as number;
+
+    if (
+      currentProduct &&
+      currentProduct?.quantity &&
+      currentProduct?.quantity < quantity
+    ) {
+      throw new AppError.BadRequestError(
+        `Available quantity for ${currentProduct.productName} is lower than the ordered quantity. Restock to proceed with invoice.`
+      );
+    }
+
     currentProduct!.quantity =
       (currentProduct!.quantity as number) - (item!.quantity as number);
     await currentProduct?.save();
   }
+
+  // Loop through the unmatched payment
+  for (const item of unMatchedPayments) {
+    // Get the current invoice
+    const currentInvoice = await Order.findById(req.params.id);
+
+    // Calculate payment already made.
+    const alreadyPaid = currentInvoice!.amountPaid.reduce((a, b) => a + b, 0);
+    // Calculate outstanding balance
+    const outstandingBalance = currentInvoice!.totalAmount - alreadyPaid;
+
+    // Check if outstanding balance is less or equals to unsettled amount, push the outstanding orders.
+    if (
+      item.UnsettledAmt &&
+      outstandingBalance <= item.UnsettledAmt &&
+      alreadyPaid !== currentInvoice!.totalAmount
+    ) {
+      currentInvoice!.amountPaid.push(outstandingBalance);
+      currentInvoice!.paymentDate.push(new Date(Date.now()));
+      currentInvoice!.paymentStatus = 'paid';
+      currentInvoice!.paymentRef.push(item._id);
+      await currentInvoice!.save();
+
+      // Update payment data
+      item.UnsettledAmt =
+        item.UnsettledAmt - outstandingBalance > 0
+          ? item.UnsettledAmt - outstandingBalance
+          : undefined;
+      item.isFullySettled =
+        item.UnsettledAmt && item.UnsettledAmt - outstandingBalance === 0
+          ? true
+          : false;
+      await item.save();
+
+      return;
+    }
+
+    // But if outstanding balance is more than unsettled amount, push the payment.
+    if (
+      item.UnsettledAmt &&
+      outstandingBalance > item.UnsettledAmt &&
+      alreadyPaid !== currentOrder?.totalAmount
+    ) {
+      currentInvoice!.amountPaid.push(item.UnsettledAmt);
+      currentInvoice!.paymentDate.push(new Date(Date.now()));
+      currentInvoice!.paymentStatus = 'partial';
+      currentInvoice!.paymentRef.push(item._id);
+      await currentInvoice!.save();
+
+      // Update payment data.
+      item.UnsettledAmt = undefined;
+      item.isFullySettled = true;
+      await item.save();
+    }
+  }
+
+  // Create transaction for the invoice
+  const trans = await Transaction.create({
+    orderId: currentOrder!._id,
+    amount: currentOrder!.totalAmount,
+    user: currentOrder?.user,
+    date: new Date(Date.now()),
+  });
 };
 
-export const settleInvoice = async (req: Request) => {
+export const createPayment = async (req: Request) => {
+  // To create payment id
+  const uid = new ShortUniqueId({ length: 8 });
+  const payId = uid.rnd();
+
+  // Sessions
   const session = await startSession();
-  const currentOrder = await Order.findById(req.params.id);
 
-  if (currentOrder) {
-    const alreadyPaidAmt = currentOrder?.amountPaid.reduce(
-      (acc, amt) => acc + amt,
-      0
-    );
-    if (currentOrder?.orderStatus === 'pending') {
-      throw new AppError.BadRequestError(
-        'Please invoice the sales order before trying to settle the invoice.'
-      );
-    }
+  // Get all unsettled invoices for the current customer
+  const unSettledOrders = await Order.find({
+    user: req.body.user,
+    isManual: true,
+    orderStatus: 'invoiced',
+    paymentStatus: { $ne: 'paid' },
+  }).sort('createdAt');
 
-    if (currentOrder?.totalAmount === alreadyPaidAmt) {
-      throw new AppError.BadRequestError(
-        'Transaction failed because invoice has been fully paid for.'
-      );
-    }
+  // Calculate the total outstanding invoices
+  const totalOrdersToSettle = unSettledOrders
+    .map(
+      (item) =>
+        item.totalAmount - item.amountPaid.reduce((acc, curr) => acc + curr, 0)
+    )
+    .reduce((acc, curr) => acc + curr, 0);
 
-    if (alreadyPaidAmt + +req.body.payment > currentOrder.totalAmount) {
-      throw new AppError.BadRequestError(
-        `You cannot settle more than the invoice amount. The payment is ₦${Math.abs(
-          currentOrder.totalAmount - alreadyPaidAmt - req.body.payment
-        )} more than the invoice amount.`
-      );
-    }
+  type settledOrderTypes = {
+    invoice: string | undefined | null;
+    balance: number;
+    amountSettled: number;
+  };
 
-    await session.withTransaction(async () => {
-      await Payment.create({
-        amountPaid: req.body.payment,
-        invoiceNo: currentOrder.invoiceNo,
-        orderId: currentOrder._id,
-        user: req.body.user,
-      });
-      // Update payment on order
-      currentOrder.amountPaid.push(req.body.payment);
-      currentOrder.paymentDate.push(new Date(Date.now()));
-      currentOrder.paymentStatus =
-        currentOrder.totalAmount === alreadyPaidAmt + +req.body.payment
-          ? 'paid'
-          : 'partial';
-      await currentOrder.save();
+  // Payment made by customer coming from user
+  let payment: number = +req.body.payment;
+  // To track the settled invoices.
+  let settledOrders: settledOrderTypes[] = [];
+
+  await session.withTransaction(async () => {
+    // Create a new payment for the customer.
+    const newPayment = await Payment.create({
+      amountPaid: req.body.payment,
+      paymentId: payId,
+      user: req.body.user,
+      isFullySettled: payment <= totalOrdersToSettle, //If payment is less or equals to total orders to settle then we know the payment will be fully utilized.
+      UnsettledAmt:
+        payment > totalOrdersToSettle
+          ? payment - totalOrdersToSettle
+          : undefined,
     });
-  }
+
+    // Automatically run settlement for upaid and partially paid invoices
+    for (const item of unSettledOrders) {
+      // For partially paid invoice, this will have a value but zero for unpaid.
+      const alreadyPaidAmt = item.amountPaid.reduce(
+        (acc, curr) => acc + curr,
+        0
+      );
+      // Calculate outstanding balance for each iteration.
+      const outstandingBalance = item.totalAmount - alreadyPaidAmt;
+
+      // Save the settlement data in order collections
+      if (outstandingBalance <= payment) {
+        // In this condition, the payment can partially or fully take care of the outstanding invoices.
+        item.amountPaid.push(outstandingBalance);
+        item.paymentDate.push(new Date(Date.now()));
+        item.paymentStatus = 'paid';
+        item.paymentRef.push(newPayment._id);
+        payment -= outstandingBalance;
+
+        await item.save();
+        // Push order details into the array to be send to user as feedack
+        settledOrders.push({
+          invoice: item.invoiceNo,
+          balance: outstandingBalance,
+          amountSettled: outstandingBalance,
+        });
+      } else if (outstandingBalance > payment && payment > 0) {
+        // In this condition, when unsettled invoice is more than payment, the payment is accepted as a partial payment.
+        item.amountPaid.push(payment);
+        item.paymentDate.push(new Date(Date.now()));
+        item.paymentStatus = 'partial';
+        item.paymentRef.push(newPayment._id);
+
+        // Changing the value of payment
+        payment -= payment;
+
+        await item.save();
+        settledOrders.push({
+          invoice: item.invoiceNo,
+          balance: outstandingBalance,
+          amountSettled: +req.body.payment,
+        });
+      }
+    }
+
+    // Create the transaction for payment
+    await Transaction.create({
+      paymentId: newPayment!._id,
+      amount: req.body.payment,
+      user: req.body.user,
+      date: new Date(Date.now()),
+    });
+  });
+  await session.endSession();
+
+  return settledOrders;
 };

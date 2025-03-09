@@ -7,6 +7,7 @@ import { checkForErrors } from '../../utils/validate';
 import statusCodes from '../../errors/statusCodes';
 import { body } from 'express-validator';
 import { Types } from 'mongoose';
+import * as AppError from '../../errors/appError';
 
 export const uploadProductImages = utils.upload.fields([
   { name: 'productImage', maxCount: 1 },
@@ -52,6 +53,28 @@ export const setSlug = async (
 ) => {
   if (req.body.productName && !req.body.slug)
     req.body.slug = utils.slugifyInput(req.body.productName);
+  next();
+};
+
+export const validateProductPrices = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.body.discountPrice > req.body.sellingPrice) {
+    throw new AppError.BadRequestError(
+      'Discount price must be lower than selling price.'
+    );
+  }
+
+  if (
+    req.body.costPrice > req.body.discountPrice ||
+    req.body.costPrice > req.body.sellingPrice
+  ) {
+    throw new AppError.BadRequestError(
+      'Cost price is lower than sales price which would mean selling at loss. Please check again. '
+    );
+  }
   next();
 };
 

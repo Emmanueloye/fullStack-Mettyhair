@@ -14,3 +14,4 @@ export {
 } from './cartUtilsFunc';
 export { reportDate } from './reportDate';
 export { calculateOrderMetrics } from './SalesOrderCalc';
+export { reportLastDate } from './reportLastDate';

@@ -1,33 +1,44 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import { IoReloadCircleOutline } from 'react-icons/io5';
+
+import { ActionFunctionArgs, Form, useActionData } from 'react-router-dom';
+import { FaDownload } from 'react-icons/fa';
+import { useRef, useState } from 'react';
+import html2pdf from 'html2pdf.js';
+import { User } from '../../../dtos/userDto';
+import { TransactionType } from '../../../dtos/statementDto';
+import FormError from '../../../ui/FormError';
 import {
+  AdminSection,
   AFormGroup,
   ThreeGrid,
-} from '../../features/adminNavLayouts/AdminUtils';
-import Button from '../../ui/Button';
-import Input, { Label } from '../../ui/Input';
-import { OrderLabel } from '../../features/adminAccount/adminOrderStyles';
-import { StatementBox } from '../../features/products/ClientStatementStyles';
+} from '../../../features/adminNavLayouts/AdminUtils';
+import Input, { Label } from '../../../ui/Input';
+import Button from '../../../ui/Button';
+import { StatementBox } from '../../../features/products/ClientStatementStyles';
+import { formatDate, formatNumber } from '../../../utilities/HelperFunc';
+import { OrderLabel } from '../../../features/adminAccount/adminOrderStyles';
 import {
-  ActionFunctionArgs,
-  Form,
-  useActionData,
-  useOutletContext,
-} from 'react-router-dom';
-import { User } from '../../dtos/userDto';
-import { extractFormData, postData } from '../../api/requests';
-import { TransactionType } from '../../dtos/statementDto';
-import FormError from '../../ui/FormError';
-import { formatDate, formatNumber } from '../../utilities/HelperFunc';
-import { FaDownload } from 'react-icons/fa';
-import { useRef } from 'react';
-import html2pdf from 'html2pdf.js';
+  extractFormData,
+  getOnlyData,
+  postData,
+  queryClient,
+} from '../../../api/requests';
+import { Select } from '../../../ui/SelectInput';
+import { useQuery } from '@tanstack/react-query';
 
-const ClientStatement = () => {
-  const user = useOutletContext<User>();
+const CustomerStatement = () => {
+  const [customerDetails, setCustomerDetails] = useState<User>();
   const data = useActionData() as TransactionType;
   const statementRef = useRef(null);
+
+  const {
+    data: { users },
+  } = useQuery({
+    queryKey: ['users'],
+    queryFn: () => getOnlyData({ url: '/users?role=wholesaler' }),
+  });
 
   let runningBalance = data?.openingBal || 0;
 
@@ -50,27 +61,57 @@ const ClientStatement = () => {
       });
   };
 
+  const handleUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedUser = users.find(
+      (user: User) => user._id === e.target.value
+    );
+    setCustomerDetails(selectedUser);
+  };
+
   return (
-    <div>
+    <AdminSection style={{ padding: '2rem' }}>
       <Form method='post' id='form'>
         <div className='mt-3'>
           {data?.status === 'fail' && <FormError info={data?.message} />}
         </div>
         <ThreeGrid>
-          <input type='hidden' defaultValue={user._id} name='user' />
           <AFormGroup>
-            <Label htmlFor='startDate'>start date</Label>
-            <Input type='date' id='startDate' name='startDate' />
+            <Label htmlFor='user' type='dark'>
+              Customer
+            </Label>
+            <Select
+              $width='100%'
+              $bg='var(--admin-input-bg)'
+              name='user'
+              id='user'
+              onChange={handleUserChange}
+            >
+              <option value='' hidden>
+                Select customer
+              </option>
+              {users.map((customer: User) => (
+                <option value={customer._id} key={customer._id}>
+                  {customer.fullName}
+                </option>
+              ))}
+            </Select>
           </AFormGroup>
           <AFormGroup>
-            <Label htmlFor='endDate'>end date</Label>
-            <Input type='date' id='endDate' name='endDate' />
+            <Label htmlFor='startDate' type='dark'>
+              start date
+            </Label>
+            <Input type='date' id='startDate' name='startDate' $dark />
+          </AFormGroup>
+          <AFormGroup>
+            <Label htmlFor='endDate' type='dark'>
+              end date
+            </Label>
+            <Input type='date' id='endDate' name='endDate' $dark />
           </AFormGroup>
           <AFormGroup
             style={{
               display: 'flex',
               alignItems: 'center',
-              marginTop: '3.5rem',
             }}
           >
             <Button btnText='generate' icon={<IoReloadCircleOutline />} />
@@ -87,10 +128,10 @@ const ClientStatement = () => {
               <h3>Metty General Merchant</h3>
               <p className='text-center fw-500'>Customer Statement</p>
             </div>
-            <div className='header'>
+            <div className='header color'>
               <div className='header-box'>
                 <span>Customer Name:</span>
-                <span>{user.fullName}</span>
+                <span>{customerDetails?.fullName}</span>
               </div>
               <div className='header-box'>
                 <span>Opening Balance:</span>
@@ -123,7 +164,7 @@ const ClientStatement = () => {
                   if (item.paymentId) runningBalance -= item.amount;
 
                   return (
-                    <div className='grid lines' key={item._id}>
+                    <div className='grid lines evenLines' key={item._id}>
                       <p>{formatDate(new Date(item.date))}</p>
                       <p>
                         {item.orderId
@@ -137,7 +178,7 @@ const ClientStatement = () => {
                   );
                 })}
               </div>
-              <div className='grid fw-500'>
+              <div className='grid fw-500 color'>
                 <p></p>
                 <p>Closing balance</p>
                 <p></p>
@@ -148,11 +189,11 @@ const ClientStatement = () => {
           </StatementBox>
         </>
       )}
-    </div>
+    </AdminSection>
   );
 };
 
-export default ClientStatement;
+export default CustomerStatement;
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const data = await extractFormData(request);
@@ -164,5 +205,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export const loader = () => {
-  return null;
+  return queryClient.ensureQueryData({
+    queryKey: ['users'],
+    queryFn: () => getOnlyData({ url: '/users?role=wholesaler' }),
+  });
 };

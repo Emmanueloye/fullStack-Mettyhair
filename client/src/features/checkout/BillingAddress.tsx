@@ -9,10 +9,15 @@ import TextArea from '../../ui/TextArea';
 import { User } from '../../dtos/userDto';
 import { InfoType } from '../../dtos/utilsDto';
 import FormError from '../../ui/FormError';
+import { FaTreeCity } from 'react-icons/fa6';
+import { CityType, CountryType, StateType } from '../../dtos/locationDto';
+import { useState } from 'react';
+import { getOnlyData } from '../../api/requests';
 
 const BillingAddress = ({
   user,
   error,
+  countries,
   disabled,
   bg,
   color,
@@ -20,11 +25,35 @@ const BillingAddress = ({
 }: {
   user?: User;
   error?: InfoType;
+  countries?: CountryType[];
   disabled?: boolean;
   bg?: string;
   color?: string;
   isDark?: boolean;
 }) => {
+  const [states, setStates] = useState<StateType[]>([]);
+  const [cities, setCities] = useState<CityType[]>([]);
+  const handleCountryChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const country = countries?.find((item) => item._id === e.target.value);
+    const newStates = await getOnlyData({
+      url: `/locations/states?countryId=${country?.countryId}&sort=state`,
+    });
+
+    setStates(newStates.states);
+  };
+
+  const handleStateChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+    const currentState = states.find((item) => item._id === e.target.value);
+    const newCities = await getOnlyData({
+      url: `/locations/cities?stateId=${currentState?.stateId}&sort=city`,
+    });
+
+    setCities(newCities.cities);
+  };
+
   return (
     <div>
       <Header $mb='1rem' $bg={bg} $color={color}>
@@ -74,30 +103,69 @@ const BillingAddress = ({
             isDark={isDark}
             defaultValue={user?.address}
           />
-          <InputGroup
-            type='text'
-            name='state'
-            placeholder='State*'
-            icon={<BiSolidCity />}
-            mb='2.5rem'
-            disabled={disabled || false}
-            isDark={isDark}
-            defaultValue={user?.state}
-            capitalize={true}
-          />
-
+          {/* Country select input */}
           <FormGroup $height='4.4rem'>
             <SelectInput
               name='country'
               bg={bg || 'var(--grey)'}
               width='100%'
               disabled={disabled || false}
+              onInputChange={handleCountryChange}
             >
-              <option value='Nigeria'>{user?.country}</option>
-              <option value='United Kingdon'>United Kingdom</option>
+              <option value='' hidden>
+                select country
+              </option>
+              {countries?.map((item) => (
+                <option value={item._id} key={item._id}>
+                  {item.country}
+                </option>
+              ))}
             </SelectInput>
             <span className='a-icon'>
               <FaFlag />
+            </span>
+          </FormGroup>
+
+          {/* State select input */}
+          <FormGroup $height='4.4rem'>
+            <SelectInput
+              name='state'
+              bg={bg || 'var(--grey)'}
+              width='100%'
+              disabled={disabled || false}
+              onInputChange={handleStateChange}
+            >
+              <option value='' hidden>
+                select state
+              </option>
+              {states?.map((item) => (
+                <option value={item._id} key={item._id}>
+                  {item.state}
+                </option>
+              ))}
+            </SelectInput>
+            <span className='a-icon'>
+              <BiSolidCity />
+            </span>
+          </FormGroup>
+          <FormGroup $height='4.4rem'>
+            <SelectInput
+              name='city'
+              bg={bg || 'var(--grey)'}
+              width='100%'
+              disabled={disabled || false}
+            >
+              <option value='' hidden>
+                select city
+              </option>
+              {cities.map((item) => (
+                <option value={item._id} key={item._id}>
+                  {item.city}
+                </option>
+              ))}
+            </SelectInput>
+            <span className='a-icon'>
+              <FaTreeCity />
             </span>
           </FormGroup>
         </div>

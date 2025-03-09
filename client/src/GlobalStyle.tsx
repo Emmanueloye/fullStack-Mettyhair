@@ -260,6 +260,16 @@ const GlobalStyle = createGlobalStyle`
         text-align:justify;
         font-size:1.4rem;
     }
+    .border-new {
+        border:2px solid var(--admin-sec-text-color);
+        padding: 2rem;
+        margin-bottom:2rem;
+    }
+    .center-obj {
+        display: flex;
+        justify-content:center;
+        align-items:center;
+    }
     @media screen and (min-width: 1024px ) {
     h1 {
         font-size:2.3rem

@@ -1,4 +1,4 @@
-import { InferSchemaType, model, Query, Schema } from 'mongoose';
+import { InferSchemaType, model, Query, Schema, Types } from 'mongoose';
 
 const orderSchema = new Schema(
   {
@@ -58,8 +58,18 @@ const orderSchema = new Schema(
     },
     address: String,
     phone: String,
-    state: String,
-    country: String,
+    state: {
+      type: Types.ObjectId,
+      ref: 'State',
+    },
+    city: {
+      type: Types.ObjectId,
+      ref: 'City',
+    },
+    country: {
+      type: Types.ObjectId,
+      ref: 'Country',
+    },
     note: String,
     confirmationDate: Date,
     confirmedBy: {
@@ -94,9 +104,9 @@ const orderSchema = new Schema(
       default: 'unpaid',
       enum: ['paid', 'unpaid', 'partial'],
     },
-    isSettled: {
-      type: Boolean,
-      default: false,
+    paymentRef: {
+      type: [Types.ObjectId],
+      ref: 'Payment',
     },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
@@ -116,7 +126,10 @@ orderSchema.pre(/^find/, function (this: Query<{}, IOrder>) {
       path: 'confirmedBy',
       select: 'fullName',
     })
-    .populate({ path: 'deliveredBy', select: 'fullName' });
+    .populate({ path: 'deliveredBy', select: 'fullName' })
+    .populate({ path: 'country', select: 'country' })
+    .populate({ path: 'state', select: 'state' })
+    .populate({ path: 'city', select: 'city' });
 });
 
 export default model('Order', orderSchema);

@@ -32,7 +32,7 @@ const SalesOrderList = () => {
   const { data } = useQuery({
     queryKey: [
       'fetchOrder',
-      'salesOrdersList',
+      'salesOrdersListOrder',
       page ?? 1,
       sort ?? '-createdAt',
     ],
@@ -157,7 +157,6 @@ const SalesOrderList = () => {
                       <SalesOrderAction
                         editURL={`/admin/account/sales-orders/edit/${order._id}`}
                         invoiceURL={`/admin/account/sales-orders/invoice/${order._id}`}
-                        paymentURL={`/admin/account/sales-orders/payment/${order._id}`}
                       />
                     )}
                   </TableRow>
@@ -178,7 +177,7 @@ const SalesOrderList = () => {
           </>
         ) : (
           <Empty
-            message={'No product is not available'}
+            message={'No sales order is not available'}
             showLink={false}
             type='dark'
           />
@@ -196,7 +195,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   await queryClient.ensureQueryData({
     queryKey: [
       'fetchOrder',
-      'salesOrdersList',
+      'salesOrdersListOrder',
       page ?? 1,
       sort ?? '-createdAt',
     ],

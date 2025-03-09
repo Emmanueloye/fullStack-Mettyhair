@@ -91,7 +91,6 @@ import Setting, {
 } from '../pages/adminClient/Settings/Setting';
 // import SalesReport from '../pages/adminClient/Accounting/SalesReport';
 // import SalesJournal from '../pages/adminClient/Accounting/SalesJournal';
-import CustomerReport from '../pages/adminClient/Accounting/CustomerReport';
 import AccessManager from '../pages/adminClient/Settings/AccessManager';
 import AdminProfile from '../pages/users/AdminProfile';
 import AdminEditProfile, {
@@ -155,13 +154,14 @@ import InvoiceSalesOrder, {
   loader as salesInvoiceLoader,
   action as salesInvoiceAction,
 } from '../pages/adminClient/Accounting/InvoiceSalesOrder';
-import PaySalesOrder, {
-  loader as orderPaymentLoader,
-  action as orderPaymentAction,
-} from '../pages/adminClient/Accounting/PaySalesOrder';
 import PostPayment, {
   loader as postPaymentLoader,
+  action as postPaymentAction,
 } from '../pages/adminClient/Accounting/PostPayment';
+import CustomerStatement, {
+  loader as CustomerStatementLoader,
+  action as customerStatementAction,
+} from '../pages/adminClient/Accounting/CustomerStatement';
 // import CreateOrderV1 from '../pages/adminClient/Accounting/CreateOrderV1';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
@@ -353,6 +353,11 @@ const adminRoutes = [
           },
         ],
       },
+      {
+        path: 'sales-orders',
+        element: <SalesOrderList />,
+        loader: salesOrderListLoader,
+      },
 
       // Review management
       {
@@ -520,23 +525,22 @@ const adminRoutes = [
                 loader: salesInvoiceLoader,
                 action: salesInvoiceAction,
               },
-              {
-                path: 'payment/:id',
-                element: <PaySalesOrder />,
-                loader: orderPaymentLoader,
-                action: orderPaymentAction,
-              },
             ],
           },
           {
             path: 'payment',
             element: <PostPayment />,
             loader: postPaymentLoader,
+            action: postPaymentAction,
+          },
+          {
+            path: 'customer-statement',
+            element: <CustomerStatement />,
+            loader: CustomerStatementLoader,
+            action: customerStatementAction,
           },
         ],
       },
-
-      { path: 'customers-report', element: <CustomerReport /> },
     ],
   },
 ];

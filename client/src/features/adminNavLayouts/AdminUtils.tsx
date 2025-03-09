@@ -15,20 +15,16 @@ const Main = styled.main<{ $isOpen?: boolean }>`
 `;
 
 export const AdminSection = styled.section<{ type?: string }>`
-  background-color: var(--admin-alt-color);
+  background-color: ${(props) =>
+    props.type === 'light'
+      ? 'background-color: var(--primary-white)'
+      : 'var(--admin-alt-color)'};
   padding: 2rem;
   min-height: 100vh;
 
   .unread {
     font-weight: 600;
   }
-  ${(props) =>
-    props.type === 'light' &&
-    css`
-      background-color: var(--primary-white);
-    `}/* @media screen and (min-width: 1024px) {
-    padding: 2rem 5rem;
-  } */
 `;
 
 export const AdminGrid = styled.div`

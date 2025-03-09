@@ -48,6 +48,7 @@ const InvoiceSalesOrder = () => {
   const handleSubmit = () => {
     const formData = new FormData();
     formData.append('orderNo', salesOrder.orderNo);
+    formData.append('user', salesOrder.user._id);
     submit(formData, { method: 'PATCH' });
   };
 
@@ -231,12 +232,14 @@ const InvoiceSalesOrder = () => {
             totalDiscount: salesOrder.discount,
           }}
         />
-        <Button
-          type='submit'
-          btnText='invoice order'
-          icon={<FaPlus />}
-          onBtnTrigger={handleSubmit}
-        />
+        {!salesOrder.invoiceNo && (
+          <Button
+            type='submit'
+            btnText='invoice order'
+            icon={<FaPlus />}
+            onBtnTrigger={handleSubmit}
+          />
+        )}
       </>
     </AdminSection>
   );

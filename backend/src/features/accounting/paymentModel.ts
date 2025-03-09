@@ -5,20 +5,19 @@ const paymentSchema = new Schema({
     type: Number,
     required: [true, 'Specify amount paid.'],
   },
-  invoiceNO: String,
-  orderId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Order',
+  paymentId: {
+    type: String,
+    required: [true, 'Payment Id is required.'],
   },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  settledInvoice: [String],
-  isPayment: {
+  isFullySettled: {
     type: Boolean,
-    default: true,
+    default: false,
   },
+  UnsettledAmt: Number,
   createdAt: {
     type: Date,
     default: Date.now(),

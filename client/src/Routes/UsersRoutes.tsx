@@ -86,6 +86,7 @@ import InvoicedOrderListing, {
 } from '../pages/userClient/InvoicedOrderListing';
 import ClientStatement, {
   loader as clientStatementLoader,
+  action as clientStatementAction,
 } from '../pages/userClient/ClientStatement';
 
 const userClientRoutes = [
@@ -254,6 +255,7 @@ const userClientRoutes = [
             path: 'statement',
             element: <ClientStatement />,
             loader: clientStatementLoader,
+            action: clientStatementAction,
           },
           {
             path: 'view/:id',

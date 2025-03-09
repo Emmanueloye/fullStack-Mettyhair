@@ -41,6 +41,7 @@ export const sidebarLinks: LinksType[] = [
       'pending orders',
       'confirmed orders',
       'delivered orders',
+      'sales orders',
       // 'cancelled orders',
     ],
     icon: <FaBoxes />,

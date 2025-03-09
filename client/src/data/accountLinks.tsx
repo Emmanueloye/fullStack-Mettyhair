@@ -13,13 +13,7 @@ export const accountLinks: AccountLinks[] = [
   {
     id: 2,
     title: 'account receivables',
-    links: [
-      'create invoice',
-      'sales orders',
-      'returns',
-      'due invoices',
-      'payment',
-    ],
+    links: ['sales orders', 'returns', 'payment'],
   },
   {
     id: 3,

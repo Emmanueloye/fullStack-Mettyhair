@@ -40,13 +40,11 @@ const SalesOrderActionBox = styled.div`
 const SalesOrderAction = ({
   editURL,
   invoiceURL,
-  paymentURL,
   viewURL,
   hideEdit = true,
 }: {
   editURL?: string;
   invoiceURL?: string;
-  paymentURL?: string;
   viewURL?: string;
   hideEdit?: boolean;
 }) => {
@@ -76,11 +74,6 @@ const SalesOrderAction = ({
         {invoiceURL && (
           <li>
             <Link to={invoiceURL}>Invoice</Link>
-          </li>
-        )}
-        {paymentURL && (
-          <li>
-            <Link to={paymentURL}>Payment</Link>
           </li>
         )}
       </ul>

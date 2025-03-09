@@ -68,7 +68,7 @@ const CreateOrder = () => {
   const {
     data: { products },
   } = useQuery({
-    queryKey: ['fetchProduct', 'products'],
+    queryKey: ['fetchProduct', 'createOrderProducts'],
     queryFn: () =>
       getOnlyData({ url: '/products?isActive=true&quantity[gt]=0' }),
   });
@@ -481,7 +481,7 @@ export const loader = async () => {
   });
 
   await queryClient.ensureQueryData({
-    queryKey: ['fetchProduct', 'products'],
+    queryKey: ['fetchProduct', 'createOrderProducts'],
     queryFn: () =>
       getOnlyData({ url: '/products?isActive=true&quantity[gt]=0' }),
   });

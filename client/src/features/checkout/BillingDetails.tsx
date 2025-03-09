@@ -18,6 +18,8 @@ const BillingDetails = ({
   disabled?: boolean;
   isDark?: boolean;
 }) => {
+  console.log(order);
+
   return (
     <div>
       <Heading title={'billing address'} />

@@ -34,7 +34,7 @@ export const loader = async () => {
   if (
     resp.status === 'fail' ||
     resp.status === 'error' ||
-    resp.user.role !== 'wholeseller'
+    resp.user.role !== 'wholesaler'
   ) {
     return redirect('/login');
   }

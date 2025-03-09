@@ -13,10 +13,13 @@ export const FourGrid = styled.div<{ type?: string; $isAction?: boolean }>`
   gap: 1rem;
 `;
 
-export const OrderLabel = styled.p`
+export const OrderLabel = styled.p<{ type?: string }>`
   display: block;
   font-size: 1.4rem;
-  color: var(--admin-sec-text-color);
+  color: ${(props) =>
+    props.type === 'light'
+      ? 'var(--primary-text-color'
+      : 'var(--admin-sec-text-color)'};
   text-transform: capitalize;
 `;
 

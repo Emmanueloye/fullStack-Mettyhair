@@ -50,6 +50,7 @@ const MainNav = ({
       dispatch(uiActions.closeSubmenu());
     }
   };
+
   return (
     <Nav>
       <MainNavWrapper onMouseOver={hideSubmenuHandler}>
@@ -120,7 +121,7 @@ const MainNav = ({
                 </NavLink>
               </li>
             )}
-            {isAuth && ['wholeseller'].includes(user?.role) && (
+            {isAuth && ['wholesaler'].includes(user?.role) && (
               <li>
                 <NavLink
                   to='/my-dashboard'

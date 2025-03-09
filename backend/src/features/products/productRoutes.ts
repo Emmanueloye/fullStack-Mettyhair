@@ -15,12 +15,12 @@ router
   .post(
     authMiddleware.protect,
     authMiddleware.restrictTo('super-admin', 'admin'),
-    // authMiddleware.checkAccess,
     productController.uploadProductImages,
     imageController.processProductImages,
     setBodyMiddleware.setCreationDetails,
     productController.setSlug,
     productController.validateProduct,
+    productController.validateProductPrices,
     productController.createProduct
   )
   .get(productController.getProducts);

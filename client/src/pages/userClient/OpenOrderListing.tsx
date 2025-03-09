@@ -31,7 +31,7 @@ const OpenOrderListing = () => {
   const queryClientHook = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: ['fetchOrder', 'openOrders', page ?? 1, sort ?? '-createdAt'],
+    queryKey: ['fetchOrder', 'openOrdersList', page ?? 1, sort ?? '-createdAt'],
     queryFn: () =>
       getData({
         url: `/sales-orders/wholeseller?page=${page || 1}&sort=${
@@ -140,7 +140,7 @@ const OpenOrderListing = () => {
                 );
 
                 return (
-                  <TableRow $column={column} key={order._id}>
+                  <TableRow $column={column} key={order._id} type='light'>
                     <p>{order.orderNo}</p>
                     <p>{order.customerName}</p>
                     <p>{formatNumber(order.subtotal)}</p>
@@ -196,7 +196,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const params = extractParams(request);
   const { page, sort } = params;
   await queryClient.ensureQueryData({
-    queryKey: ['fetchOrder', 'openOrders', page ?? 1, sort ?? '-createdAt'],
+    queryKey: ['fetchOrder', 'openOrdersList', page ?? 1, sort ?? '-createdAt'],
     queryFn: () =>
       getData({
         url: `/sales-orders/wholeseller?page=${page || 1}&sort=${

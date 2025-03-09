@@ -46,7 +46,7 @@ const TopNav = ({
           {isAuth && user ? (
             <>
               <Link to='/user/profile' className='link'>
-                profile
+                {user.fullName.split(' ')[0]}
               </Link>
               <p className='link' onClick={onLogout}>
                 logout

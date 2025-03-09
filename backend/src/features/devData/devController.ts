@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
 import Product from '../products/productModel';
 import Review from '../reviews/reviewModel';
+import Country from '../location/countryModel';
+import State from '../location/stateModel';
+import City from '../location/cityModel'
 import fs from 'fs';
 
 export const uploadDevData = async (req: Request, res: Response) => {
   try {
-    const newProducts = JSON.parse(
-      fs.readFileSync(`${__dirname}/newProducts.json`, 'utf-8')
+    const cities = JSON.parse(
+      fs.readFileSync(`${__dirname}/cities.json`, 'utf-8')
     );
-    await Product.create(newProducts);
+    await City.create(cities);
     console.log('data loaded successfull');
     res.send('data loaded successfull');
   } catch (error) {

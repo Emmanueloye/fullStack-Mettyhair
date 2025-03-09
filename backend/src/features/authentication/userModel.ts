@@ -52,7 +52,7 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: {
-        values: ['user', 'super-admin', 'admin', 'wholeseller'],
+        values: ['user', 'super-admin', 'admin', 'wholesaler'],
         message: '{VALUE} is not valid.',
       },
       default: 'user',

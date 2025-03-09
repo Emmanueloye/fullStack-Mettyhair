@@ -9,9 +9,9 @@ export const calculateOrderMetrics = async (req: Request, Model: any) => {
 
   // Calculating order totals
   for (const item of JSON.parse(req.body.orders)) {
-    if (!item.product) {
+    if (!item.product || !item.size || !item.color) {
       throw new AppError.BadRequestError(
-        'No order items. Please select the product you want to order.'
+        'Please fill all required fields in the order lines.'
       );
     }
     // Get current product in the loop as we do not want to rely on pricing from frontend to prevent manupulation.

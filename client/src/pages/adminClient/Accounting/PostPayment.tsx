@@ -1,27 +1,51 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Link } from 'react-router-dom';
+import {
+  ActionFunctionArgs,
+  Form,
+  Link,
+  useActionData,
+} from 'react-router-dom';
 import {
   AdminHeader,
   AdminSection,
   AFormGroup,
   ThreeGrid,
+  TwoGrid,
 } from '../../../features/adminNavLayouts/AdminUtils';
 import Input, { Label } from '../../../ui/Input';
 import { Select } from '../../../ui/SelectInput';
-import { getData, getOnlyData, queryClient } from '../../../api/requests';
+import {
+  extractFormData,
+  getOnlyData,
+  postData,
+  queryClient,
+} from '../../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import { User } from '../../../dtos/userDto';
-import { useState } from 'react';
-import { OrderType } from '../../../dtos/orderDto';
-import {
-  FourGrid,
-  OrderLabel,
-} from '../../../features/adminAccount/adminOrderStyles';
+import Button from '../../../ui/Button';
+import { FaSave } from 'react-icons/fa';
+import FormError from '../../../ui/FormError';
+import { InfoType } from '../../../dtos/utilsDto';
+import { OrderLabel } from '../../../features/adminAccount/adminOrderStyles';
 import { formatNumber } from '../../../utilities/HelperFunc';
+import React from 'react';
+
+type SettledInvoiceType = {
+  invoice?: string;
+  balance?: number;
+  amountSettled?: number;
+};
+
+export type ActionDataTypes = SettledInvoiceType[] | InfoType;
 
 const PostPayment = () => {
-  const [email, setEmail] = useState<string>();
-  const [invoices, setInvoices] = useState<OrderType[]>();
+  const actionData = useActionData();
+  const { settledInvoices } =
+    (actionData as {
+      settledInvoices: SettledInvoiceType[];
+    }) || [];
+  console.log(actionData);
+
   const { data: usersData } = useQuery({
     queryKey: ['users'],
     queryFn: () => getOnlyData({ url: '/users' }),
@@ -29,85 +53,86 @@ const PostPayment = () => {
 
   const { users }: { users: User[] } = usersData;
 
-  const handleUserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedUser = users.find((item) => item._id === e.target.value);
-
-    const unsettledInvoices = await getData({
-      url: `/sales-orders?orderStatus=invoiced&paymentStatus=unpaid&paymentStatus=partial&user=${e.target.value}`,
-    });
-
-    setInvoices(unsettledInvoices.salesOrders);
-
-    setEmail(selectedUser!.email);
-  };
-  console.log(invoices);
-
   return (
     <AdminSection>
       <AdminHeader>
         <h4>Post Payment</h4>
         <Link to='/admin/account'>Account Dashboard</Link>
       </AdminHeader>
-      <ThreeGrid>
-        <AFormGroup>
-          <Label htmlFor='customer' type='dark'>
-            customer
-          </Label>
-          <Select
-            $width='100%'
-            $bg='var(--admin-input-bg)'
-            name='customer'
-            id='customer'
-            onChange={handleUserChange}
-          >
-            <option value='' hidden>
-              Select customer
-            </option>
-            {users.map((customer: User) => (
-              <option value={customer._id} key={customer._id}>
-                {customer.fullName}
+      <Form id='form' method='post'>
+        {(actionData as InfoType)?.status === 'fail' && (
+          <FormError info={(actionData as InfoType)?.message} />
+        )}
+
+        {settledInvoices?.length > 0 && (
+          <div className='border-new'>
+            <h4 className='admin-color text-center accessmgr-group mb-2'>
+              Settled Invoices
+            </h4>
+            <ThreeGrid>
+              <>
+                <OrderLabel>Invoice No.</OrderLabel>
+                <OrderLabel>Balance</OrderLabel>
+                <OrderLabel>amount settled</OrderLabel>
+              </>
+              {settledInvoices?.length > 0 &&
+                settledInvoices?.map((item) => {
+                  return (
+                    <React.Fragment key={item.invoice}>
+                      <p className='admin-color fs-14'>INV-{item.invoice}</p>
+                      <p className='admin-color fs-14'>
+                        {formatNumber(item.balance || 0)}
+                      </p>
+                      <p className='admin-color fs-14'>
+                        {formatNumber(item.amountSettled || 0)}
+                      </p>
+                    </React.Fragment>
+                  );
+                })}
+            </ThreeGrid>
+          </div>
+        )}
+
+        {settledInvoices?.length === 0 && (
+          <div className='border-new'>
+            <p className='admin-color fs-14'>
+              No unsettled invoice for the payment made. The system will
+              automatically match payment once new invoice is generate.
+            </p>
+          </div>
+        )}
+
+        <TwoGrid>
+          <AFormGroup>
+            <Label htmlFor='user' type='dark'>
+              customer
+            </Label>
+            <Select
+              $width='100%'
+              $bg='var(--admin-input-bg)'
+              name='user'
+              id='user'
+            >
+              <option value='' hidden>
+                Select customer
               </option>
-            ))}
-          </Select>
-        </AFormGroup>
-        <AFormGroup>
-          <Label htmlFor='email' type='dark'>
-            Email
-          </Label>
-          <Input
-            type='email'
-            id='email'
-            $dark
-            name='email'
-            defaultValue={email}
-          />
-        </AFormGroup>
-        <AFormGroup>
-          <Label htmlFor='amountPaid' type='dark'>
-            payment (NGN)
-          </Label>
-          <Input type='number' id='amountPaid' $dark name='amountPaid' />
-        </AFormGroup>
-      </ThreeGrid>
-      {invoices?.map((invoice) => {
-        const totalAmountPaid = invoice.amountPaid.reduce(
-          (acc, curr) => acc + curr,
-          0
-        );
-        return (
-          <FourGrid key={invoice._id}>
-            <input type='checkbox' defaultValue={invoice._id} name='orderId' />
-            <OrderLabel>{invoice.invoiceNo}</OrderLabel>
-            <OrderLabel>
-              {formatNumber(invoice.totalAmount) || '0.00'}
-            </OrderLabel>
-            <OrderLabel>{formatNumber(totalAmountPaid) ?? '0.00'}</OrderLabel>
-            <OrderLabel>
-              {formatNumber(invoice.totalAmount - totalAmountPaid) ?? '0.00'}
-            </OrderLabel>
-          </FourGrid>
-        );
-      })}
+              {users.map((customer: User) => (
+                <option value={customer._id} key={customer._id}>
+                  {customer.fullName}
+                </option>
+              ))}
+            </Select>
+          </AFormGroup>
+
+          <AFormGroup>
+            <Label htmlFor='payment' type='dark'>
+              payment (NGN)
+            </Label>
+            <Input type='number' id='payment' $dark name='payment' />
+          </AFormGroup>
+        </TwoGrid>
+        <Button btnText='post' icon={<FaSave />} />
+      </Form>
     </AdminSection>
   );
 };
@@ -118,5 +143,14 @@ export const loader = async () => {
   return queryClient.ensureQueryData({
     queryKey: ['users'],
     queryFn: () => getOnlyData({ url: '/users' }),
+  });
+};
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const data = await extractFormData(request);
+  return postData({
+    url: `/sales-orders/pay`,
+    data,
+    invalidate: ['fetchOrder'],
   });
 };

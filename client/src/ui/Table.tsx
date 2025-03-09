@@ -27,13 +27,20 @@ export const TableHeader = styled.div<{ $column?: string; $width?: string }>`
   min-width: ${(props) => (props.$width ? `${props.$width}` : '90rem')};
 `;
 
-export const TableRow = styled.div<{ $column?: string; $width?: string }>`
+export const TableRow = styled.div<{
+  type?: string;
+  $column?: string;
+  $width?: string;
+}>`
   display: grid;
   grid-template-columns: ${(props) =>
     props.$column ? props.$column : 'repeat(5, 1fr)'};
   column-gap: 2.4rem;
   align-items: center;
-  color: var(--admin-sec-text-color);
+  color: ${(props) =>
+    props.type === 'light'
+      ? 'var(--primary-text-black)'
+      : 'var(--admin-sec-text-color)'};
   padding: 1rem 2.4rem;
   min-width: ${(props) => (props.$width ? `${props.$width}` : '90rem')};
   text-transform: capitalize;

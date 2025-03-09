@@ -224,7 +224,7 @@ const CreateClientOrder = () => {
       {/* Header */}
       <AdminHeader>
         <h4>Create order</h4>
-        <Link to='/my-dashboard/all-orders'>All Orders</Link>
+        <Link to='/my-dashboard/open-orders'>Open Orders</Link>
       </AdminHeader>
 
       <>

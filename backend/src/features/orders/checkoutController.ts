@@ -4,8 +4,6 @@ import { body } from 'express-validator';
 import crypto from 'crypto';
 import * as checkoutService from './checkoutService';
 import axios, { isAxiosError } from 'axios';
-import base64 from 'base-64';
-import { buffer } from 'stream/consumers';
 
 export const checkout = async (req: Request, res: Response) => {
   await checkoutService.initializeCheckout(req, res);

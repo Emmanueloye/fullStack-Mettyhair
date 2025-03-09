@@ -16,6 +16,8 @@ export const initializeCheckout = async (req: Request, res: Response) => {
   // Calculate subtotal and total discount.
   const { subtotal, totalDiscount, totalCost } = util.calcCartTotal(carts);
 
+  console.log(req.body);
+
   // Specify checkout data
   const checkoutData = {
     email: req.body.email,
@@ -28,6 +30,7 @@ export const initializeCheckout = async (req: Request, res: Response) => {
       phone: req.body.phone,
       state: req.body.state,
       country: req.body.country,
+      city: req.body.city,
       subtotal,
       totalCost,
       discount: totalDiscount,
@@ -77,6 +80,7 @@ type DataType = {
     state: string;
     country: string;
     note: string;
+    city: string;
   };
   amount: number;
   id: number;
@@ -97,6 +101,8 @@ export const verifyTransaction = async (
       const uid = new ShortUniqueId({ length: 8 });
       const orderNumber = uid.rnd();
       const session = await startSession();
+
+      console.log(data);
 
       await session.withTransaction(async () => {
         // Create new order.
@@ -121,6 +127,7 @@ export const verifyTransaction = async (
           phone: data.metadata.phone,
           state: data.metadata.state,
           country: data.metadata.country,
+          city: data.metadata.city,
           note: data.metadata.note,
           paymentStatus: 'paid',
         });

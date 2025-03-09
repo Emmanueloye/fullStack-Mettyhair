@@ -23,6 +23,7 @@ const OrderDetails = () => {
   });
 
   const { order, orderItems } = data;
+  console.log(order);
 
   return (
     <TabContentWrapper>

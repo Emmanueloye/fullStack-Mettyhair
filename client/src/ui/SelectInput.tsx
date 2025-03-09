@@ -28,6 +28,7 @@ const SelectInput = ({
   name,
   disabled,
   defaultValue,
+  onInputChange,
 }: {
   children: React.ReactNode;
   bg?: string;
@@ -35,6 +36,7 @@ const SelectInput = ({
   name: string;
   disabled?: boolean;
   defaultValue?: string;
+  onInputChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }) => {
   return (
     <Select
@@ -43,6 +45,8 @@ const SelectInput = ({
       name={name}
       disabled={disabled || false}
       defaultValue={defaultValue}
+      onChange={(e) => onInputChange?.(e)}
+      className='capitalize'
     >
       {children}
     </Select>

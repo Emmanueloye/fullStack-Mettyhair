@@ -28,6 +28,8 @@ import salesOrderRouter from './features/salesOrder/salesOrderRoutes';
 import contactRouter from './features/contacts/contactRoutes';
 import contactReplyRouter from './features/contacts/contactReplyRoutes';
 import blogRouter from './features/blogs/blogRoutes';
+import reportRouter from './features/accounting/reportRoutes';
+import locationRouter from './features/location/locationRoutes';
 
 // Create express application.
 const app = express();
@@ -68,6 +70,8 @@ app.use('/api/v1/sales-orders', salesOrderRouter);
 app.use('/api/v1/contacts', contactRouter);
 app.use('/api/v1/contact-replies', contactReplyRouter);
 app.use('/api/v1/posts', blogRouter);
+app.use('/api/v1/reports', reportRouter);
+app.use('/api/v1/locations', locationRouter);
 
 // import dist from './../../client/dist';
 
