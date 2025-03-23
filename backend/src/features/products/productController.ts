@@ -75,6 +75,16 @@ export const validateProductPrices = async (
       'Cost price is lower than sales price which would mean selling at loss. Please check again. '
     );
   }
+
+  if (
+    req.body.wholeSalerPrice > req.body.sellingPrice ||
+    req.body.wholeSalerPrice < req.body.costPrice
+  ) {
+    throw new AppError.BadRequestError(
+      'Wholesaler price cannot be higher than retail price or lower than the cost price.'
+    );
+  }
+
   next();
 };
 
@@ -107,4 +117,14 @@ export const validateProduct = checkForErrors([
   body('description')
     .notEmpty()
     .withMessage('Long description field is required.'),
+  body('wholeSalerPrice')
+    .notEmpty()
+    .withMessage('Wholesaler price field is required'),
+  body('weight')
+    .notEmpty()
+    .withMessage(
+      'Weight field is required. Please put zero(0) if product has no weight.'
+    )
+    .isNumeric()
+    .withMessage('Weight must be number.'),
 ]);

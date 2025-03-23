@@ -22,7 +22,7 @@ export const createOneOrder = async (req: Request) => {
   const session = await startSession();
 
   // Calculate sales order numbers
-  const { subtotal, discount, totalCost } = await utils.calculateOrderMetrics(
+  const { subtotal, totalCost } = await utils.calculateOrderMetrics(
     req,
     Product
   );
@@ -32,8 +32,7 @@ export const createOneOrder = async (req: Request) => {
     const newOrder = await Order.create({
       orderNo,
       subtotal,
-      discount,
-      totalAmount: subtotal - discount,
+      totalAmount: subtotal,
       totalCost,
       customerName: req.body.orderName,
       orderName: req.body.orderName,
@@ -55,12 +54,10 @@ export const createOneOrder = async (req: Request) => {
         size: item.size,
         color: item.color,
         quantity: item.quantity,
-        sellingPrice: currentProduct?.sellingPrice,
-        discountPrice: currentProduct?.discountPrice,
+        sellingPrice: currentProduct?.wholeSalerPrice,
+        // discountPrice: currentProduct?.discountPrice,
         costPrice: currentProduct?.costPrice,
-        price: currentProduct?.discountPrice
-          ? currentProduct.discountPrice
-          : currentProduct?.sellingPrice,
+        price: currentProduct?.wholeSalerPrice,
       });
     }
   });
@@ -73,7 +70,7 @@ export const updateOneOrder = async (req: Request) => {
   const session = await startSession();
 
   // Calculate sales order numbers
-  const { subtotal, discount, totalCost } = await utils.calculateOrderMetrics(
+  const { subtotal, totalCost } = await utils.calculateOrderMetrics(
     req,
     Product
   );
@@ -81,8 +78,7 @@ export const updateOneOrder = async (req: Request) => {
   await session.withTransaction(async () => {
     const inputtedData = {
       subtotal,
-      discount,
-      totalAmount: subtotal - discount,
+      totalAmount: subtotal,
       totalCost,
       amountPaid: 0,
       customerName: req.body.orderName,
@@ -108,8 +104,7 @@ export const updateOneOrder = async (req: Request) => {
         size: item.size,
         color: item.color,
         quantity: item.quantity,
-        sellingPrice: currentProduct?.sellingPrice,
-        discountPrice: currentProduct?.discountPrice,
+        sellingPrice: currentProduct?.wholeSalerPrice,
         costPrice: currentProduct?.costPrice,
         price: currentProduct?.discountPrice
           ? currentProduct.discountPrice

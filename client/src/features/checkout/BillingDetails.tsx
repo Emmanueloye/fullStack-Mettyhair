@@ -83,7 +83,20 @@ const BillingDetails = ({
               mb='2.5rem'
               disabled={disabled || false}
               isDark={isDark}
-              defaultValue={order.state}
+              defaultValue={order.state?.state}
+              capitalize={true}
+            />
+          </div>
+          <div>
+            <Label htmlFor='city'>city</Label>
+            <InputGroup
+              type='text'
+              name='city'
+              icon={<BiSolidCity />}
+              mb='2.5rem'
+              disabled={disabled || false}
+              isDark={isDark}
+              defaultValue={order.city?.city}
               capitalize={true}
             />
           </div>
@@ -98,7 +111,7 @@ const BillingDetails = ({
               mb='2.5rem'
               disabled={disabled || false}
               isDark={isDark}
-              defaultValue={order.country}
+              defaultValue={order.country?.country}
               capitalize={true}
             />
           </div>

@@ -23,11 +23,11 @@ const productSchema = new Schema(
     },
     quantity: {
       type: Number,
-      required: ['true', 'Quantity field is required.'],
+      required: [true, 'Quantity field is required.'],
     },
     sellingPrice: {
       type: Number,
-      required: ['true', 'Selling price field is required.'],
+      required: [true, 'Selling price field is required.'],
     },
     discountPrice: {
       type: Number,
@@ -49,6 +49,10 @@ const productSchema = new Schema(
       //   },
       //   message: 'Cost price is higher than selling or discount price.',
       // },
+    },
+    wholeSalerPrice: {
+      type: Number,
+      required: [true, 'Wholesaler Price field is required.'],
     },
     color: String,
     size: String,
@@ -80,6 +84,11 @@ const productSchema = new Schema(
     isActive: {
       type: Boolean,
       default: true,
+    },
+    weight: {
+      type: Number,
+      required: [true, 'Weight field is required.'],
+      default: 0,
     },
     numOfReview: Number,
     averageRating: Number,

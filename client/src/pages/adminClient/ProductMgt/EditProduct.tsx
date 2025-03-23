@@ -176,19 +176,7 @@ const EditProduct = () => {
                 defaultValue={product.quantity}
               />
             </AFormGroup>
-            <AFormGroup>
-              <Label htmlFor='costPrice' type='dark'>
-                cost price
-              </Label>
-              <Input
-                id='costPrice'
-                type='text'
-                placeholder='Cost Price*'
-                $dark={true}
-                name='costPrice'
-                defaultValue={product.costPrice && product.costPrice}
-              />
-            </AFormGroup>
+
             <AFormGroup>
               <Label htmlFor='sellingPrice' type='dark'>
                 selling price
@@ -203,16 +191,51 @@ const EditProduct = () => {
               />
             </AFormGroup>
             <AFormGroup>
+              <Label htmlFor='costPrice' type='dark'>
+                cost price
+              </Label>
+              <Input
+                id='costPrice'
+                type='text'
+                placeholder='Cost Price*'
+                $dark={true}
+                name='costPrice'
+                defaultValue={product.costPrice && product.costPrice}
+              />
+            </AFormGroup>
+            <AFormGroup>
               <Label htmlFor='discountPrice' type='dark'>
                 discounted price
               </Label>
               <Input
                 id='discountPrice'
                 type='text'
-                placeholder='Discounted Price'
                 $dark={true}
                 name='discountPrice'
                 defaultValue={product.discountPrice && product.discountPrice}
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Label htmlFor='wholesalerPrice' type='dark'>
+                wholesaler price
+              </Label>
+              <Input
+                type='text'
+                $dark={true}
+                name='wholeSalerPrice'
+                defaultValue={product?.wholeSalerPrice}
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Label htmlFor='weight' type='dark'>
+                weight in gram
+              </Label>
+              <Input
+                type='number'
+                placeholder='Weight (g)*'
+                $dark={true}
+                name='weight'
+                defaultValue={product?.weight}
               />
             </AFormGroup>
             <AFormGroup>
@@ -367,7 +390,7 @@ const EditProduct = () => {
               <TextArea
                 $dark={true}
                 id='longDesc'
-                name='longDesc'
+                name='description'
                 rows={6}
                 defaultValue={product.description}
               />

@@ -17,8 +17,8 @@ export const calculateOrderMetrics = async (req: Request, Model: any) => {
     // Get current product in the loop as we do not want to rely on pricing from frontend to prevent manupulation.
     const currentProduct = await Model.findById(item.product);
     // Calculate total selling price which will be subtotal.
-    if (currentProduct?.sellingPrice) {
-      subtotal += currentProduct.sellingPrice * item.quantity;
+    if (currentProduct?.wholeSalerPrice) {
+      subtotal += currentProduct.wholeSalerPrice * item.quantity;
     }
 
     // Calculate total cost for the incomeing order.
@@ -27,12 +27,12 @@ export const calculateOrderMetrics = async (req: Request, Model: any) => {
     }
 
     // Calculate the total discount given on the order.
-    if (currentProduct?.discountPrice && currentProduct?.sellingPrice) {
-      discount +=
-        (currentProduct.sellingPrice - currentProduct.discountPrice) *
-        item.quantity;
-    }
+    // if (currentProduct?.discountPrice && currentProduct?.sellingPrice) {
+    //   discount +=
+    //     (currentProduct.sellingPrice - currentProduct.discountPrice) *
+    //     item.quantity;
+    // }
   }
 
-  return { subtotal, discount, totalCost };
+  return { subtotal, totalCost };
 };

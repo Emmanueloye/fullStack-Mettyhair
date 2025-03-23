@@ -17,6 +17,7 @@ router
   .route('/confirm-payment')
   .get(authMiddleware.protect, checkoutController.paymentConfirmation);
 
-router.route('/rates').get(checkoutController.dhl);
+router.route('/validate').get(checkoutController.dhl);
+router.route('/rates').get(checkoutController.getDHLRate);
 
 export default router;

@@ -4,6 +4,7 @@ import { body } from 'express-validator';
 import crypto from 'crypto';
 import * as checkoutService from './checkoutService';
 import axios, { isAxiosError } from 'axios';
+import day from 'dayjs';
 
 export const checkout = async (req: Request, res: Response) => {
   await checkoutService.initializeCheckout(req, res);
@@ -33,17 +34,52 @@ export const paymentConfirmation = async (req: Request, res: Response) => {
   res.status(200).json({ status: 'success', order });
 };
 
+export const getDHLRate = async (req: Request, res: Response) => {
+  const username = process.env.DHL_API_KEY;
+  const password = process.env.DHL_API_SECRET;
+  try {
+    const resp = await axios.get(`${process.env.DHL_TEST_URL}/rates`, {
+      params: {
+        accountNumber: 365338347, //process.env.ACCOUNT_NUMB
+        originCountryCode: process.env.ORIGIN_COUNTRY,
+        originCityName: 'MUSHIN', //process.env.ORIGIN_CITY,
+        destinationCountryCode: 'US', //req.body.country
+        destinationCityName: 'Abbeville', //req.body.city
+        weight: 2, //req.body.weight
+        length: 1,
+        width: 1,
+        height: 1,
+        plannedShippingDate: day(new Date(Date.now())).format('YYYY-MM-DD'),
+        isCustomsDeclarable: true,
+        unitOfMeasurement: 'metric',
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-version': '2.12.0',
+      },
+      auth: {
+        username: username as string,
+        password: password as string,
+      },
+    });
+    res.send(resp.data);
+  } catch (error) {
+    if (isAxiosError(error)) {
+      // console.log(error.response?.data);
+
+      res.send(error.response?.data);
+    }
+  }
+};
 export const dhl = async (req: Request, res: Response) => {
   const username = process.env.DHL_API_KEY;
   const password = process.env.DHL_API_SECRET;
-
-  console.log(process.env.DHL_TEST_URL);
 
   try {
     const resp = await axios.get(
       `${process.env.DHL_TEST_URL}/address-validate`,
       {
-        params: { type: 'delivery', countryCode: 'NG', cityName: 'epe' },
+        params: { type: 'delivery', countryCode: 'NG', cityName: 'mushin' },
         headers: {
           'Content-Type': 'application/json',
         },

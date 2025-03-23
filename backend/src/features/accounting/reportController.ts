@@ -5,6 +5,8 @@ import { body } from 'express-validator';
 import * as AppError from '../../errors/appError';
 import statusCodes from '../../errors/statusCodes';
 import * as utils from '../../utils';
+import OrderItems from '../orders/orderItemsModel';
+import Order from '../orders/orderModel';
 
 export const customerStatement = async (req: Request, res: Response) => {
   const { startDate, endDate } = req.body;
@@ -37,6 +39,16 @@ export const customerStatement = async (req: Request, res: Response) => {
     noHits: statement.length,
     statement,
   });
+};
+
+export const salesReports = async (req: Request, res: Response) => {
+  const { startDate, endDate } = req.body;
+
+  const salesReport = await Order.find({
+    createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
+    orderStatus: 'invoiced',
+  }).populate({ path: 'orderItems' });
+  res.send({ noHits: salesReport.length, salesReport });
 };
 
 export const validateDateInput = checkForErrors([

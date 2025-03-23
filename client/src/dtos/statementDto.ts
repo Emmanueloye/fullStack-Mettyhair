@@ -18,4 +18,5 @@ export type TransactionType = {
   message: string;
   statement?: StatmentTypes[];
   openingBal: number;
+  noHits: number;
 };

@@ -36,11 +36,12 @@ export const StatementBox = styled.div`
   }
   .evenLines {
     &:nth-last-of-type(even) {
-      color: var(--admin-sec-text-color);
+      color: var(--main-red-300);
     }
   }
   .color {
-    color: var(--admin-sec-text-color);
+    /* color: var(--admin-sec-text-color); */
+    color: var(--main-red-300);
   }
 
   p {

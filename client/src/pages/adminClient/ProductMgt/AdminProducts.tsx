@@ -114,11 +114,12 @@ const AdminProducts = () => {
     'product',
     'quantity',
     'price',
+    'WS Price',
     'discount',
     'status',
     'action',
   ];
-  const column = '0.6fr 1.7fr .4fr 1fr .6fr .3fr 1.8fr';
+  const column = '0.6fr 1.7fr .4fr 1fr 1fr .6fr .3fr 1.8fr';
   return (
     <>
       <AdminSection>
@@ -169,11 +170,19 @@ const AdminProducts = () => {
                     <p>{product.quantity}</p>
                     <p> &#8358;{formatNumber(product.sellingPrice)} </p>
                     <p>
+                      {' '}
+                      &#8358;
+                      {product.wholeSalerPrice
+                        ? formatNumber(product.wholeSalerPrice)
+                        : '0.00'}{' '}
+                    </p>
+                    <p>
                       &#8358;
                       {product.discountPrice
                         ? formatNumber(product.discountPrice)
                         : '0.00'}
                     </p>
+
                     <p>
                       {product.isActive ? (
                         <Status $isActive={product.isActive}>

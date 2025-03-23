@@ -12,6 +12,8 @@ export type ProductTypes = {
   };
   quantity: number;
   sellingPrice: number;
+  wholeSalerPrice: number;
+  weight: number;
   discountPrice?: number;
   costPrice: number;
   color: string;

@@ -229,7 +229,7 @@ const InvoiceSalesOrder = () => {
           hideBtn={true}
           productTotal={{
             subtotal: salesOrder.subtotal,
-            totalDiscount: salesOrder.discount,
+            totalDiscount: salesOrder.discount ?? 0,
           }}
         />
         {!salesOrder.invoiceNo && (

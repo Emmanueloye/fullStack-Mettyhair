@@ -16,8 +16,6 @@ export const initializeCheckout = async (req: Request, res: Response) => {
   // Calculate subtotal and total discount.
   const { subtotal, totalDiscount, totalCost } = util.calcCartTotal(carts);
 
-  console.log(req.body);
-
   // Specify checkout data
   const checkoutData = {
     email: req.body.email,

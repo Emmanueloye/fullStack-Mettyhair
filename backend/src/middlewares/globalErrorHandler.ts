@@ -54,10 +54,10 @@ const globalErrorMiddleware = async (
     });
   }
 
-  sendError(res, error);
-  // res
-  //   .status(err.statusCode || statusCodes.INTERNAL_SERVER_ERROR)
-  //   .json({ status: error.status, err, stack: err.stack });
+  // sendError(res, error);
+  res
+    .status(err.statusCode || statusCodes.INTERNAL_SERVER_ERROR)
+    .json({ status: error.status, err, stack: err.stack });
 };
 
 export default globalErrorMiddleware;

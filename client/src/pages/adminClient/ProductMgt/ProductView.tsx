@@ -113,6 +113,18 @@ const ProductView = () => {
             />
           </AFormGroup>
           <AFormGroup>
+            <Label htmlFor='wholesalerPrice' type='dark'>
+              wholesaler price
+            </Label>
+            <Input
+              type='text'
+              $dark={true}
+              name='wholeSalerPrice'
+              defaultValue={product?.wholeSalerPrice}
+              disabled
+            />
+          </AFormGroup>
+          <AFormGroup>
             <Label htmlFor='costPrice' type='dark'>
               cost Price
             </Label>
@@ -137,6 +149,19 @@ const ProductView = () => {
               defaultValue={
                 product.discountPrice && formatNumber(product.discountPrice)
               }
+              disabled
+            />
+          </AFormGroup>
+          <AFormGroup>
+            <Label htmlFor='weight' type='dark'>
+              weight in gram
+            </Label>
+            <Input
+              type='text'
+              placeholder='Weight (g)*'
+              $dark={true}
+              name='weight'
+              defaultValue={product?.weight}
               disabled
             />
           </AFormGroup>

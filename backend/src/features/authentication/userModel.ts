@@ -69,11 +69,11 @@ const userSchema = new Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// userSchema.virtual('token', {
-//   localField: '_id',
-//   foreignField: 'userId',
-//   ref: 'Token',
-// });
+userSchema.virtual('token', {
+  localField: '_id',
+  foreignField: 'userId',
+  ref: 'Token',
+});
 
 // Hash the password before saving it to database and set confirmed password to empty string.
 userSchema.pre('save', async function () {

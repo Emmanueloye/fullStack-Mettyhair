@@ -12,7 +12,7 @@ const orderSchema = new Schema(
     },
     discount: {
       type: Number,
-      required: true,
+      // required: true,
     },
     totalAmount: {
       type: Number,

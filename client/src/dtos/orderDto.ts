@@ -25,8 +25,18 @@ export type OrderType = {
   orderStatus: string;
   address: string;
   phone?: string;
-  state?: string;
-  country?: string;
+  city?: {
+    _id: string;
+    city: string;
+  };
+  state?: {
+    _id: string;
+    state: string;
+  };
+  country?: {
+    _id: string;
+    country: string;
+  };
   note?: string;
   confirmationDate?: Date;
   confirmedBy?: string;

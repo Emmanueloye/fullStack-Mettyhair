@@ -55,7 +55,7 @@ const CreateOrder = () => {
     },
   ]);
   const [total, setTotal] = useState(0);
-  const [discount, setDiscount] = useState(0);
+  const [discount] = useState(0);
   const submit = useSubmit();
 
   const {
@@ -117,13 +117,13 @@ const CreateOrder = () => {
     );
   };
 
-  const calcDiscount = useCallback(() => {
-    const total = data.reduce((acc, item) => {
-      return acc + Number(item.discountPrice) * Number(item.quantity);
-    }, 0);
+  // const calcDiscount = useCallback(() => {
+  //   const total = data.reduce((acc, item) => {
+  //     return acc + Number(item.discountPrice) * Number(item.quantity);
+  //   }, 0);
 
-    setDiscount(total);
-  }, [data]);
+  //   setDiscount(total);
+  // }, [data]);
 
   const calcTotal = useCallback(() => {
     const total = data.reduce((acc, item) => {
@@ -154,11 +154,11 @@ const CreateOrder = () => {
         return item._id === e.target.value;
       })[0];
 
-      changedVal[i].price = filteredProduct?.sellingPrice;
+      changedVal[i].price = filteredProduct?.wholeSalerPrice;
 
-      changedVal[i].discountPrice = filteredProduct?.discountPrice
-        ? `${filteredProduct?.sellingPrice - filteredProduct?.discountPrice}`
-        : '';
+      // changedVal[i].discountPrice = filteredProduct?.discountPrice
+      //   ? `${filteredProduct?.sellingPrice - filteredProduct?.discountPrice}`
+      //   : '';
 
       // Get color based on the selected product.
       const updatedColors = [...colors];
@@ -175,9 +175,9 @@ const CreateOrder = () => {
   };
 
   useEffect(() => {
-    calcDiscount();
+    // calcDiscount();
     calcTotal();
-  }, [calcDiscount, calcTotal, data]);
+  }, [calcTotal, data]);
 
   const handleInputAdd = () => {
     setData([
@@ -233,7 +233,7 @@ const CreateOrder = () => {
       newData[i].quantity = e.target.value;
       setData(newData);
       calculateSubTotals();
-      calcDiscount();
+      // calcDiscount();
       calcTotal();
     }
   };

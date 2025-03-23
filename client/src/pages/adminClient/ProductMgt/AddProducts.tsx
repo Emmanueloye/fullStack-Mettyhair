@@ -159,12 +159,29 @@ const AddProducts = () => {
                 name='sellingPrice'
               />
             </AFormGroup>
+
             <AFormGroup>
               <Input
                 type='text'
                 placeholder='Discounted Price'
                 $dark={true}
                 name='discountPrice'
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Input
+                type='text'
+                placeholder='wholesales Price*'
+                $dark={true}
+                name='wholeSalerPrice'
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Input
+                type='text'
+                placeholder='Weight (g)*'
+                $dark={true}
+                name='weight'
               />
             </AFormGroup>
             <AFormGroup>

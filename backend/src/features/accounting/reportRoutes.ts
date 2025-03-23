@@ -12,4 +12,6 @@ router
     reportController.customerStatement
   );
 
+router.route('/sales').post(reportController.salesReports);
+
 export default router;

@@ -40,6 +40,8 @@ const EditUser = () => {
     queryFn: () => getData({ url: `/users/${userId}` }),
   });
 
+  console.log(user);
+
   const handleUserAccess = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     try {
       setIsLoading(true);

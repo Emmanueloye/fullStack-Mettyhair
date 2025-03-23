@@ -27,6 +27,7 @@ import {
 } from '../../../api/requests';
 import { Select } from '../../../ui/SelectInput';
 import { useQuery } from '@tanstack/react-query';
+import Empty from '../../../ui/Empty';
 
 const CustomerStatement = () => {
   const [customerDetails, setCustomerDetails] = useState<User>();
@@ -118,7 +119,7 @@ const CustomerStatement = () => {
           </AFormGroup>
         </ThreeGrid>
       </Form>
-      {data?.statement && data?.statement?.length > 0 && (
+      {data?.statement && data?.statement?.length > 0 ? (
         <>
           <div className='center-obj mb-2' onClick={handleInvoiceDownlaod}>
             <Button btnText='download PDF' icon={<FaDownload />} wide='20rem' />
@@ -144,11 +145,11 @@ const CustomerStatement = () => {
             </div>
             <div className='box'>
               <div className='grid accessmgr-group fw-500'>
-                <OrderLabel>date</OrderLabel>
-                <OrderLabel>Transaction id</OrderLabel>
-                <OrderLabel>Debit</OrderLabel>
-                <OrderLabel>Credit</OrderLabel>
-                <OrderLabel>Balance</OrderLabel>
+                <OrderLabel className='color'>date</OrderLabel>
+                <OrderLabel className='color'>Transaction id</OrderLabel>
+                <OrderLabel className='color'>Debit</OrderLabel>
+                <OrderLabel className='color'>Credit</OrderLabel>
+                <OrderLabel className='color'>Balance</OrderLabel>
               </div>
               <div>
                 <div className='grid fw-500 lines'>
@@ -164,7 +165,12 @@ const CustomerStatement = () => {
                   if (item.paymentId) runningBalance -= item.amount;
 
                   return (
-                    <div className='grid lines evenLines' key={item._id}>
+                    <div
+                      className={`grid lines evenLines ${
+                        data.noHits && 'color'
+                      }`}
+                      key={item._id}
+                    >
                       <p>{formatDate(new Date(item.date))}</p>
                       <p>
                         {item.orderId
@@ -188,6 +194,12 @@ const CustomerStatement = () => {
             </div>
           </StatementBox>
         </>
+      ) : (
+        <Empty
+          type='dark'
+          message='No record to display for this customer.'
+          showLink={false}
+        />
       )}
     </AdminSection>
   );
