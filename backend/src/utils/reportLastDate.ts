@@ -1,4 +1,4 @@
-export const reportLastDate = (endDate: Date) => {
+export const reportLastDate = (endDate: string) => {
   //   Determine if the current date is last day of the month
   const newDate = new Date();
   const currentDate = new Date(

@@ -44,6 +44,7 @@ export const setOrderUpdate = (
 ) => {
   if (req.body.orderStatus === 'confirmed') {
     req.body.confirmationDate = Date.now();
+    req.body.invoiceDate = Date.now();
     req.body.confirmedBy = req.user!.id;
   }
   if (req.body.orderStatus === 'delivered') {

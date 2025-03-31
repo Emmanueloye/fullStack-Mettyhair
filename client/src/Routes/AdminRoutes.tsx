@@ -162,6 +162,7 @@ import CustomerStatement, {
   loader as CustomerStatementLoader,
   action as customerStatementAction,
 } from '../pages/adminClient/Accounting/CustomerStatement';
+import SalesReport from '../pages/adminClient/Accounting/SalesReport';
 // import CreateOrderV1 from '../pages/adminClient/Accounting/CreateOrderV1';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
@@ -538,6 +539,12 @@ const adminRoutes = [
             element: <CustomerStatement />,
             loader: CustomerStatementLoader,
             action: customerStatementAction,
+          },
+          {
+            path: 'sales-report',
+            element: <SalesReport />,
+            // loader: salesReportLoader,
+            // action: salesReportAction,
           },
         ],
       },

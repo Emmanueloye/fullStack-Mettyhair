@@ -15,6 +15,12 @@ export const StatementBox = styled.div`
       margin-top: 1rem;
     }
   }
+  .bg-white {
+    background-color: var(--white);
+  }
+  .border-bottom {
+    border-bottom: 1px solid var(--main-red-700);
+  }
   .header-box {
     font-size: 1.4rem;
     margin-bottom: 1rem;
@@ -42,6 +48,9 @@ export const StatementBox = styled.div`
   .color {
     /* color: var(--admin-sec-text-color); */
     color: var(--main-red-300);
+  }
+  .font-bold {
+    font-weight: 600;
   }
 
   p {

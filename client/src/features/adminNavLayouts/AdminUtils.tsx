@@ -63,11 +63,12 @@ export const ThreeGrid = styled.div<{ type?: string }>`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  gap: 2rem;
+  gap: 1rem;
   justify-self: self-start;
   width: 100%;
   @media screen and (min-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
 
     ${(props) =>
       props.type === 'image' &&
@@ -87,6 +88,13 @@ export const ThreeGrid = styled.div<{ type?: string }>`
       props.type === 'two' &&
       css`
         grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+      `}
+
+    ${(props) =>
+      props.type === 'four' &&
+      css`
+        grid-template-columns: repeat(4, 1fr);
         align-items: center;
       `}
   }

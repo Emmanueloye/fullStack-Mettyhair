@@ -8,3 +8,6 @@ export const SPECIAL_ROUTES = [
   'user manager',
   'site settings',
 ];
+
+// Update to 10 later
+export const PAGE_SIZE = 10;

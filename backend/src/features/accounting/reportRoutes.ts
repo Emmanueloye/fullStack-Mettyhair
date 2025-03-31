@@ -12,6 +12,13 @@ router
     reportController.customerStatement
   );
 
-router.route('/sales').post(reportController.salesReports);
+router
+  .route('/sales')
+  .get(
+    authMiddleware.protect,
+    authMiddleware.restrictTo('admin', 'super-admin'),
+    reportController.validateSalesDateInput,
+    reportController.salesReports
+  );
 
 export default router;

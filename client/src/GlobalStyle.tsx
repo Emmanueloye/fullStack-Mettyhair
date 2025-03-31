@@ -93,7 +93,7 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         font-size:1.2rem;
         color:var(--primary-text-black);
-        background-color:var(--body-bg);
+        background-color:oklch(0.968 0.007 247.896);
         min-height:100vh;
     }
     li {
@@ -270,6 +270,11 @@ const GlobalStyle = createGlobalStyle`
         justify-content:center;
         align-items:center;
     }
+    .btnWrapper {
+        display: flex;
+        align-items:center;
+        margin-top:1rem;
+    }
     @media screen and (min-width: 1024px ) {
     h1 {
         font-size:2.3rem
@@ -278,6 +283,9 @@ const GlobalStyle = createGlobalStyle`
         font-size: 1.6rem;
         
        
+    }
+    .btnWrapper {
+        margin-top:3.5rem;
     }
     }
 
