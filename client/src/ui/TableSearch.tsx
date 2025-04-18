@@ -56,9 +56,6 @@ const TableSearch = ({
     <Form>
       <SearchContainer $bg={bg}>
         <Select $bg={bg} name='query' id='query' onChange={onSearchField}>
-          <option value='' hidden>
-            Select search Option
-          </option>
           {searchOptions.map((header) => {
             return (
               <option key={header} value={changeToCamelCase(header)}>

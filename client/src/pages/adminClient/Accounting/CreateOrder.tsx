@@ -447,20 +447,20 @@ const CreateOrder = () => {
             );
           })}
         </div>
-        {total && (
-          <ProductTotal
-            showHeader={false}
-            marginTop='0'
-            btnType='btn'
-            isOrder={true}
-            isDark={true}
-            hideBtn={true}
-            productTotal={{
-              subtotal: total,
-              totalDiscount: discount,
-            }}
-          />
-        )}
+
+        <ProductTotal
+          showHeader={false}
+          marginTop='0'
+          btnType='btn'
+          isOrder={true}
+          isDark={true}
+          hideBtn={true}
+          productTotal={{
+            subtotal: total,
+            totalDiscount: discount,
+          }}
+        />
+
         <Button
           type='button'
           btnText='create Order'

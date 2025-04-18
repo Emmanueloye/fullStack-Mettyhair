@@ -30,6 +30,8 @@ import contactReplyRouter from './features/contacts/contactReplyRoutes';
 import blogRouter from './features/blogs/blogRoutes';
 import reportRouter from './features/accounting/reportRoutes';
 import locationRouter from './features/location/locationRoutes';
+import expenseHeadRouter from './features/accounting/expenseHead/expenseHeadRoutes';
+import expenseRouter from './features/accounting/expensePosting/expenseRoutes';
 
 // Create express application.
 const app = express();
@@ -72,6 +74,8 @@ app.use('/api/v1/contact-replies', contactReplyRouter);
 app.use('/api/v1/posts', blogRouter);
 app.use('/api/v1/reports', reportRouter);
 app.use('/api/v1/locations', locationRouter);
+app.use('/api/v1/expense-head', expenseHeadRouter);
+app.use('/api/v1/expenses', expenseRouter);
 
 // import dist from './../../client/dist';
 

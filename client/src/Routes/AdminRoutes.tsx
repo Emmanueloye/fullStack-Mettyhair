@@ -163,6 +163,27 @@ import CustomerStatement, {
   action as customerStatementAction,
 } from '../pages/adminClient/Accounting/CustomerStatement';
 import SalesReport from '../pages/adminClient/Accounting/SalesReport';
+import ExpenseHead, {
+  loader as expenseHeadLoader,
+  action as expenseHeadAction,
+} from '../pages/adminClient/Accounting/ExpenseHead';
+import NewExpenseHead, {
+  action as newExpenseHeadAction,
+} from '../pages/adminClient/Accounting/NewExpenseHead';
+import EditExpenseHead, {
+  loader as editExpenseHeadLoader,
+  action as editExpenseHeadAction,
+} from '../pages/adminClient/Accounting/EditExpenseHead';
+import ViewExpenseHead, {
+  loader as viewExpenseHeadLoader,
+} from '../pages/adminClient/Accounting/ViewExpenseHead';
+import Expenses, {
+  loader as expensesDataLoader,
+} from '../pages/adminClient/Accounting/Expenses';
+import ExpenseJournal, {
+  action as expensesAction,
+  loader as expensesLoader,
+} from '../pages/adminClient/Accounting/ExpenseJournal';
 // import CreateOrderV1 from '../pages/adminClient/Accounting/CreateOrderV1';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
@@ -543,8 +564,49 @@ const adminRoutes = [
           {
             path: 'sales-report',
             element: <SalesReport />,
-            // loader: salesReportLoader,
-            // action: salesReportAction,
+          },
+          {
+            path: 'expenses',
+            children: [
+              {
+                index: true,
+                element: <Expenses />,
+                loader: expensesDataLoader,
+              },
+              {
+                path: 'new',
+                element: <ExpenseJournal />,
+                action: expensesAction,
+                loader: expensesLoader,
+              },
+            ],
+          },
+          {
+            path: 'expense-head',
+            children: [
+              {
+                index: true,
+                element: <ExpenseHead />,
+                loader: expenseHeadLoader,
+                action: expenseHeadAction,
+              },
+              {
+                path: 'new',
+                element: <NewExpenseHead />,
+                action: newExpenseHeadAction,
+              },
+              {
+                path: 'edit/:id',
+                element: <EditExpenseHead />,
+                loader: editExpenseHeadLoader,
+                action: editExpenseHeadAction,
+              },
+              {
+                path: 'view/:id',
+                element: <ViewExpenseHead />,
+                loader: viewExpenseHeadLoader,
+              },
+            ],
           },
         ],
       },

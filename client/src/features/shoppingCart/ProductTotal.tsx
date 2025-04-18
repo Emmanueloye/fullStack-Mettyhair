@@ -35,7 +35,7 @@ const ProductTotal = ({
         <div className='cost-breakdown'>
           <div className='subtotal border'>
             <p>subtotal:</p>
-            <p>&#8358; {formatNumber(productTotal.subtotal)}</p>
+            <p>&#8358; {formatNumber(productTotal.subtotal) || `0.00`}</p>
           </div>
           <div className='subtotal border'>
             <p>discount:</p>
@@ -56,7 +56,9 @@ const ProductTotal = ({
             <p>Total:</p>
             <p>
               &#8358;{' '}
-              {formatNumber(productTotal.subtotal - productTotal.totalDiscount)}
+              {formatNumber(
+                productTotal.subtotal - productTotal.totalDiscount
+              ) || `0.00`}
             </p>
           </div>
           {btnType === 'link' ? (

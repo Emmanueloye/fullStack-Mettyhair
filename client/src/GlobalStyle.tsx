@@ -157,6 +157,9 @@ const GlobalStyle = createGlobalStyle`
         font-size:1.4rem;
         font-family:'Lato' sans-serif;
     }
+    .mt-0 {
+        margin-top:0;
+    }
     .mt-3{
         margin-top:3rem;
     }

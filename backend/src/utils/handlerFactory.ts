@@ -33,8 +33,6 @@ export const createOne = ({
       excludedFields,
     });
 
-    console.log(filteredObj);
-
     const newDoc = await Model.create(filteredObj);
     res.status(statusCodes.CREATED).json({
       status: 'success',

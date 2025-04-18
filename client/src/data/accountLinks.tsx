@@ -8,7 +8,7 @@ export const accountLinks: AccountLinks[] = [
   {
     id: 1,
     title: 'sales',
-    links: ['create order', 'sales orders', 'cancelled order'],
+    links: ['create order', 'sales orders'],
   },
   {
     id: 2,
@@ -18,11 +18,11 @@ export const accountLinks: AccountLinks[] = [
   {
     id: 3,
     title: 'reporting',
-    links: ['sales report', 'bank balance', 'customer statement'],
+    links: ['sales report', 'customer statement'],
   },
   {
     id: 4,
     title: 'financial accounting',
-    links: ['journal', 'P/L statement', 'bank balance', 'chart of account'],
+    links: ['expenses', 'expense head', 'P/L statement'],
   },
 ];

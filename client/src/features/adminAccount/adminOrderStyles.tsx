@@ -9,7 +9,7 @@ export const OrderGrid = styled.div<{ type?: string; $isAction?: boolean }>`
 
 export const FourGrid = styled.div<{ type?: string; $isAction?: boolean }>`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1.3fr 3fr 1fr 0.3fr;
   gap: 1rem;
 `;
 
@@ -31,6 +31,7 @@ export const BtnUI = styled.button`
   padding: 1rem 3rem;
   outline: none;
   text-transform: capitalize;
+  cursor: pointer;
   ${(props) =>
     props.type === 'button' &&
     css`
