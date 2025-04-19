@@ -70,7 +70,9 @@ const Expenses = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      const newUrl = `/expenses?search=${searchField}&value=${searchValue}`;
+      const newUrl = `/expenses?search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}`;
 
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({

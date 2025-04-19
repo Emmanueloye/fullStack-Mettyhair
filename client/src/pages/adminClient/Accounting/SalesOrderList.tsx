@@ -75,7 +75,9 @@ const SalesOrderList = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      const newUrl = `/sales-orders?search=${searchField}&value=${searchValue}`;
+      const newUrl = `/sales-orders?search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}`;
 
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({

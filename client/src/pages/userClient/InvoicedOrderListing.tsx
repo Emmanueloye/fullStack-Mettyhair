@@ -73,7 +73,9 @@ const InvoicedOrderListing = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      const newUrl = `/sales-orders/wholeseller?search=${searchField}&value=${searchValue}&orderStatus=invoiced`;
+      const newUrl = `/sales-orders/wholeseller?search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}&orderStatus=invoiced`;
 
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({

@@ -82,7 +82,9 @@ const AdminProducts = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      let newUrl = `/products?search=${searchField}&value=${searchValue}`;
+      let newUrl = `/products?search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}`;
       if (searchField !== 'productName') {
         newUrl = `/products?${searchField}=${searchValue}`;
       }

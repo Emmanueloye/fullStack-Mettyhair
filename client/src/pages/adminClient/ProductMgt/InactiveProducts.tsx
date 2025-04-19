@@ -77,9 +77,13 @@ const InactiveProducts = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      let newUrl = `/products?isActive=false&search=${searchField}&value=${searchValue}`;
+      let newUrl = `/products?isActive=false&search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}`;
       if (searchField !== 'productName') {
-        newUrl = `/products?isActive=false&${searchField}=${searchValue}`;
+        newUrl = `/products?isActive=false&${encodeURIComponent(
+          searchField
+        )}=${encodeURIComponent(searchValue)}`;
       }
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.ensureQueryData({

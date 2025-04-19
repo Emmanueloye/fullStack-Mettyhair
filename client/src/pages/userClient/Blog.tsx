@@ -37,10 +37,10 @@ const Blog = () => {
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setTimeout(async () => {
       const resp = await getOnlyData({
-        url: `/posts?search=title&value=${e.target.value}`,
+        url: `/posts?search=title&value=${encodeURIComponent(e.target.value)}`,
       });
       setAllPost(resp.posts);
-    }, 2000);
+    }, 1000);
   };
 
   return (

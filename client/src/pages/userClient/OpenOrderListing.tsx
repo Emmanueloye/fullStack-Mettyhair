@@ -73,7 +73,9 @@ const OpenOrderListing = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      const newUrl = `/sales-orders/wholeseller?search=${searchField}&value=${searchValue}&orderStatus=pending`;
+      const newUrl = `/sales-orders/wholeseller?search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}&orderStatus=pending`;
 
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({

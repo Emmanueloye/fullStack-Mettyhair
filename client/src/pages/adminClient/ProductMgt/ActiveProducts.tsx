@@ -69,7 +69,9 @@ const ActiveProducts = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      let newUrl = `/products?isActive=true&search=${searchField}&value=${searchValue}`;
+      let newUrl = `/products?isActive=true&search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}`;
       if (searchField !== 'productName') {
         newUrl = `/products?isActive=true&${searchField}=${searchValue}`;
       }

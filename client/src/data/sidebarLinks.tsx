@@ -60,7 +60,7 @@ export const sidebarLinks: LinksType[] = [
   },
   {
     id: 6,
-    title: 'accounting - in dev',
+    title: 'accounting',
     links: ['account'],
     icon: <FaChartBar />,
   },

@@ -102,7 +102,9 @@ const OrderLists = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      const newUrl = `/orders?search=${searchField}&value=${searchValue}&orderStatus=${
+      const newUrl = `/orders?search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}&orderStatus=${
         pageLabel || 'pending'
       }`;
 

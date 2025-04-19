@@ -83,9 +83,15 @@ const StockoutNotice = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      let newUrl = `/products?quantity[lte]=${reOderLevel}&search=${searchField}&value=${searchValue}`;
+      let newUrl = `/products?quantity[lte]=${reOderLevel}&search=${encodeURIComponent(
+        searchField
+      )}&value=${encodeURIComponent(searchValue)}`;
       if (searchField !== 'productName') {
-        newUrl = `/products?quantity[lte]=${reOderLevel}&${searchField}=${searchValue}`;
+        newUrl = `/products?quantity[lte]=${encodeURIComponent(
+          reOderLevel
+        )}&${encodeURIComponent(searchField)}=${encodeURIComponent(
+          searchValue
+        )}`;
       }
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({
@@ -100,7 +106,7 @@ const StockoutNotice = () => {
 
         const data = await resp;
 
-        if (searchValue) {
+        if (encodeURIComponent(searchValue)) {
           setAllProducts(data.products);
         } else {
           setAllProducts(products);
