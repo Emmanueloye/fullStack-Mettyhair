@@ -36,7 +36,7 @@ const validateExpense = (req: Request) => {
   for (const item of expenses) {
     const { expenseHead, description, amount } = item;
     if (!expenseHead) {
-      throw new AppError.BadRequestError('');
+      throw new AppError.BadRequestError('Expense head field is required.');
     }
     if (!description) {
       throw new AppError.BadRequestError(

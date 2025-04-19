@@ -28,3 +28,8 @@ export type ExpenseType = {
   postedBy: string;
   createdAt: Date;
 };
+
+export type ExpenseSummaryType = {
+  _id: string;
+  totalAmount: number;
+};

@@ -13,6 +13,24 @@ export const FourGrid = styled.div<{ type?: string; $isAction?: boolean }>`
   gap: 1rem;
 `;
 
+export const PandLWrapper = styled.article`
+  padding: 1rem 0;
+  @media screen and (min-width: 800px) {
+    padding: 1rem 5rem;
+  }
+`;
+
+export const PandLBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  text-transform: capitalize;
+  color: var(--admin-sec-text-color);
+  &:nth-last-of-type(odd) {
+    background-color: var(--admin-input-bg);
+  }
+`;
+
 export const OrderLabel = styled.p<{ type?: string }>`
   display: block;
   font-size: 1.4rem;

@@ -252,6 +252,9 @@ const GlobalStyle = createGlobalStyle`
     .rounded-img {
         border-radius:50%;
     }
+    .underline {
+        text-decoration: underline
+    }
     .pimg{
         border-radius:var(--border-radius-md)
     }
@@ -277,6 +280,12 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         align-items:center;
         margin-top:1rem;
+    }
+    .bg-green {
+        background-color:green
+    }
+    .bg-red {
+        background-color: var(--main-red-500)
     }
     @media screen and (min-width: 1024px ) {
     h1 {

@@ -134,7 +134,7 @@ const ExpenseJournal = () => {
                     select expense head
                   </option>
                   {data?.expenseHeads.map((item: ExpenseHeadType) => (
-                    <option value={item._id} key={item._id}>
+                    <option value={item.description} key={item._id}>
                       {item.description}
                     </option>
                   ))}

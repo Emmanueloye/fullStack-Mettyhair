@@ -13,7 +13,7 @@ export const accountLinks: AccountLinks[] = [
   {
     id: 2,
     title: 'account receivables',
-    links: ['sales orders', 'returns', 'payment'],
+    links: ['sales orders', 'payment'],
   },
   {
     id: 3,

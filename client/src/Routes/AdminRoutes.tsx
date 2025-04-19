@@ -184,6 +184,7 @@ import ExpenseJournal, {
   action as expensesAction,
   loader as expensesLoader,
 } from '../pages/adminClient/Accounting/ExpenseJournal';
+import ProfitAndLoss from '../pages/adminClient/Accounting/ProfitAndLoss';
 // import CreateOrderV1 from '../pages/adminClient/Accounting/CreateOrderV1';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
@@ -607,6 +608,10 @@ const adminRoutes = [
                 loader: viewExpenseHeadLoader,
               },
             ],
+          },
+          {
+            path: 'p/l-statement',
+            element: <ProfitAndLoss />,
           },
         ],
       },

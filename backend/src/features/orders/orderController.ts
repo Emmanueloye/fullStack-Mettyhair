@@ -29,6 +29,7 @@ export const updateOrder = factory.updateOne({
   includedFields: [
     'orderStatus',
     'confirmationDate',
+    'invoiceDate',
     'confirmedBy',
     'deliveryDate',
     'deliveredBy',

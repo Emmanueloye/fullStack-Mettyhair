@@ -21,4 +21,13 @@ router
     reportController.salesReports
   );
 
+router
+  .route('/profit-or-loss')
+  .post(
+    authMiddleware.protect,
+    authMiddleware.restrictTo('super-admin'),
+    reportController.validateDateInput,
+    reportController.profitAndLossReport
+  );
+
 export default router;

@@ -7,6 +7,7 @@ import statusCodes from '../../errors/statusCodes';
 import * as utils from '../../utils';
 import OrderItems from '../orders/orderItemsModel';
 import Order from '../orders/orderModel';
+import Expense from './expensePosting/expenseModel';
 
 export const customerStatement = async (req: Request, res: Response) => {
   const { startDate, endDate } = req.body;
@@ -39,6 +40,41 @@ export const customerStatement = async (req: Request, res: Response) => {
     noHits: statement.length,
     statement,
   });
+};
+
+export const profitAndLossReport = async (req: Request, res: Response) => {
+  const { startDate, endDate } = req.body;
+  if (startDate! > endDate!) {
+    throw new AppError.BadRequestError(
+      'End date cannot be earlier than the start date.'
+    );
+  }
+  const lastDate = utils.reportLastDate(endDate);
+
+  // Get all the revenue depending on the requested date
+  const revenue = await Order.find({
+    orderStatus: { $in: ['confirmed', 'invoiced'] },
+    invoiceDate: { $gte: new Date(startDate), $lte: lastDate },
+  });
+
+  // Group expenses based on requested date and expense head.
+  const expenses = await Expense.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $gte: new Date(startDate as string),
+          $lte: new Date(lastDate),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: '$expenseHead',
+        totalAmount: { $sum: '$amount' },
+      },
+    },
+  ]);
+  res.status(statusCodes.OK).json({ status: 'success', revenue, expenses });
 };
 
 export const salesReports = async (req: Request, res: Response) => {

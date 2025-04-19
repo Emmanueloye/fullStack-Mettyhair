@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { useSearchParams } from 'react-router-dom';
 import {
   AdminSection,
@@ -130,6 +129,7 @@ const SalesReport = () => {
         <Empty
           message='No sales available for the date range selected'
           showLink={false}
+          type='dark'
         />
       )}
     </AdminSection>
