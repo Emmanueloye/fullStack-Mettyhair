@@ -1,6 +1,6 @@
 export type ExpenseHeadType = {
   _id: string;
-  expenseHead: string;
+  headId: string;
   description: string;
   isActive: boolean;
   createdAt: Date;
