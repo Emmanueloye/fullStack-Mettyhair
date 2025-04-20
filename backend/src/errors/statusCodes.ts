@@ -28,6 +28,9 @@ class StatusCodes {
   get CONFLICT() {
     return 409;
   }
+  get TOOMANYREQUEST() {
+    return 429;
+  }
 }
 
 export default new StatusCodes();

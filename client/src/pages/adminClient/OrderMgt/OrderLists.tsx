@@ -100,7 +100,7 @@ const OrderLists = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       const newUrl = `/orders?search=${encodeURIComponent(
         searchField

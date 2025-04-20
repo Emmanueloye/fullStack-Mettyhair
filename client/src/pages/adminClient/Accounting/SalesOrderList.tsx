@@ -73,7 +73,7 @@ const SalesOrderList = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       const newUrl = `/sales-orders?search=${encodeURIComponent(
         searchField

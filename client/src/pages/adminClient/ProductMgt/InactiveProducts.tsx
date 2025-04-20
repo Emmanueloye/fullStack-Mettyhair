@@ -75,7 +75,7 @@ const InactiveProducts = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       let newUrl = `/products?isActive=false&search=${encodeURIComponent(
         searchField

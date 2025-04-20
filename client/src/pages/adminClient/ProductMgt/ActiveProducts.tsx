@@ -67,7 +67,7 @@ const ActiveProducts = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       let newUrl = `/products?isActive=true&search=${encodeURIComponent(
         searchField

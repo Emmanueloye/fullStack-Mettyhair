@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/hpp": "^0.2.6"
+  }
+}

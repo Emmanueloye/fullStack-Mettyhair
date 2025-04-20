@@ -68,7 +68,7 @@ const Expenses = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       const newUrl = `/expenses?search=${encodeURIComponent(
         searchField

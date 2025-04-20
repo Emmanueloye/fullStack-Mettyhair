@@ -71,7 +71,7 @@ const InvoicedOrderListing = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       const newUrl = `/sales-orders/wholeseller?search=${encodeURIComponent(
         searchField

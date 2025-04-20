@@ -83,7 +83,7 @@ const ExpenseHead = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       const newUrl = `/expense-head?search=${encodeURIComponent(
         searchField

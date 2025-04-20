@@ -68,3 +68,18 @@ export class ConflictError extends Error {
     this.isOperational = true;
   }
 }
+
+export class TooManyRequest extends Error {
+  statusCode: number;
+  status: string;
+  isOperational: boolean;
+  msg: string;
+
+  constructor(message: string) {
+    super(message);
+    this.statusCode = statusCodes.TOOMANYREQUEST;
+    this.status = `${this.statusCode}`.startsWith('4') ? 'fail' : 'error';
+    this.isOperational = true;
+    this.msg = message;
+  }
+}

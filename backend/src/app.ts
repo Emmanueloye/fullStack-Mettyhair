@@ -2,7 +2,14 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+// Security packages
 import helmet from 'helmet';
+import { rateLimit } from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import hpp from 'hpp';
+import xss from 'x-xss-protection';
+
+import * as AppError from './errors/appError';
 
 // Import error middlewares
 import notFoundMiddleware from './middlewares/notfoundHandler';
@@ -37,7 +44,8 @@ import expenseRouter from './features/accounting/expensePosting/expenseRoutes';
 const app = express();
 
 // mount application wide middlewares
-app.use(express.json());
+
+// Set HTTP request headers
 app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
@@ -47,6 +55,32 @@ app.use(
     },
   })
 );
+
+// setup rate limiter
+const limiter = rateLimit({
+  windowMs: Number(process.env.WINDOWMS) * 60 * 1000,
+  limit: Number(process.env.LIMIT),
+  message: new AppError.TooManyRequest(
+    'Too many requests. Please retry again after 30 minutes'
+  ),
+  legacyHeaders: false,
+});
+
+// Mount rate limiter
+app.use(limiter);
+
+// Middleware for Reading data from request body
+app.use(express.json({ limit: '50kb' }));
+
+// To prevent against nosql injection
+app.use(mongoSanitize());
+
+// To prevent cross site attack (xss)
+app.use(xss());
+
+// To prevent against http parameter pollution
+app.use(hpp());
+
 // app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(express.static(path.resolve(__dirname, './../../client/dist')));
 app.use(cookieParser(process.env.JWT_SECRET));

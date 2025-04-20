@@ -81,7 +81,7 @@ const StockoutNotice = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       let newUrl = `/products?quantity[lte]=${reOderLevel}&search=${encodeURIComponent(
         searchField

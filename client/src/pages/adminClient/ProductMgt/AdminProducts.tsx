@@ -80,7 +80,7 @@ const AdminProducts = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       let newUrl = `/products?search=${encodeURIComponent(
         searchField
@@ -141,8 +141,6 @@ const AdminProducts = () => {
           sortOptions={[
             'old to new',
             'new to old',
-            'A-Z: Product',
-            'Z-A: Product',
             'accending: Price',
             'decending: Price',
             'accending: quantity',

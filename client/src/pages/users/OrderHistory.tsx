@@ -74,7 +74,7 @@ const OrderHistory = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       const newUrl = `/orders/me?search=${encodeURIComponent(
         searchField

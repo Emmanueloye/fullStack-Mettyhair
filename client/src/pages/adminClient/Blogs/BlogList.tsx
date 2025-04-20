@@ -73,7 +73,7 @@ const BlogList = () => {
   };
 
   useEffect(() => {
-    let timeOut: number | undefined;
+    let timeOut: NodeJS.Timeout;
     const filterData = async () => {
       const newUrl = `/posts?search=${encodeURIComponent(
         searchField
