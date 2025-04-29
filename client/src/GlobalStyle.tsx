@@ -93,7 +93,7 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         font-size:1.2rem;
         color:var(--primary-text-black);
-        background-color:oklch(0.968 0.007 247.896);
+        background-color:#f1f4f8;
         min-height:100vh;
     }
     li {

@@ -8,6 +8,7 @@ import { rateLimit } from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 import xss from 'x-xss-protection';
+import cors from 'cors';
 
 import * as AppError from './errors/appError';
 
@@ -56,6 +57,8 @@ app.use(
   })
 );
 
+app.use(cors());
+
 // setup rate limiter
 const limiter = rateLimit({
   windowMs: Number(process.env.WINDOWMS) * 60 * 1000,
@@ -81,10 +84,11 @@ app.use(xss());
 // To prevent against http parameter pollution
 app.use(hpp());
 
-// app.use(express.static(path.resolve(__dirname, 'public')));
-app.use(express.static(path.resolve(__dirname, './../../client/dist')));
 app.use(cookieParser(process.env.JWT_SECRET));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
+// app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, './../../client/dist')));
 
 // mount dev route
 app.use('/api/v1/devs', devRouter);

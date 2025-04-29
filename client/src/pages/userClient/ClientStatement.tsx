@@ -21,13 +21,12 @@ import { TransactionType } from '../../dtos/statementDto';
 import FormError from '../../ui/FormError';
 import { formatDate, formatNumber } from '../../utilities/HelperFunc';
 import { FaDownload } from 'react-icons/fa';
-import { useRef } from 'react';
-import html2pdf from 'html2pdf.js';
+import { usePDF } from 'react-to-pdf';
 
 const ClientStatement = () => {
   const user = useOutletContext<User>();
   const data = useActionData() as TransactionType;
-  const statementRef = useRef(null);
+  const { toPDF, targetRef } = usePDF({ filename: 'statement.pdf' });
 
   let runningBalance = data?.openingBal || 0;
 
@@ -40,15 +39,6 @@ const ClientStatement = () => {
 
   const openingBalance = data?.openingBal || 0;
   const totalBalance = balance + openingBalance;
-
-  const handleInvoiceDownlaod = async () => {
-    if (statementRef.current)
-      html2pdf(statementRef.current, {
-        margin: Number(20),
-        filename: 'Statement',
-        html2canvas: { scale: 2 as number, useCORS: true as boolean },
-      });
-  };
 
   return (
     <div>
@@ -79,10 +69,15 @@ const ClientStatement = () => {
       </Form>
       {data?.statement && data?.statement?.length > 0 && (
         <>
-          <div className='center-obj mb-2' onClick={handleInvoiceDownlaod}>
-            <Button btnText='download PDF' icon={<FaDownload />} wide='20rem' />
+          <div className='center-obj mb-2'>
+            <Button
+              btnText='download PDF'
+              icon={<FaDownload />}
+              wide='20rem'
+              onBtnTrigger={() => toPDF()}
+            />
           </div>
-          <StatementBox id='statement' ref={statementRef}>
+          <StatementBox id='statement' ref={targetRef}>
             <div className='text-center color-red'>
               <h3>Metty General Merchant</h3>
               <p className='text-center fw-500'>Customer Statement</p>

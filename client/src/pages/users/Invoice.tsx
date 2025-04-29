@@ -3,17 +3,14 @@ import { FaDownload } from 'react-icons/fa';
 import Button from '../../ui/Button';
 import InvoiceWrapper from './InvoiceStyles';
 import ProductTotal from '../../features/shoppingCart/ProductTotal';
-import { useRef } from 'react';
-import html2pdf from 'html2pdf.js';
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import OrderSum from '../../features/checkout/OrderSum';
 import { OrderItemType } from '../../dtos/orderDto';
+import { usePDF } from 'react-to-pdf';
 
 const Invoice = () => {
-  const invoiceRef = useRef(null);
-
   const params = useLoaderData() as { orderNo: string };
 
   const { data } = useQuery({
@@ -28,27 +25,21 @@ const Invoice = () => {
       ? `order-${order.orderNo}.pdf`
       : `invoice-${order.invoiceNo}.pdf`;
 
-  const handleInvoiceDownlaod = async () => {
-    if (invoiceRef.current)
-      html2pdf(invoiceRef.current, {
-        margin: Number(20),
-        filename: fileLabel as string,
-        html2canvas: { scale: 2 as number, useCORS: true as boolean },
-      });
-  };
+  const { toPDF, targetRef } = usePDF({ filename: fileLabel });
 
   return (
     <InvoiceWrapper>
-      <div className='btn-box' onClick={handleInvoiceDownlaod}>
+      <div className='btn-box'>
         <Button
           btnText='download'
           //   wide='fit-content'
           icon={<FaDownload />}
           bg='var(--main-red-400)'
           color='var(--main-red-50)'
+          onBtnTrigger={() => toPDF()}
         />
       </div>
-      <div id='invoice' ref={invoiceRef}>
+      <div id='invoice' ref={targetRef}>
         <div className='invoice-header'>
           {order.orderStatus === 'pending' ? (
             <h2>
