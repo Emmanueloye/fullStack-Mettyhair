@@ -3,7 +3,6 @@
 import { IoReloadCircleOutline } from 'react-icons/io5';
 
 import { ActionFunctionArgs, Form, useActionData } from 'react-router-dom';
-import { FaDownload } from 'react-icons/fa';
 import { User } from '../../../dtos/userDto';
 import { TransactionType } from '../../../dtos/statementDto';
 import FormError from '../../../ui/FormError';
@@ -26,17 +25,13 @@ import {
 import { Select } from '../../../ui/SelectInput';
 import { useQuery } from '@tanstack/react-query';
 import Empty from '../../../ui/Empty';
-import generatePDF, { Resolution, Margin, usePDF } from 'react-to-pdf';
+
 import { useState } from 'react';
+import DownloadStatement from '../../../features/downloads/DownloadStatement';
 
 const CustomerStatement = () => {
   const [customerDetails, setCustomerDetails] = useState<User>();
   const data = useActionData() as TransactionType;
-  const options = {
-    resolution: Resolution.HIGH,
-    margin: Margin.MEDIUM,
-  };
-  const { targetRef } = usePDF({ filename: 'customerStatement.pdf' });
 
   const {
     data: { users },
@@ -117,14 +112,14 @@ const CustomerStatement = () => {
       {data?.statement && data?.statement?.length > 0 ? (
         <>
           <div className='center-obj mb-2'>
-            <Button
-              btnText='download PDF'
-              icon={<FaDownload />}
-              wide='20rem'
-              onBtnTrigger={() => generatePDF(targetRef, options)}
+            <DownloadStatement
+              closingBal={totalBalance}
+              openingBal={openingBalance}
+              customerDetails={customerDetails}
+              statementContent={data?.statement}
             />
           </div>
-          <StatementBox id='statement' ref={targetRef}>
+          <StatementBox id='statement'>
             <div className='text-center color-red'>
               <h3>Metty General Merchant</h3>
               <p className='text-center fw-500'>Customer Statement</p>
