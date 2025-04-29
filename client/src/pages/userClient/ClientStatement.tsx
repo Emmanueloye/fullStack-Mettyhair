@@ -22,6 +22,7 @@ import FormError from '../../ui/FormError';
 import { formatDate, formatNumber } from '../../utilities/HelperFunc';
 import { FaDownload } from 'react-icons/fa';
 import { usePDF } from 'react-to-pdf';
+import Empty from '../../ui/Empty';
 
 const ClientStatement = () => {
   const user = useOutletContext<User>();
@@ -67,7 +68,7 @@ const ClientStatement = () => {
           </AFormGroup>
         </ThreeGrid>
       </Form>
-      {data?.statement && data?.statement?.length > 0 && (
+      {data?.statement && data?.statement?.length > 0 ? (
         <>
           <div className='center-obj mb-2'>
             <Button
@@ -142,6 +143,11 @@ const ClientStatement = () => {
             </div>
           </StatementBox>
         </>
+      ) : (
+        <Empty
+          message='No data available for the selected date range.'
+          showLink={false}
+        />
       )}
     </div>
   );

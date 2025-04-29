@@ -26,13 +26,17 @@ import {
 import { Select } from '../../../ui/SelectInput';
 import { useQuery } from '@tanstack/react-query';
 import Empty from '../../../ui/Empty';
-import { usePDF } from 'react-to-pdf';
+import generatePDF, { Resolution, Margin, usePDF } from 'react-to-pdf';
 import { useState } from 'react';
 
 const CustomerStatement = () => {
   const [customerDetails, setCustomerDetails] = useState<User>();
   const data = useActionData() as TransactionType;
-  const { toPDF, targetRef } = usePDF({ filename: 'customerStatement.pdf' });
+  const options = {
+    resolution: Resolution.HIGH,
+    margin: Margin.MEDIUM,
+  };
+  const { targetRef } = usePDF({ filename: 'customerStatement.pdf' });
 
   const {
     data: { users },
@@ -117,7 +121,7 @@ const CustomerStatement = () => {
               btnText='download PDF'
               icon={<FaDownload />}
               wide='20rem'
-              onBtnTrigger={() => toPDF()}
+              onBtnTrigger={() => generatePDF(targetRef, options)}
             />
           </div>
           <StatementBox id='statement' ref={targetRef}>
