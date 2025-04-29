@@ -6,6 +6,7 @@ export const StatementBox = styled.div`
   /* border: 1px solid gray; */
   padding: 1.2rem;
   overflow-x: auto;
+  width: 100%;
 
   .grid {
     display: grid;

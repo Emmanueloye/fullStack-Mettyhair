@@ -61,7 +61,7 @@ const MainNav = ({
             </BrandText>
           </Link>
           {/* cart bag */}
-          <CartAndSearch cartQty={carts.length} className='hidden' />
+          <CartAndSearch cartQty={carts?.length} className='hidden' />
           {/* mobile toggle icon */}
           <span onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             <Icon icon={<FaBars />} iconSize='2rem' className='hidden' />

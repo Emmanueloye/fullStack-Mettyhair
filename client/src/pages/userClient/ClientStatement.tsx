@@ -20,21 +20,19 @@ import { extractFormData, postData } from '../../api/requests';
 import { TransactionType } from '../../dtos/statementDto';
 import FormError from '../../ui/FormError';
 import { formatDate, formatNumber } from '../../utilities/HelperFunc';
-import { FaDownload } from 'react-icons/fa';
-import { usePDF } from 'react-to-pdf';
 import Empty from '../../ui/Empty';
+import DownloadStatement from '../../features/downloads/DownloadStatement';
 
 const ClientStatement = () => {
   const user = useOutletContext<User>();
   const data = useActionData() as TransactionType;
-  const { toPDF, targetRef } = usePDF({ filename: 'statement.pdf' });
 
   let runningBalance = data?.openingBal || 0;
 
   const balance =
     data?.statement?.reduce((acc, curr) => {
-      if (curr.orderId) return acc + curr.amount;
-      if (curr.paymentId) return acc - curr.amount;
+      if (curr?.orderId) return acc + curr.amount;
+      if (curr?.paymentId) return acc - curr.amount;
       return acc;
     }, 0) || 0;
 
@@ -48,7 +46,7 @@ const ClientStatement = () => {
           {data?.status === 'fail' && <FormError info={data?.message} />}
         </div>
         <ThreeGrid>
-          <input type='hidden' defaultValue={user._id} name='user' />
+          <input type='hidden' defaultValue={user?._id} name='user' />
           <AFormGroup>
             <Label htmlFor='startDate'>start date</Label>
             <Input type='date' id='startDate' name='startDate' />
@@ -71,14 +69,14 @@ const ClientStatement = () => {
       {data?.statement && data?.statement?.length > 0 ? (
         <>
           <div className='center-obj mb-2'>
-            <Button
-              btnText='download PDF'
-              icon={<FaDownload />}
-              wide='20rem'
-              onBtnTrigger={() => toPDF()}
+            <DownloadStatement
+              closingBal={totalBalance}
+              openingBal={openingBalance}
+              customerDetails={user}
+              statementContent={data?.statement}
             />
           </div>
-          <StatementBox id='statement' ref={targetRef}>
+          <StatementBox id='statement'>
             <div className='text-center color-red'>
               <h3>Metty General Merchant</h3>
               <p className='text-center fw-500'>Customer Statement</p>
@@ -86,7 +84,7 @@ const ClientStatement = () => {
             <div className='header'>
               <div className='header-box'>
                 <span>Customer Name:</span>
-                <span>{user.fullName}</span>
+                <span>{user?.fullName}</span>
               </div>
               <div className='header-box'>
                 <span>Opening Balance:</span>

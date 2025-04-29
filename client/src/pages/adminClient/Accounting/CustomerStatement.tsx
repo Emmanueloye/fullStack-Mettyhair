@@ -59,7 +59,7 @@ const CustomerStatement = () => {
 
   const handleUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedUser = users.find(
-      (user: User) => user._id === e.target.value
+      (user: User) => user?._id === e.target.value
     );
     setCustomerDetails(selectedUser);
   };

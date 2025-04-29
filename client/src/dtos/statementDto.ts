@@ -1,4 +1,4 @@
-export type StatmentTypes = {
+export type StatementTypes = {
   _id: string;
   paymentId?: {
     _id: string;
@@ -16,7 +16,7 @@ export type StatmentTypes = {
 export type TransactionType = {
   status?: string;
   message: string;
-  statement?: StatmentTypes[];
+  statement?: StatementTypes[];
   openingBal: number;
   noHits: number;
 };
