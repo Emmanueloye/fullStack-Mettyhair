@@ -23,6 +23,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { authActions } from '../../store/authAction';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 type ErrorType = { message: string; status: string };
 
@@ -47,46 +48,51 @@ const Login = () => {
   }, [dispatch, error, navigate]);
 
   return (
-    <FormBox>
-      <Container>
-        {info && <FormError info={info} />}
-        <Header>
-          <h4>Login</h4>
-        </Header>
-        <Form method='post'>
-          {error && error.status === 'fail' && (
-            <FormError info={error.message} />
-          )}
-          {/* Email input group */}
-          <InputGroup
-            type='email'
-            name='email'
-            placeholder='Email*'
-            icon={<MdMail />}
-          />
-          {/* Password input group */}
-          <PasswordInput name='password' placeholder='Password*' />
-
-          {/* Register link */}
-          <AuthAction>
-            <span>Don't have an account?</span>
-            <Link to='/register'>Register here.</Link>
-          </AuthAction>
-          {/* forget password link */}
-          <AuthAction>
-            <Link to='/forget-password'>Forgot password</Link>
-          </AuthAction>
-          <div style={{ marginTop: '4rem' }}>
-            <Button
-              btnText={state === 'submitting' ? 'Logging in...' : 'Login'}
-              icon={<BiSolidLogInCircle />}
-              disable={state === 'submitting'}
-              type='submit'
+    <>
+      <Helmet>
+        <title>MettyHair - Login</title>
+      </Helmet>
+      <FormBox>
+        <Container>
+          {info && <FormError info={info} />}
+          <Header>
+            <h4>Login</h4>
+          </Header>
+          <Form method='post'>
+            {error && error.status === 'fail' && (
+              <FormError info={error.message} />
+            )}
+            {/* Email input group */}
+            <InputGroup
+              type='email'
+              name='email'
+              placeholder='Email*'
+              icon={<MdMail />}
             />
-          </div>
-        </Form>
-      </Container>
-    </FormBox>
+            {/* Password input group */}
+            <PasswordInput name='password' placeholder='Password*' />
+
+            {/* Register link */}
+            <AuthAction>
+              <span>Don't have an account?</span>
+              <Link to='/register'>Register here.</Link>
+            </AuthAction>
+            {/* forget password link */}
+            <AuthAction>
+              <Link to='/forget-password'>Forgot password</Link>
+            </AuthAction>
+            <div style={{ marginTop: '4rem' }}>
+              <Button
+                btnText={state === 'submitting' ? 'Logging in...' : 'Login'}
+                icon={<BiSolidLogInCircle />}
+                disable={state === 'submitting'}
+                type='submit'
+              />
+            </div>
+          </Form>
+        </Container>
+      </FormBox>
+    </>
   );
 };
 

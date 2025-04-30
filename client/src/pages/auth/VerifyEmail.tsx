@@ -3,6 +3,7 @@ import LinkBtn from '../../ui/LinkBtn';
 import { useEffect, useState } from 'react';
 import { customFetch } from '../../api/requests';
 import { useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 // import { ActionFunctionArgs, useSearchParams } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -33,12 +34,17 @@ const VerifyEmail = () => {
     sendEmailVerification();
   }, [searchParams]);
   return (
-    <Wrapper>
-      <p>{verifyMsg?.message}</p>
-      {verifyMsg.status === 'success' && (
-        <LinkBtn btnText='login' url='/login' />
-      )}
-    </Wrapper>
+    <>
+      <Helmet>
+        <title>MettyHair - Signup</title>
+      </Helmet>
+      <Wrapper>
+        <p>{verifyMsg?.message}</p>
+        {verifyMsg.status === 'success' && (
+          <LinkBtn btnText='login' url='/login' />
+        )}
+      </Wrapper>
+    </>
   );
 };
 

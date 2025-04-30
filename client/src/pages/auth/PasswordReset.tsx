@@ -12,38 +12,44 @@ import { FaArrowDownUpLock } from 'react-icons/fa6';
 import { extractFormData, updateData } from '../../api/requests';
 import FormError from '../../ui/FormError';
 import { InfoType } from '../../dtos/utilsDto';
+import { Helmet } from 'react-helmet-async';
 
 const PasswordReset = () => {
   const data = useActionData() as InfoType;
   const { state } = useNavigation();
 
   return (
-    <FormBox>
-      <Container>
-        <Header>
-          <h4>Reset Password</h4>
-        </Header>
-        <Form id='form' method='post'>
-          {data && <FormError info={data.message} />}
-          <>
-            <PasswordInput name='password' placeholder='New Password*' />
-            <PasswordInput
-              name='confirmPassword'
-              placeholder='Confirm Password*'
-            />
-            <div style={{ marginTop: '4rem' }}>
-              <Button
-                btnText={
-                  state === 'submitting' ? 'Updating...' : 'Update Password'
-                }
-                icon={<FaArrowDownUpLock />}
-                disable={state === 'submitting'}
+    <>
+      <Helmet>
+        <title>MettyHair - Reset Password</title>
+      </Helmet>
+      <FormBox>
+        <Container>
+          <Header>
+            <h4>Reset Password</h4>
+          </Header>
+          <Form id='form' method='post'>
+            {data && <FormError info={data.message} />}
+            <>
+              <PasswordInput name='password' placeholder='New Password*' />
+              <PasswordInput
+                name='confirmPassword'
+                placeholder='Confirm Password*'
               />
-            </div>
-          </>
-        </Form>
-      </Container>
-    </FormBox>
+              <div style={{ marginTop: '4rem' }}>
+                <Button
+                  btnText={
+                    state === 'submitting' ? 'Updating...' : 'Update Password'
+                  }
+                  icon={<FaArrowDownUpLock />}
+                  disable={state === 'submitting'}
+                />
+              </div>
+            </>
+          </Form>
+        </Container>
+      </FormBox>
+    </>
   );
 };
 

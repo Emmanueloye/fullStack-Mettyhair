@@ -23,6 +23,7 @@ import { useAppDispatch } from '../../store/hook';
 import { useEffect } from 'react';
 import { authActions } from '../../store/authAction';
 import { InfoType } from '../../dtos/utilsDto';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
   const data = useActionData();
@@ -40,49 +41,54 @@ const Register = () => {
   }, [data, dispatch, navigate]);
 
   return (
-    <FormBox>
-      <Container>
-        <Header>
-          <h4>Register</h4>
-        </Header>
-        <Form method='post'>
-          {(data as InfoType)?.status === 'fail' && (
-            <FormError info={(data as InfoType)?.message} />
-          )}
-          <>
-            <InputGroup
-              type='text'
-              name='fullName'
-              placeholder='Full Name'
-              icon={<FaUserAlt />}
-            />
-            <InputGroup
-              type='email'
-              name='email'
-              placeholder='Email*'
-              icon={<MdMail />}
-            />
-            <PasswordInput name='password' placeholder='Password*' />
-            <PasswordInput
-              name='confirmPassword'
-              placeholder='Confirm Password*'
-            />
-            <AuthAction>
-              <span>Already have an account?</span>
-              <Link to='/login'>Login here.</Link>
-            </AuthAction>
-            <div style={{ marginTop: '4rem' }}>
-              <Button
-                btnText={state === 'submitting' ? 'Creating...' : 'Register'}
-                icon={<IoCreate />}
-                disable={state === 'submitting'}
-                type='submit'
+    <>
+      <Helmet>
+        <title>MettyHair - Signup</title>
+      </Helmet>
+      <FormBox>
+        <Container>
+          <Header>
+            <h4>Register</h4>
+          </Header>
+          <Form method='post'>
+            {(data as InfoType)?.status === 'fail' && (
+              <FormError info={(data as InfoType)?.message} />
+            )}
+            <>
+              <InputGroup
+                type='text'
+                name='fullName'
+                placeholder='Full Name'
+                icon={<FaUserAlt />}
               />
-            </div>
-          </>
-        </Form>
-      </Container>
-    </FormBox>
+              <InputGroup
+                type='email'
+                name='email'
+                placeholder='Email*'
+                icon={<MdMail />}
+              />
+              <PasswordInput name='password' placeholder='Password*' />
+              <PasswordInput
+                name='confirmPassword'
+                placeholder='Confirm Password*'
+              />
+              <AuthAction>
+                <span>Already have an account?</span>
+                <Link to='/login'>Login here.</Link>
+              </AuthAction>
+              <div style={{ marginTop: '4rem' }}>
+                <Button
+                  btnText={state === 'submitting' ? 'Creating...' : 'Register'}
+                  icon={<IoCreate />}
+                  disable={state === 'submitting'}
+                  type='submit'
+                />
+              </div>
+            </>
+          </Form>
+        </Container>
+      </FormBox>
+    </>
   );
 };
 
