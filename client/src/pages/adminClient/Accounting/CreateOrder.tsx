@@ -345,105 +345,107 @@ const CreateOrder = () => {
           {/* Dynamic inputs */}
           {data.map((val, index) => {
             return (
-              <OrderGrid key={index}>
-                <AFormGroup className='mb-0'>
-                  <Select
-                    $width='100%'
-                    $bg='var(--admin-input-bg)'
-                    name='product'
-                    value={val.product}
-                    onChange={(e) => handleFormChange(e, index)}
-                  >
-                    <option value='' hidden>
-                      Select products
-                    </option>
-                    {products.map((product: ProductTypes) => (
-                      <option value={product._id} key={product._id}>
-                        {product.productName}
+              <div key={index} className='order-box'>
+                <OrderGrid>
+                  <AFormGroup className='mb-0'>
+                    <Select
+                      $width='100%'
+                      $bg='var(--admin-input-bg)'
+                      name='product'
+                      value={val.product}
+                      onChange={(e) => handleFormChange(e, index)}
+                    >
+                      <option value='' hidden>
+                        Select products
                       </option>
-                    ))}
-                  </Select>
-                </AFormGroup>
-                {/* color */}
-                <AFormGroup className='mb-0'>
-                  <Select
-                    $width='100%'
-                    $bg='var(--admin-input-bg)'
-                    name='color'
-                    onChange={(e) => handleOtherChange(e, index)}
-                  >
-                    <option value='' hidden>
-                      Select color
-                    </option>
-                    {colors[index]
-                      ?.split(',')
-                      ?.map((color: string, index: number) => (
-                        <option value={color} key={index}>
-                          {color}
+                      {products.map((product: ProductTypes) => (
+                        <option value={product._id} key={product._id}>
+                          {product.productName}
                         </option>
                       ))}
-                  </Select>
-                </AFormGroup>
+                    </Select>
+                  </AFormGroup>
+                  {/* color */}
+                  <AFormGroup className='mb-0'>
+                    <Select
+                      $width='100%'
+                      $bg='var(--admin-input-bg)'
+                      name='color'
+                      onChange={(e) => handleOtherChange(e, index)}
+                    >
+                      <option value='' hidden>
+                        Select color
+                      </option>
+                      {colors[index]
+                        ?.split(',')
+                        ?.map((color: string, index: number) => (
+                          <option value={color} key={index}>
+                            {color}
+                          </option>
+                        ))}
+                    </Select>
+                  </AFormGroup>
 
-                {/* sizes */}
-                <AFormGroup className='mb-0'>
-                  <Select
-                    $width='100%'
-                    $bg='var(--admin-input-bg)'
-                    name='size'
-                    onChange={(e) => handleOtherChange(e, index)}
+                  {/* sizes */}
+                  <AFormGroup className='mb-0'>
+                    <Select
+                      $width='100%'
+                      $bg='var(--admin-input-bg)'
+                      name='size'
+                      onChange={(e) => handleOtherChange(e, index)}
+                    >
+                      <option value='' hidden>
+                        Select size
+                      </option>
+                      {sizes[index]
+                        ?.split(',')
+                        ?.map((size: string, index: number) => (
+                          <option value={size} key={index}>
+                            {size}
+                          </option>
+                        ))}
+                    </Select>
+                  </AFormGroup>
+
+                  <AFormGroup className='mb-0'>
+                    <Input
+                      type='number'
+                      id={`quantity-${index + 1}`}
+                      $dark
+                      name='quantity'
+                      min={1}
+                      value={val.quantity}
+                      onChange={(e) => handleOtherChange(e, index)}
+                    />
+                  </AFormGroup>
+                  <AFormGroup className='mb-0'>
+                    <Input
+                      type='text'
+                      id={`price-${index + 1}`}
+                      $dark
+                      name='price'
+                      defaultValue={val.price}
+                    />
+                  </AFormGroup>
+                  <AFormGroup className='mb-0'>
+                    <Input
+                      type='text'
+                      id={`subtotal-${index + 1}`}
+                      $dark
+                      name='subtotal'
+                      defaultValue={isNaN(+val.subtotal) ? 0 : val.subtotal}
+                    />
+                  </AFormGroup>
+                  <AFormGroup
+                    style={{ display: 'flex', alignItems: 'center' }}
+                    className='mb-0'
                   >
-                    <option value='' hidden>
-                      Select size
-                    </option>
-                    {sizes[index]
-                      ?.split(',')
-                      ?.map((size: string, index: number) => (
-                        <option value={size} key={index}>
-                          {size}
-                        </option>
-                      ))}
-                  </Select>
-                </AFormGroup>
-
-                <AFormGroup className='mb-0'>
-                  <Input
-                    type='number'
-                    id={`quantity-${index + 1}`}
-                    $dark
-                    name='quantity'
-                    min={1}
-                    value={val.quantity}
-                    onChange={(e) => handleOtherChange(e, index)}
-                  />
-                </AFormGroup>
-                <AFormGroup className='mb-0'>
-                  <Input
-                    type='text'
-                    id={`price-${index + 1}`}
-                    $dark
-                    name='price'
-                    defaultValue={val.price}
-                  />
-                </AFormGroup>
-                <AFormGroup className='mb-0'>
-                  <Input
-                    type='text'
-                    id={`subtotal-${index + 1}`}
-                    $dark
-                    name='subtotal'
-                    defaultValue={isNaN(+val.subtotal) ? 0 : val.subtotal}
-                  />
-                </AFormGroup>
-                <AFormGroup
-                  style={{ display: 'flex', alignItems: 'center' }}
-                  className='mb-0'
-                >
-                  <BtnUI type='button' onClick={() => handleDelete(index)}>
-                    <FaTimes />
-                  </BtnUI>
-                </AFormGroup>
-              </OrderGrid>
+                    <BtnUI type='button' onClick={() => handleDelete(index)}>
+                      <FaTimes />
+                    </BtnUI>
+                  </AFormGroup>
+                </OrderGrid>
+              </div>
             );
           })}
         </div>

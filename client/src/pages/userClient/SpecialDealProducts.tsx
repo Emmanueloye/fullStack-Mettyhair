@@ -13,6 +13,7 @@ import { extractParams, getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { ProductTypes } from '../../dtos/productsDto';
+import { Helmet } from 'react-helmet-async';
 
 export const GridWrapper = styled.div`
   position: relative;
@@ -81,44 +82,49 @@ const SpecialDealProducts = () => {
   const { totalPages, currentPage, nextPage, previousPage } = data.page;
 
   return (
-    <ProductSection>
-      <Container>
-        <Header $mb='3rem'>
-          <h4>All Products</h4>
-        </Header>
-        {/* Sidebar toggle */}
-        <div
-          className='sidebar-toggle'
-          onClick={() => dispatch(uiActions.openSideBar())}
-        >
-          <Icon
-            icon={<FaBarsStaggered />}
-            iconSize='3rem'
-            color='var(--primary-color)'
-            text='Filter'
-          />
-        </div>
-        <GridWrapper>
-          {/* Sidebar */}
-          <ProductSideBar
-            categories={categories}
-            subcategories={subcategories}
-          />
-          {/* Main product grid */}
-          <MainProduct products={products} />
-        </GridWrapper>
-        {totalPages > 1 && data.noHits >= 12 && (
-          <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            nextPage={nextPage}
-            previousPage={previousPage}
-            pageLink='/products'
-            marginTop='5rem'
-          />
-        )}
-      </Container>
-    </ProductSection>
+    <>
+      <Helmet>
+        <title>MettyHair - Special Offer</title>
+      </Helmet>
+      <ProductSection>
+        <Container>
+          <Header $mb='3rem'>
+            <h4>All Products</h4>
+          </Header>
+          {/* Sidebar toggle */}
+          <div
+            className='sidebar-toggle'
+            onClick={() => dispatch(uiActions.openSideBar())}
+          >
+            <Icon
+              icon={<FaBarsStaggered />}
+              iconSize='3rem'
+              color='var(--primary-color)'
+              text='Filter'
+            />
+          </div>
+          <GridWrapper>
+            {/* Sidebar */}
+            <ProductSideBar
+              categories={categories}
+              subcategories={subcategories}
+            />
+            {/* Main product grid */}
+            <MainProduct products={products} />
+          </GridWrapper>
+          {totalPages > 1 && data.noHits >= 12 && (
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              nextPage={nextPage}
+              previousPage={previousPage}
+              pageLink='/products'
+              marginTop='5rem'
+            />
+          )}
+        </Container>
+      </ProductSection>
+    </>
   );
 };
 

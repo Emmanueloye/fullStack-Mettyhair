@@ -14,6 +14,7 @@ import { extractParams, getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import { PageTypes, ProductTypes } from '../../dtos/productsDto';
 import { useEffect, useState } from 'react';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 const CategoriesProducts = () => {
   const [allProducts, setAllProducts] = useState<ProductTypes[]>([]);
@@ -78,44 +79,53 @@ const CategoriesProducts = () => {
   }, [currentPage, data.page, nextPage, previousPage, products, totalPages]);
 
   return (
-    <ProductSection>
-      <Container>
-        <Header $mb='3rem'>
-          <h4>Category: {slug.split('-').join(' ')}</h4>
-        </Header>
-        {/* Sidebar toggle */}
-        <div
-          className='sidebar-toggle'
-          onClick={() => dispatch(uiActions.openSideBar())}
-        >
-          <Icon
-            icon={<FaBarsStaggered />}
-            iconSize='3rem'
-            color='var(--primary-color)'
-            text='Filter'
-          />
-        </div>
-        <GridWrapper>
-          {/* Sidebar */}
-          <ProductSideBar
-            categories={categories}
-            subcategories={subcategories}
-          />
-          {/* Main product grid */}
-          <MainProduct products={allProducts} />
-        </GridWrapper>
-        {totalPages > 1 && (
-          <Pagination
-            totalPages={pages!.totalPages}
-            currentPage={pages!.currentPage}
-            nextPage={pages?.nextPage}
-            previousPage={pages?.previousPage}
-            pageLink={`/products/subcategory/${slug}/${id}`}
-            marginTop='5rem'
-          />
-        )}
-      </Container>
-    </ProductSection>
+    <>
+      {/* HTML header for seo */}
+      <HelmetSEO
+        title='MettyHair - Products by Categories'
+        description='Products by categoriess'
+        name='Products by Categories - MettyHair'
+        type='website'
+      />
+      <ProductSection>
+        <Container>
+          <Header $mb='3rem'>
+            <h4>Category: {slug.split('-').join(' ')}</h4>
+          </Header>
+          {/* Sidebar toggle */}
+          <div
+            className='sidebar-toggle'
+            onClick={() => dispatch(uiActions.openSideBar())}
+          >
+            <Icon
+              icon={<FaBarsStaggered />}
+              iconSize='3rem'
+              color='var(--primary-color)'
+              text='Filter'
+            />
+          </div>
+          <GridWrapper>
+            {/* Sidebar */}
+            <ProductSideBar
+              categories={categories}
+              subcategories={subcategories}
+            />
+            {/* Main product grid */}
+            <MainProduct products={allProducts} />
+          </GridWrapper>
+          {totalPages > 1 && (
+            <Pagination
+              totalPages={pages!.totalPages}
+              currentPage={pages!.currentPage}
+              nextPage={pages?.nextPage}
+              previousPage={pages?.previousPage}
+              pageLink={`/products/subcategory/${slug}/${id}`}
+              marginTop='5rem'
+            />
+          )}
+        </Container>
+      </ProductSection>
+    </>
   );
 };
 

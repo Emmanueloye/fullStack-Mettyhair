@@ -65,11 +65,11 @@ const Cart = () => {
   return (
     <>
       <HelmetSEO
-        title='Shopping cart'
+        title='MettyHair - Shopping cart'
         description='Shopping cart'
         name='Shopping cart'
         type='article'
-        keyword='best hair vendor in lagos, affordable hairs, quality hair seller'
+
         // image={product.productImage}
       />
       <CartWrapper>

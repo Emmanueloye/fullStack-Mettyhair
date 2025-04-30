@@ -50,7 +50,7 @@ const MegaMenu = ({
         </ColThree>
         <ImageBox>
           <img
-            src={categories[0]?.photo}
+            src={categories?.[0]?.photo}
             alt='product image'
             width='100%'
             height={200}

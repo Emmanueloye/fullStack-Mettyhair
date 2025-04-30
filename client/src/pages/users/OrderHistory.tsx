@@ -17,6 +17,7 @@ import { extractParams, getData, queryClient } from '../../api/requests';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { OrderType } from '../../dtos/orderDto';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const OrderHistory = () => {
   const [allOrders, setAllOrders] = useState<OrderType[]>([]);
@@ -107,66 +108,71 @@ const OrderHistory = () => {
   const column = '1fr 1fr 1fr 1fr 1.5fr';
 
   return (
-    <TabContentWrapper>
-      <ProfileHeader>Order history</ProfileHeader>
-      <AppTableSearch
-        searchOptions={['order no', 'invoice no', 'status']}
-        sortOptions={[
-          'new to old',
-          'old to new',
-          'highest to lowest',
-          'lowest to highest',
-        ]}
-        onSort={handleSort}
-        onSearchField={handleSearchField}
-        onSearchValue={handleSearchValue}
-      />
-      {allOrders.length > 0 ? (
-        <>
-          <Table headers={headers} column={column}>
-            {allOrders.map((order) => {
-              let status;
-              if (order.orderStatus === 'pending') status = 'pending';
-              if (order.orderStatus === 'confirmed') status = 'confirmed';
-              if (order.orderStatus === 'delivered') status = 'delivered';
-
-              return (
-                <TableRow $column={column} key={order.invoiceNo}>
-                  <p>{order.orderNo}</p>
-                  <p>{order.invoiceNo}</p>
-                  <p>&#8358;{formatNumber(order.totalAmount)}</p>
-                  <div className={`capitalize `}>
-                    <span className={status}>{order.orderStatus}</span>
-                  </div>
-                  <OrderTableAction
-                    view={`/user/order-history/view/${order.orderNo}`}
-                    download={`/user/order-history/${order.orderNo}`}
-                  />
-                </TableRow>
-              );
-            })}
-          </Table>
-          {totalPages > 1 && (
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              nextPage={nextPage}
-              previousPage={previousPage}
-              pageLink='/admin/products'
-              marginTop='2rem'
-            />
-          )}
-        </>
-      ) : (
-        <Empty
-          icon={<FiBox />}
-          message='We cannot wait for you to patronise us. Your order history will be populated once you make your first purchase.'
-          btnText='continue shopping'
-          url='/'
-          iconSize='8rem'
+    <>
+      <Helmet>
+        <title>MettyHair - Order History</title>
+      </Helmet>
+      <TabContentWrapper>
+        <ProfileHeader>Order history</ProfileHeader>
+        <AppTableSearch
+          searchOptions={['order no', 'invoice no', 'status']}
+          sortOptions={[
+            'new to old',
+            'old to new',
+            'highest to lowest',
+            'lowest to highest',
+          ]}
+          onSort={handleSort}
+          onSearchField={handleSearchField}
+          onSearchValue={handleSearchValue}
         />
-      )}
-    </TabContentWrapper>
+        {allOrders.length > 0 ? (
+          <>
+            <Table headers={headers} column={column}>
+              {allOrders.map((order) => {
+                let status;
+                if (order.orderStatus === 'pending') status = 'pending';
+                if (order.orderStatus === 'confirmed') status = 'confirmed';
+                if (order.orderStatus === 'delivered') status = 'delivered';
+
+                return (
+                  <TableRow $column={column} key={order.invoiceNo}>
+                    <p>{order.orderNo}</p>
+                    <p>{order.invoiceNo}</p>
+                    <p>&#8358;{formatNumber(order.totalAmount)}</p>
+                    <div className={`capitalize `}>
+                      <span className={status}>{order.orderStatus}</span>
+                    </div>
+                    <OrderTableAction
+                      view={`/user/order-history/view/${order.orderNo}`}
+                      download={`/user/order-history/${order.orderNo}`}
+                    />
+                  </TableRow>
+                );
+              })}
+            </Table>
+            {totalPages > 1 && (
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                nextPage={nextPage}
+                previousPage={previousPage}
+                pageLink='/admin/products'
+                marginTop='2rem'
+              />
+            )}
+          </>
+        ) : (
+          <Empty
+            icon={<FiBox />}
+            message='We cannot wait for you to patronise us. Your order history will be populated once you make your first purchase.'
+            btnText='continue shopping'
+            url='/'
+            iconSize='8rem'
+          />
+        )}
+      </TabContentWrapper>
+    </>
   );
 };
 

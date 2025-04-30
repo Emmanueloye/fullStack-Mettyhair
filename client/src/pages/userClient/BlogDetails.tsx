@@ -5,6 +5,7 @@ import { getData, queryClient } from '../../api/requests';
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { formatDate } from '../../utilities/HelperFunc';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 export const BlogDetailsBox = styled.div`
   padding-top: 4rem;
@@ -41,23 +42,32 @@ const BlogDetails = () => {
   // console.log(data);
 
   return (
-    <BlogDetailsBox>
-      <Container>
-        <img src={post.image} alt='blog image' className='img' />
-        <div className='main'>
-          <h3 className='title'>{post.title}</h3>
+    <>
+      <HelmetSEO
+        title={`MettyHair - ${post.title}`}
+        description={post.content.substring(0, 10)}
+        name={post.title}
+        type='article'
+        image={post.image}
+      />
+      <BlogDetailsBox>
+        <Container>
+          <img src={post.image} alt='blog image' className='img' />
+          <div className='main'>
+            <h3 className='title'>{post.title}</h3>
 
-          <div className='small'>
-            <span>Created Date: </span>
-            <span>
-              {post.createdAt && formatDate(new Date(post.createdAt))}
-            </span>
+            <div className='small'>
+              <span>Created Date: </span>
+              <span>
+                {post.createdAt && formatDate(new Date(post.createdAt))}
+              </span>
+            </div>
+            <div className='preserve-whitespace'> {post.content}</div>
           </div>
-          <div className='preserve-whitespace'> {post.content}</div>
-        </div>
-        <LinkBtn btnText='back to main blog' url='/blog' />
-      </Container>
-    </BlogDetailsBox>
+          <LinkBtn btnText='back to main blog' url='/blog' />
+        </Container>
+      </BlogDetailsBox>
+    </>
   );
 };
 

@@ -17,6 +17,7 @@ import { BlogTypes } from '../../dtos/blogDto';
 import { ThreeGrid } from '../../features/adminNavLayouts/AdminUtils';
 import { useEffect, useState } from 'react';
 import Empty from '../../ui/Empty';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 const Blog = () => {
   const [allPosts, setAllPost] = useState<BlogTypes[]>([]);
@@ -44,7 +45,14 @@ const Blog = () => {
   };
 
   return (
-    <div>
+    <>
+      {/* HTML header for seo */}
+      <HelmetSEO
+        title='MettyHair - Blog'
+        description='Read up to date information about hairs and its maintenance.'
+        name='Blog page'
+        type='website'
+      />
       {/* Hero */}
       <BlogHero />
       <Container id='blog'>
@@ -84,7 +92,7 @@ const Blog = () => {
           />
         )}
       </Container>
-    </div>
+    </>
   );
 };
 

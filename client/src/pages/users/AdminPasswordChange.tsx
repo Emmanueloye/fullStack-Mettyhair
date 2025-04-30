@@ -19,56 +19,62 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { InfoType } from '../../dtos/utilsDto';
 import FormError from '../../ui/FormError';
+import { Helmet } from 'react-helmet-async';
 
 const AdminPasswordChange = () => {
   const data = useActionData() as InfoType;
   const { state } = useNavigation();
   return (
-    <AdminSection>
-      <AdminHeader>
-        <h4>Update password</h4>
-      </AdminHeader>
-      <TabContentWrapper $dark={true}>
-        <Form id='form' method='post'>
-          {data && <FormError info={data.message} />}
-          <>
-            <AFormGroup>
-              <Input
-                type='password'
-                placeholder='Current password*'
-                name='oldPassword'
-                $dark={true}
-              />
-            </AFormGroup>
-            <AFormGroup>
-              <Input
-                type='password'
-                placeholder='New password*'
-                name='newPassword'
-                $dark={true}
-              />
-            </AFormGroup>
-            <AFormGroup>
-              <Input
-                type='password'
-                placeholder='Confirm password*'
-                name='confirmPassword'
-                $dark={true}
-              />
-            </AFormGroup>
-            <AFormGroup>
-              <Button
-                btnText={
-                  state === 'submitting' ? 'Updating...' : 'Update Password'
-                }
-                icon={<GrDocumentUpdate />}
-                disable={state === 'submitting'}
-              />
-            </AFormGroup>
-          </>
-        </Form>
-      </TabContentWrapper>
-    </AdminSection>
+    <>
+      <Helmet>
+        <title>MettyHair - Update Password</title>
+      </Helmet>
+      <AdminSection>
+        <AdminHeader>
+          <h4>Update password</h4>
+        </AdminHeader>
+        <TabContentWrapper $dark={true}>
+          <Form id='form' method='post'>
+            {data && <FormError info={data.message} />}
+            <>
+              <AFormGroup>
+                <Input
+                  type='password'
+                  placeholder='Current password*'
+                  name='oldPassword'
+                  $dark={true}
+                />
+              </AFormGroup>
+              <AFormGroup>
+                <Input
+                  type='password'
+                  placeholder='New password*'
+                  name='newPassword'
+                  $dark={true}
+                />
+              </AFormGroup>
+              <AFormGroup>
+                <Input
+                  type='password'
+                  placeholder='Confirm password*'
+                  name='confirmPassword'
+                  $dark={true}
+                />
+              </AFormGroup>
+              <AFormGroup>
+                <Button
+                  btnText={
+                    state === 'submitting' ? 'Updating...' : 'Update Password'
+                  }
+                  icon={<GrDocumentUpdate />}
+                  disable={state === 'submitting'}
+                />
+              </AFormGroup>
+            </>
+          </Form>
+        </TabContentWrapper>
+      </AdminSection>
+    </>
   );
 };
 

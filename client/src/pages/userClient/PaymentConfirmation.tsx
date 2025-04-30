@@ -17,6 +17,7 @@ import {
 import { OrderType } from '../../dtos/orderDto';
 import LinkBtn from '../../ui/LinkBtn';
 import { Center } from '../../features/Tab/TabContentWrapper';
+import { Helmet } from 'react-helmet-async';
 
 const Wrapper = styled.section`
   padding-top: 2rem;
@@ -43,58 +44,63 @@ const PaymentConfirmation = () => {
   const reference = searchParams.get('reference');
 
   return (
-    <Wrapper>
-      {order ? (
-        <Container>
-          <Header>
-            <h4>Thanks for your patronage.</h4>
-          </Header>
-          <div className='p-details'>
-            <div className='details'>
-              <p>Status: </p>
-              <p>Success</p>
+    <>
+      <Helmet>
+        <title>MettyHair - Payment Confirmation</title>
+      </Helmet>
+      <Wrapper>
+        {order ? (
+          <Container>
+            <Header>
+              <h4>Thanks for your patronage.</h4>
+            </Header>
+            <div className='p-details'>
+              <div className='details'>
+                <p>Status: </p>
+                <p>Success</p>
+              </div>
+              <div className='details'>
+                <p>Amount Paid: </p>
+                <p>&#8358;{formatNumber(order.totalAmount)}</p>
+              </div>
+              <div className='details'>
+                <p>Invoice numb: </p>
+                <p>{order.invoiceNo}</p>
+              </div>
+              <div className='details'>
+                <p>Reference: </p>
+                <p>{order.reference}</p>
+              </div>
             </div>
-            <div className='details'>
-              <p>Amount Paid: </p>
-              <p>&#8358;{formatNumber(order.totalAmount)}</p>
-            </div>
-            <div className='details'>
-              <p>Invoice numb: </p>
-              <p>{order.invoiceNo}</p>
-            </div>
-            <div className='details'>
-              <p>Reference: </p>
-              <p>{order.reference}</p>
-            </div>
-          </div>
-          <Center style={{ flexDirection: 'column', marginTop: '2rem' }}>
-            <p>Please go to your order history for your order details.</p>
-            <LinkBtn btnText='Order history' url='/user/order-history' />
-          </Center>
-        </Container>
-      ) : (
-        <Container>
-          <Header>
-            <h4>Thanks for your patronage.</h4>
-          </Header>
-          <div className='p-details'>
-            <div className='details'>
-              <p>Status: </p>
-              <p>Success</p>
-            </div>
+            <Center style={{ flexDirection: 'column', marginTop: '2rem' }}>
+              <p>Please go to your order history for your order details.</p>
+              <LinkBtn btnText='Order history' url='/user/order-history' />
+            </Center>
+          </Container>
+        ) : (
+          <Container>
+            <Header>
+              <h4>Thanks for your patronage.</h4>
+            </Header>
+            <div className='p-details'>
+              <div className='details'>
+                <p>Status: </p>
+                <p>Success</p>
+              </div>
 
-            <div className='details'>
-              <p>Reference: </p>
-              <p>{reference}</p>
+              <div className='details'>
+                <p>Reference: </p>
+                <p>{reference}</p>
+              </div>
             </div>
-          </div>
-          <Center style={{ flexDirection: 'column', marginTop: '2rem' }}>
-            <p>Please go to your order history for your order details.</p>
-            <LinkBtn btnText='Order history' url='/user/order-history' />
-          </Center>
-        </Container>
-      )}
-    </Wrapper>
+            <Center style={{ flexDirection: 'column', marginTop: '2rem' }}>
+              <p>Please go to your order history for your order details.</p>
+              <LinkBtn btnText='Order history' url='/user/order-history' />
+            </Center>
+          </Container>
+        )}
+      </Wrapper>
+    </>
   );
 };
 

@@ -25,6 +25,19 @@ export const AdminSection = styled.section<{ type?: string }>`
   .unread {
     font-weight: 600;
   }
+  .order-box {
+    background-color: var(--white);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media screen and (min-width: 700px) {
+    .order-box {
+      background-color: transparent;
+      padding: 0;
+      margin-bottom: 0;
+    }
+  }
 `;
 
 export const AdminGrid = styled.div`

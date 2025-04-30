@@ -20,6 +20,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { InfoType } from '../../dtos/utilsDto';
 import FormError from '../../ui/FormError';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 const ContactFormBox = styled.div`
   background-color: var(--primary-white);
@@ -111,118 +112,127 @@ const Contact = () => {
   };
 
   return (
-    <Container style={{ paddingTop: '3rem' }}>
-      <TwoGrid>
-        <ContactFormBox>
-          {/* <h4>Contact Us</h4> */}
-          <Heading title='contact us' />
-          <p className='txt'>We would like to hear from you.</p>
-          <Form className='form' id='form' method='post'>
-            {info && <FormError info={info.message} />}
-            <div className='group'>
-              <Label htmlFor='email' className='label' ref={emailRef}>
-                email
-              </Label>
-              <Input
-                type='email'
-                id='email'
-                name='email'
-                onFocus={onFocusHandler}
-                autoComplete='off'
-              />
-            </div>
-            <div className='group'>
-              <Label htmlFor='fullName' className='label' ref={nameRef}>
-                full name
-              </Label>
-              <Input
-                type='fullName'
-                id='fullName'
-                name='fullName'
-                onFocus={onFocusHandler}
-                autoComplete='off'
-              />
-            </div>
-            <div className='group'>
-              <Label htmlFor='subject' className='label' ref={subjectRef}>
-                Subject
-              </Label>
-              <Input
-                type='subject'
-                id='subject'
-                name='subject'
-                onFocus={onFocusHandler}
-                autoComplete='off'
-              />
-            </div>
-            <div className='group'>
-              <Label htmlFor='message' className='label' ref={messageRef}>
-                message
-              </Label>
-              <TextArea
-                rows={10}
-                cols={10}
-                onFocus={onFocusHandler}
-                autoComplete='off'
-                name='message'
-                id='message'
-              ></TextArea>
-            </div>
-            <div className='group'>
-              <Button btnText='send' icon={<MdSend />} />
-            </div>
-          </Form>
-        </ContactFormBox>
-        <DetailsBox>
-          <div className='info'>
-            <h3>Metty General Merchant</h3>
+    <>
+      {/* HTML header for seo */}
+      <HelmetSEO
+        title='MettyHair - Contact'
+        description='Contact page - For any enquiry, contact us.'
+        name='Products - Contact page'
+        type='website'
+      />
+      <Container style={{ paddingTop: '3rem' }}>
+        <TwoGrid>
+          <ContactFormBox>
+            {/* <h4>Contact Us</h4> */}
+            <Heading title='contact us' />
+            <p className='txt'>We would like to hear from you.</p>
+            <Form className='form' id='form' method='post'>
+              {info && <FormError info={info.message} />}
+              <div className='group'>
+                <Label htmlFor='email' className='label' ref={emailRef}>
+                  email
+                </Label>
+                <Input
+                  type='email'
+                  id='email'
+                  name='email'
+                  onFocus={onFocusHandler}
+                  autoComplete='off'
+                />
+              </div>
+              <div className='group'>
+                <Label htmlFor='fullName' className='label' ref={nameRef}>
+                  full name
+                </Label>
+                <Input
+                  type='fullName'
+                  id='fullName'
+                  name='fullName'
+                  onFocus={onFocusHandler}
+                  autoComplete='off'
+                />
+              </div>
+              <div className='group'>
+                <Label htmlFor='subject' className='label' ref={subjectRef}>
+                  Subject
+                </Label>
+                <Input
+                  type='subject'
+                  id='subject'
+                  name='subject'
+                  onFocus={onFocusHandler}
+                  autoComplete='off'
+                />
+              </div>
+              <div className='group'>
+                <Label htmlFor='message' className='label' ref={messageRef}>
+                  message
+                </Label>
+                <TextArea
+                  rows={10}
+                  cols={10}
+                  onFocus={onFocusHandler}
+                  autoComplete='off'
+                  name='message'
+                  id='message'
+                ></TextArea>
+              </div>
+              <div className='group'>
+                <Button btnText='send' icon={<MdSend />} />
+              </div>
+            </Form>
+          </ContactFormBox>
+          <DetailsBox>
+            <div className='info'>
+              <h3>Metty General Merchant</h3>
 
-            <p>Other ways you can reach us.</p>
-            <div className='box'>
-              <span>
-                <FaPhone />
-              </span>
-              <Link to={`tel:${settings.contactPhone}`}>
-                {settings.contactPhone}
-              </Link>
+              <p>Other ways you can reach us.</p>
+              <div className='box'>
+                <span>
+                  <FaPhone />
+                </span>
+                <Link to={`tel:${settings.contactPhone}`}>
+                  {settings.contactPhone}
+                </Link>
+              </div>
+              <div className='box'>
+                <span>
+                  <FaWhatsapp />
+                </span>
+                <span>{settings.contactPhone}</span>
+              </div>
+              <div className='box'>
+                <span>
+                  <MdMail />
+                </span>
+                <Link
+                  to={`mailto:${settings.contactEmail}`}
+                  className='break-word'
+                >
+                  {settings.contactEmail}
+                </Link>
+              </div>
+              <div className='box'>
+                <span>
+                  <FaFacebook />
+                </span>
+                <Link to={settings.facebook} className='break-word'>
+                  Facebook
+                </Link>
+              </div>
+              <div className='box'>
+                <span>
+                  <FaInstagram />
+                </span>
+                <Link to={settings.instagram} className='break-word'>
+                  Instagram
+                </Link>
+              </div>
             </div>
-            <div className='box'>
-              <span>
-                <FaWhatsapp />
-              </span>
-              <span>{settings.contactPhone}</span>
-            </div>
-            <div className='box'>
-              <span>
-                <MdMail />
-              </span>
-              <Link
-                to={`mailto:${settings.contactEmail}`}
-                className='break-word'
-              >
-                {settings.contactEmail}
-              </Link>
-            </div>
-            <div className='box'>
-              <span>
-                <FaFacebook />
-              </span>
-              <Link to={settings.facebook} className='break-word'>
-                Facebook
-              </Link>
-            </div>
-            <div className='box'>
-              <span>
-                <FaInstagram />
-              </span>
-              <Link to={settings.instagram} className='break-word'>
-                Instagram
-              </Link>
-            </div>
-          </div>
-        </DetailsBox>
-      </TwoGrid>
-    </Container>
+          </DetailsBox>
+        </TwoGrid>
+      </Container>
+    </>
   );
 };
 

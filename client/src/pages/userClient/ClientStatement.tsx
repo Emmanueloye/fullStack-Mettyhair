@@ -22,6 +22,7 @@ import FormError from '../../ui/FormError';
 import { formatDate, formatNumber } from '../../utilities/HelperFunc';
 import Empty from '../../ui/Empty';
 import DownloadStatement from '../../features/downloads/DownloadStatement';
+import { Helmet } from 'react-helmet-async';
 
 const ClientStatement = () => {
   const user = useOutletContext<User>();
@@ -40,7 +41,10 @@ const ClientStatement = () => {
   const totalBalance = balance + openingBalance;
 
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>MettyHair - Products by Categories</title>
+      </Helmet>
       <Form method='post' id='form'>
         <div className='mt-3'>
           {data?.status === 'fail' && <FormError info={data?.message} />}
@@ -147,7 +151,7 @@ const ClientStatement = () => {
           showLink={false}
         />
       )}
-    </div>
+    </>
   );
 };
 

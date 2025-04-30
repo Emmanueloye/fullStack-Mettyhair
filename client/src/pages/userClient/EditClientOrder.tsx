@@ -36,6 +36,7 @@ import { Select } from '../../ui/SelectInput';
 import { User } from '../../dtos/userDto';
 import ProductTotal from '../../features/shoppingCart/ProductTotal';
 import Button from '../../ui/Button';
+import { Helmet } from 'react-helmet-async';
 
 type changedValType = {
   product: string;
@@ -225,221 +226,228 @@ const EditClientOrder = () => {
   };
 
   return (
-    <AdminSection>
-      {/* Header */}
-      <AdminHeader>
-        <h4>Update order: SO-{salesOrder.orderNo.toUpperCase()}</h4>
-        <Link to='/admin/account/sales-orders'>Sales Orders</Link>
-      </AdminHeader>
+    <>
+      <Helmet>
+        <title>MettyHair - Update Sales Order</title>
+      </Helmet>
+      <AdminSection>
+        {/* Header */}
+        <AdminHeader>
+          <h4>Update order: SO-{salesOrder.orderNo.toUpperCase()}</h4>
+          <Link to='/admin/account/sales-orders'>Sales Orders</Link>
+        </AdminHeader>
 
-      <>
-        {/* header */}
-        {salesOrder.orderStatus !== 'pending' && (
-          <FormError
-            info={'This order has already been invoiced and cannot be edited.'}
-          />
-        )}
-        <OrderLabel>customer details</OrderLabel>
-        <ThreeGrid>
-          <AFormGroup>
-            <Label htmlFor='customer' type='dark'>
-              customer
-            </Label>
-            <Input
-              type='customer'
-              id='customer'
-              name='customer'
-              defaultValue={user.fullName}
-              $capitalize
-              disabled
+        <>
+          {/* header */}
+          {salesOrder.orderStatus !== 'pending' && (
+            <FormError
+              info={
+                'This order has already been invoiced and cannot be edited.'
+              }
             />
-          </AFormGroup>
-          <AFormGroup>
-            <Label htmlFor='email' type='dark'>
-              Email
-            </Label>
-            <Input
-              type='email'
-              id='email'
-              name='email'
-              defaultValue={salesOrder.user.email}
-              disabled
-            />
-          </AFormGroup>
-          <AFormGroup>
-            <Label htmlFor='phone' type='dark'>
-              Telephone
-            </Label>
-            <Input
-              type='text'
-              id='phone'
-              name='phone'
-              $dark
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </AFormGroup>
-          <AFormGroup>
-            <Label htmlFor='address' type='dark'>
-              address
-            </Label>
-            <Input
-              type='text'
-              id='address'
-              $dark
-              name='address'
-              defaultValue={address || ''}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </AFormGroup>
-        </ThreeGrid>
+          )}
+          <OrderLabel>customer details</OrderLabel>
+          <ThreeGrid>
+            <AFormGroup>
+              <Label htmlFor='customer' type='dark'>
+                customer
+              </Label>
+              <Input
+                type='customer'
+                id='customer'
+                name='customer'
+                defaultValue={user.fullName}
+                $capitalize
+                disabled
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Label htmlFor='email' type='dark'>
+                Email
+              </Label>
+              <Input
+                type='email'
+                id='email'
+                name='email'
+                defaultValue={salesOrder.user.email}
+                disabled
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Label htmlFor='phone' type='dark'>
+                Telephone
+              </Label>
+              <Input
+                type='text'
+                id='phone'
+                name='phone'
+                $dark
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Label htmlFor='address' type='dark'>
+                address
+              </Label>
+              <Input
+                type='text'
+                id='address'
+                $dark
+                name='address'
+                defaultValue={address || ''}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </AFormGroup>
+          </ThreeGrid>
 
-        {/* Customer order section */}
-        <OrderLabel className='mb-2'>customer order</OrderLabel>
+          {/* Customer order section */}
+          <OrderLabel className='mb-2'>customer order</OrderLabel>
 
-        <div style={{ overflowX: 'auto', margin: '2rem 0 2rem 0' }}>
-          {/* Header */}
-          <OrderGrid type='dark' $isAction>
-            <OrderLabel>product</OrderLabel>
-            <OrderLabel>color</OrderLabel>
-            <OrderLabel>size</OrderLabel>
-            <OrderLabel>quantity</OrderLabel>
-            <OrderLabel>price</OrderLabel>
-            <OrderLabel>subtotal</OrderLabel>
-          </OrderGrid>
-          {/* Dynamic inputs */}
-          {data.map((val, index) => {
-            // console.log(val);
+          <div style={{ overflowX: 'auto', margin: '2rem 0 2rem 0' }}>
+            {/* Header */}
+            <OrderGrid type='dark' $isAction>
+              <OrderLabel>product</OrderLabel>
+              <OrderLabel>color</OrderLabel>
+              <OrderLabel>size</OrderLabel>
+              <OrderLabel>quantity</OrderLabel>
+              <OrderLabel>price</OrderLabel>
+              <OrderLabel>subtotal</OrderLabel>
+            </OrderGrid>
+            {/* Dynamic inputs */}
+            {data.map((val, index) => {
+              // console.log(val);
 
-            return (
-              <OrderGrid key={index} $isAction>
-                <AFormGroup className='mb-0'>
-                  <Select
-                    $width='100%'
-                    $bg='var(--admin-input-bg)'
-                    name='product'
-                    value={val.product}
-                    onChange={(e) => handleFormChange(e, index)}
-                    disabled={salesOrder.orderStatus !== 'pending'}
-                  >
-                    {!isProductChange && (
-                      <option value={val.product} hidden>
-                        {val.productName}
-                      </option>
-                    )}
-                    {products.map((product: ProductTypes) => (
-                      <option value={product._id} key={product._id}>
-                        {product.productName}
-                      </option>
-                    ))}
-                  </Select>
-                </AFormGroup>
-                {/* color */}
-                <AFormGroup className='mb-0'>
-                  <Select
-                    $width='100%'
-                    $bg='var(--admin-input-bg)'
-                    name='color'
-                    onChange={(e) => handleOtherChange(e, index)}
-                    disabled={salesOrder.orderStatus !== 'pending'}
-                  >
-                    {!isProductChange && (
-                      <option value={val.color}>{val.color}</option>
-                    )}
-
-                    {colors[index]
-                      .split(',')
-                      ?.map((color: string, index: number) => (
-                        <option value={color} key={index}>
-                          {color}
+              return (
+                <OrderGrid key={index} $isAction>
+                  <AFormGroup className='mb-0'>
+                    <Select
+                      $width='100%'
+                      $bg='var(--admin-input-bg)'
+                      name='product'
+                      value={val.product}
+                      onChange={(e) => handleFormChange(e, index)}
+                      disabled={salesOrder.orderStatus !== 'pending'}
+                    >
+                      {!isProductChange && (
+                        <option value={val.product} hidden>
+                          {val.productName}
+                        </option>
+                      )}
+                      {products.map((product: ProductTypes) => (
+                        <option value={product._id} key={product._id}>
+                          {product.productName}
                         </option>
                       ))}
-                  </Select>
-                </AFormGroup>
-                {/* Sizes */}
-                <AFormGroup className='mb-0'>
-                  <Select
-                    $width='100%'
-                    $bg='var(--admin-input-bg)'
-                    name='color'
-                    onChange={(e) => handleOtherChange(e, index)}
-                    disabled={salesOrder.orderStatus !== 'pending'}
-                  >
-                    {!isProductChange && (
-                      <option value={val.size}>{val.size}</option>
-                    )}
+                    </Select>
+                  </AFormGroup>
+                  {/* color */}
+                  <AFormGroup className='mb-0'>
+                    <Select
+                      $width='100%'
+                      $bg='var(--admin-input-bg)'
+                      name='color'
+                      onChange={(e) => handleOtherChange(e, index)}
+                      disabled={salesOrder.orderStatus !== 'pending'}
+                    >
+                      {!isProductChange && (
+                        <option value={val.color}>{val.color}</option>
+                      )}
 
-                    {sizes[index]
-                      ?.split(',')
-                      ?.map((size: string, index: number) => (
-                        <option value={size} key={index}>
-                          {size}
-                        </option>
-                      ))}
-                  </Select>
-                </AFormGroup>
+                      {colors[index]
+                        .split(',')
+                        ?.map((color: string, index: number) => (
+                          <option value={color} key={index}>
+                            {color}
+                          </option>
+                        ))}
+                    </Select>
+                  </AFormGroup>
+                  {/* Sizes */}
+                  <AFormGroup className='mb-0'>
+                    <Select
+                      $width='100%'
+                      $bg='var(--admin-input-bg)'
+                      name='color'
+                      onChange={(e) => handleOtherChange(e, index)}
+                      disabled={salesOrder.orderStatus !== 'pending'}
+                    >
+                      {!isProductChange && (
+                        <option value={val.size}>{val.size}</option>
+                      )}
 
-                <AFormGroup className='mb-0'>
-                  <Input
-                    type='number'
-                    id={`quantity-${index + 1}`}
-                    $dark
-                    name='quantity'
-                    value={val.quantity}
-                    onChange={(e) => handleOtherChange(e, index)}
-                    disabled={salesOrder.orderStatus !== 'pending'}
-                  />
-                </AFormGroup>
-                <AFormGroup className='mb-0'>
-                  <Input
-                    type='text'
-                    id={`price-${index + 1}`}
-                    $dark
-                    name='price'
-                    value={val.sellingPrice}
-                    onChange={() => {}}
-                    disabled={salesOrder.orderStatus !== 'pending'}
-                  />
-                </AFormGroup>
-                <AFormGroup className='mb-0'>
-                  <Input
-                    type='text'
-                    id={`subtotal-${index + 1}`}
-                    $dark
-                    name='subtotal'
-                    value={isNaN(+val.subtotal) ? 0 : val.subtotal}
-                    onChange={() => {}}
-                    disabled={salesOrder.orderStatus !== 'pending'}
-                  />
-                </AFormGroup>
-              </OrderGrid>
-            );
-          })}
-        </div>
-        {total && (
-          <ProductTotal
-            showHeader={false}
-            marginTop='0'
-            btnType='btn'
-            isOrder={true}
-            isDark={true}
-            hideBtn={true}
-            productTotal={{
-              subtotal: total,
-              totalDiscount: discount,
-            }}
-          />
-        )}
-        {salesOrder.orderStatus === 'pending' && (
-          <Button
-            type='button'
-            btnText='Update Order'
-            icon={<FaPlus />}
-            onBtnTrigger={handleSubmit}
-          />
-        )}
-      </>
-    </AdminSection>
+                      {sizes[index]
+                        ?.split(',')
+                        ?.map((size: string, index: number) => (
+                          <option value={size} key={index}>
+                            {size}
+                          </option>
+                        ))}
+                    </Select>
+                  </AFormGroup>
+
+                  <AFormGroup className='mb-0'>
+                    <Input
+                      type='number'
+                      id={`quantity-${index + 1}`}
+                      $dark
+                      name='quantity'
+                      value={val.quantity}
+                      onChange={(e) => handleOtherChange(e, index)}
+                      disabled={salesOrder.orderStatus !== 'pending'}
+                    />
+                  </AFormGroup>
+                  <AFormGroup className='mb-0'>
+                    <Input
+                      type='text'
+                      id={`price-${index + 1}`}
+                      $dark
+                      name='price'
+                      value={val.sellingPrice}
+                      onChange={() => {}}
+                      disabled={salesOrder.orderStatus !== 'pending'}
+                    />
+                  </AFormGroup>
+                  <AFormGroup className='mb-0'>
+                    <Input
+                      type='text'
+                      id={`subtotal-${index + 1}`}
+                      $dark
+                      name='subtotal'
+                      value={isNaN(+val.subtotal) ? 0 : val.subtotal}
+                      onChange={() => {}}
+                      disabled={salesOrder.orderStatus !== 'pending'}
+                    />
+                  </AFormGroup>
+                </OrderGrid>
+              );
+            })}
+          </div>
+          {total && (
+            <ProductTotal
+              showHeader={false}
+              marginTop='0'
+              btnType='btn'
+              isOrder={true}
+              isDark={true}
+              hideBtn={true}
+              productTotal={{
+                subtotal: total,
+                totalDiscount: discount,
+              }}
+            />
+          )}
+          {salesOrder.orderStatus === 'pending' && (
+            <Button
+              type='button'
+              btnText='Update Order'
+              icon={<FaPlus />}
+              onBtnTrigger={handleSubmit}
+            />
+          )}
+        </>
+      </AdminSection>
+    </>
   );
 };
 

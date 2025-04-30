@@ -16,6 +16,7 @@ import { User } from '../../dtos/userDto';
 import { updateData } from '../../api/requests';
 import FormError from '../../ui/FormError';
 import { InfoType } from '../../dtos/utilsDto';
+import { Helmet } from 'react-helmet-async';
 
 export const EditProfileWrapper = styled.div`
   form {
@@ -50,48 +51,53 @@ const EditProfile = () => {
   const user = useOutletContext<User>();
   const { state } = useNavigation();
   return (
-    <EditProfileWrapper>
-      <TabContentWrapper>
-        <ProfileHeader>Update profile</ProfileHeader>
-        <Form id='form' method='patch' encType='multipart/form-data'>
-          {data && <FormError info={data.message} />}
-          <InputGroup
-            type='text'
-            name='fullName'
-            placeholder='Full name*'
-            icon={<FaUserAlt />}
-            defaultValue={user.fullName}
-            mb='2rem'
-            capitalize={true}
-          />
-          <InputGroup
-            type='email'
-            name='email'
-            placeholder='email*'
-            icon={<MdMail />}
-            disabled={true}
-            defaultValue={user.email}
-            mb='2rem'
-          />
-          {/* <label htmlFor='image'>Choose file</label> */}
-          <InputGroup
-            type='file'
-            name='photo'
-            placeholder=''
-            icon={<FaImage />}
-            mb='2rem'
-          />
-          <div className='mt-3'>
-            <Button
-              btnText={
-                state === 'submitting' ? 'Updating...' : 'Update profile'
-              }
-              icon={<GrDocumentUpdate />}
+    <>
+      <Helmet>
+        <title>MettyHair - Update Profile</title>
+      </Helmet>
+      <EditProfileWrapper>
+        <TabContentWrapper>
+          <ProfileHeader>Update profile</ProfileHeader>
+          <Form id='form' method='patch' encType='multipart/form-data'>
+            {data && <FormError info={data.message} />}
+            <InputGroup
+              type='text'
+              name='fullName'
+              placeholder='Full name*'
+              icon={<FaUserAlt />}
+              defaultValue={user.fullName}
+              mb='2rem'
+              capitalize={true}
             />
-          </div>
-        </Form>
-      </TabContentWrapper>
-    </EditProfileWrapper>
+            <InputGroup
+              type='email'
+              name='email'
+              placeholder='email*'
+              icon={<MdMail />}
+              disabled={true}
+              defaultValue={user.email}
+              mb='2rem'
+            />
+            {/* <label htmlFor='image'>Choose file</label> */}
+            <InputGroup
+              type='file'
+              name='photo'
+              placeholder=''
+              icon={<FaImage />}
+              mb='2rem'
+            />
+            <div className='mt-3'>
+              <Button
+                btnText={
+                  state === 'submitting' ? 'Updating...' : 'Update profile'
+                }
+                icon={<GrDocumentUpdate />}
+              />
+            </div>
+          </Form>
+        </TabContentWrapper>
+      </EditProfileWrapper>
+    </>
   );
 };
 

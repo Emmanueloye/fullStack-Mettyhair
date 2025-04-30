@@ -7,13 +7,11 @@ const HelmetSEO = ({
   type,
   url,
   image,
-  keyword,
 }: {
   title: string;
   description: string;
   name: string;
   type: string;
-  keyword: string;
   url?: string;
   image?: string;
 }) => {
@@ -21,7 +19,6 @@ const HelmetSEO = ({
     <Helmet>
       <title>{title}</title>
       <meta name='description' content={description} />
-      <meta name='keyword' content={keyword} />
       <link rel='image_src' href={image} />
       {/* Facebook tags */}
       <meta property='og:type' content={type} />

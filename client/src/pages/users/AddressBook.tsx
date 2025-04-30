@@ -18,6 +18,7 @@ import { Label } from '../../ui/Input';
 import { AFormGroup } from '../../features/adminNavLayouts/AdminUtils';
 import { InfoType } from '../../dtos/utilsDto';
 import FormError from '../../ui/FormError';
+import { Helmet } from 'react-helmet-async';
 
 export const EditProfileWrapper = styled.div`
   form {
@@ -52,67 +53,72 @@ const AddressBook = () => {
   const error = useActionData() as InfoType;
   const { state } = useNavigation();
   return (
-    <EditProfileWrapper>
-      <TabContentWrapper>
-        <ProfileHeader>Address Book</ProfileHeader>
-        <Form id='form' method='patch'>
-          {error && <FormError info={error.message} />}
-          <AFormGroup>
-            <Label htmlFor='address'>Address*</Label>
-            <InputGroup
-              type='text'
-              name='address'
-              icon={<FaMapMarker />}
-              defaultValue={user.address}
-              mb='2rem'
-              capitalize={true}
-            />
-          </AFormGroup>
-          <AFormGroup>
-            <Label htmlFor='phone'>phone*</Label>
-            <InputGroup
-              type='text'
-              name='phone'
-              icon={<FaPhone />}
-              defaultValue={user.phone}
-              mb='2rem'
-              capitalize={true}
-            />
-          </AFormGroup>
-          <AFormGroup>
-            <Label htmlFor='address'>state*</Label>
-            <InputGroup
-              type='text'
-              name='state'
-              icon={<FaHouse />}
-              defaultValue={user.state}
-              mb='2rem'
-              capitalize={true}
-            />
-          </AFormGroup>
-          {/* <label htmlFor='image'>Choose file</label> */}
-          <AFormGroup>
-            <Label htmlFor='country'>Country*</Label>
-            <InputGroup
-              type='text'
-              name='country'
-              icon={<FaFlag />}
-              defaultValue={user.country}
-              mb='2rem'
-              capitalize={true}
-            />
-          </AFormGroup>
-          <div className='mt-3'>
-            <Button
-              btnText={
-                state === 'submitting' ? 'Updating...' : 'Update Address Book'
-              }
-              icon={<GrDocumentUpdate />}
-            />
-          </div>
-        </Form>
-      </TabContentWrapper>
-    </EditProfileWrapper>
+    <>
+      <Helmet>
+        <title>MettyHair - Address book</title>
+      </Helmet>
+      <EditProfileWrapper>
+        <TabContentWrapper>
+          <ProfileHeader>Address Book</ProfileHeader>
+          <Form id='form' method='patch'>
+            {error && <FormError info={error.message} />}
+            <AFormGroup>
+              <Label htmlFor='address'>Address*</Label>
+              <InputGroup
+                type='text'
+                name='address'
+                icon={<FaMapMarker />}
+                defaultValue={user.address}
+                mb='2rem'
+                capitalize={true}
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Label htmlFor='phone'>phone*</Label>
+              <InputGroup
+                type='text'
+                name='phone'
+                icon={<FaPhone />}
+                defaultValue={user.phone}
+                mb='2rem'
+                capitalize={true}
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Label htmlFor='address'>state*</Label>
+              <InputGroup
+                type='text'
+                name='state'
+                icon={<FaHouse />}
+                defaultValue={user.state}
+                mb='2rem'
+                capitalize={true}
+              />
+            </AFormGroup>
+            {/* <label htmlFor='image'>Choose file</label> */}
+            <AFormGroup>
+              <Label htmlFor='country'>Country*</Label>
+              <InputGroup
+                type='text'
+                name='country'
+                icon={<FaFlag />}
+                defaultValue={user.country}
+                mb='2rem'
+                capitalize={true}
+              />
+            </AFormGroup>
+            <div className='mt-3'>
+              <Button
+                btnText={
+                  state === 'submitting' ? 'Updating...' : 'Update Address Book'
+                }
+                icon={<GrDocumentUpdate />}
+              />
+            </div>
+          </Form>
+        </TabContentWrapper>
+      </EditProfileWrapper>
+    </>
   );
 };
 

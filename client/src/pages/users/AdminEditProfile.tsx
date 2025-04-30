@@ -15,52 +15,58 @@ import Input from '../../ui/Input';
 import { GrDocumentUpdate } from 'react-icons/gr';
 import { updateData } from '../../api/requests';
 import { User } from '../../dtos/userDto';
+import { Helmet } from 'react-helmet-async';
 
 const AdminEditProfile = () => {
   const user = useOutletContext<User>();
   const { state } = useNavigation();
   return (
-    <AdminSection>
-      <AdminHeader>
-        <h4>Update profile</h4>
-      </AdminHeader>
-      <TabContentWrapper $dark={true}>
-        <Form id='form' method='patch' encType='multipart/form-data'>
-          <AFormGroup>
-            <Input
-              type='text'
-              name='fullName'
-              placeholder='Full name*'
-              defaultValue={user.fullName}
-              $dark={true}
-              $capitalize={true}
-            />
-          </AFormGroup>
-          <AFormGroup>
-            <Input
-              type='email'
-              name='email'
-              placeholder='Email*'
-              defaultValue={user.email}
-              $dark={true}
-            />
-          </AFormGroup>
+    <>
+      <Helmet>
+        <title>MettyHair - Update Profile</title>
+      </Helmet>
+      <AdminSection>
+        <AdminHeader>
+          <h4>Update profile</h4>
+        </AdminHeader>
+        <TabContentWrapper $dark={true}>
+          <Form id='form' method='patch' encType='multipart/form-data'>
+            <AFormGroup>
+              <Input
+                type='text'
+                name='fullName'
+                placeholder='Full name*'
+                defaultValue={user.fullName}
+                $dark={true}
+                $capitalize={true}
+              />
+            </AFormGroup>
+            <AFormGroup>
+              <Input
+                type='email'
+                name='email'
+                placeholder='Email*'
+                defaultValue={user.email}
+                $dark={true}
+              />
+            </AFormGroup>
 
-          <AFormGroup>
-            <Input type='file' name='photo' $dark={true} />
-          </AFormGroup>
+            <AFormGroup>
+              <Input type='file' name='photo' $dark={true} />
+            </AFormGroup>
 
-          <AFormGroup>
-            <Button
-              btnText={
-                state === 'submitting' ? 'Updating...' : 'Update profile'
-              }
-              icon={<GrDocumentUpdate />}
-            />
-          </AFormGroup>
-        </Form>
-      </TabContentWrapper>
-    </AdminSection>
+            <AFormGroup>
+              <Button
+                btnText={
+                  state === 'submitting' ? 'Updating...' : 'Update profile'
+                }
+                icon={<GrDocumentUpdate />}
+              />
+            </AFormGroup>
+          </Form>
+        </TabContentWrapper>
+      </AdminSection>
+    </>
   );
 };
 

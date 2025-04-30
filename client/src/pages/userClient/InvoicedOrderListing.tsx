@@ -114,6 +114,7 @@ const InvoicedOrderListing = () => {
   const column = '0.6fr 1.7fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr';
 
   return (
+    
     <AdminSection type='light'>
       {/* Header */}
       <AdminHeader>

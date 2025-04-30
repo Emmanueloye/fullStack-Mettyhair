@@ -23,6 +23,7 @@ import { CartTypes } from '../../dtos/productsDto';
 import { useQuery } from '@tanstack/react-query';
 import { User } from '../../dtos/userDto';
 import { InfoType } from '../../dtos/utilsDto';
+import { Helmet } from 'react-helmet-async';
 
 const SectionWrapper = styled.section`
   padding-top: 6rem;
@@ -80,32 +81,39 @@ const Checkout = () => {
   );
 
   return (
-    <SectionWrapper>
-      <Form method='post'>
-        <Container>
-          <div className='grid'>
-            <BillingAddress user={user} error={error} countries={countries} />
+    <>
+      {/* HTML header for seo */}
 
-            <div className='box'>
-              <Header $mb='1rem'>
-                <h4>your order</h4>
-              </Header>
-              {carts.map((cart: CartTypes) => (
-                <OrderSummary cart={cart} key={cart._id} />
-              ))}
+      <Helmet>
+        <title>MettyHair - Checkout</title>
+      </Helmet>
+      <SectionWrapper>
+        <Form method='post'>
+          <Container>
+            <div className='grid'>
+              <BillingAddress user={user} error={error} countries={countries} />
 
-              {/* Update the data from the parent */}
-              <ProductTotal
-                productTotal={productTotalCalc}
-                showHeader={false}
-                marginTop='0'
-                btnType='btn'
-              />
+              <div className='box'>
+                <Header $mb='1rem'>
+                  <h4>your order</h4>
+                </Header>
+                {carts.map((cart: CartTypes) => (
+                  <OrderSummary cart={cart} key={cart._id} />
+                ))}
+
+                {/* Update the data from the parent */}
+                <ProductTotal
+                  productTotal={productTotalCalc}
+                  showHeader={false}
+                  marginTop='0'
+                  btnType='btn'
+                />
+              </div>
             </div>
-          </div>
-        </Container>
-      </Form>
-    </SectionWrapper>
+          </Container>
+        </Form>
+      </SectionWrapper>
+    </>
   );
 };
 

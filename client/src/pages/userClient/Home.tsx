@@ -47,12 +47,12 @@ const Home = () => {
 
   return (
     <>
+      {/* HTML header for seo */}
       <HelmetSEO
         title='Home - MettyHair'
         description='The best hair vendor in Lagos Nigeria. Buy hair online at MettyHair'
         name='Home - MettyHair'
-        type='MettyHair'
-        keyword='best hair vendor in lagos, affordable hairs, quality hair seller'
+        type='website'
       />
       {/* Hero section */}
       <Hero slides={sliders} />

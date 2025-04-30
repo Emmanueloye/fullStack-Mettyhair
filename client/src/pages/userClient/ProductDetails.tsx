@@ -56,11 +56,10 @@ const ProductDetails = () => {
   return (
     <>
       <HelmetSEO
-        title={product.productName}
+        title={`MettyHair - ${product.productName.toUpperCase()}`}
         description={product.description}
         name={product.productName}
         type='article'
-        keyword='best hair vendor in lagos, affordable hairs, quality hair seller'
         image={product.productImage}
       />
       <section style={{ paddingTop: '3rem' }}>

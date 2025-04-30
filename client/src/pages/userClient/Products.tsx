@@ -14,6 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { PageTypes, ProductTypes } from '../../dtos/productsDto';
 import { useEffect, useState } from 'react';
+import HelmetSEO from '../../features/seo/HelmetSEO';
 
 export const GridWrapper = styled.div`
   position: relative;
@@ -113,44 +114,53 @@ const Products = () => {
   }, [currentPage, data.page, nextPage, previousPage, products, totalPages]);
 
   return (
-    <ProductSection>
-      <Container>
-        <Header $mb='3rem'>
-          <h4>All Products</h4>
-        </Header>
-        {/* Sidebar toggle */}
-        <div
-          className='sidebar-toggle'
-          onClick={() => dispatch(uiActions.openSideBar())}
-        >
-          <Icon
-            icon={<FaBarsStaggered />}
-            iconSize='3rem'
-            color='var(--primary-color)'
-            text='Filter'
-          />
-        </div>
-        <GridWrapper>
-          {/* Sidebar */}
-          <ProductSideBar
-            categories={categories}
-            subcategories={subcategories}
-          />
-          {/* Main product grid */}
-          <MainProduct products={allProducts} />
-        </GridWrapper>
-        {totalPages > 1 && (
-          <Pagination
-            totalPages={pages!.totalPages}
-            currentPage={pages!.currentPage}
-            nextPage={pages?.nextPage}
-            previousPage={pages?.previousPage}
-            pageLink='/products'
-            marginTop='5rem'
-          />
-        )}
-      </Container>
-    </ProductSection>
+    <>
+      {/* HTML header for seo */}
+      <HelmetSEO
+        title='MettyHair - Products'
+        description='All best hair products you can think off.'
+        name='Products - MettyHair'
+        type='website'
+      />
+      <ProductSection>
+        <Container>
+          <Header $mb='3rem'>
+            <h4>All Products</h4>
+          </Header>
+          {/* Sidebar toggle */}
+          <div
+            className='sidebar-toggle'
+            onClick={() => dispatch(uiActions.openSideBar())}
+          >
+            <Icon
+              icon={<FaBarsStaggered />}
+              iconSize='3rem'
+              color='var(--primary-color)'
+              text='Filter'
+            />
+          </div>
+          <GridWrapper>
+            {/* Sidebar */}
+            <ProductSideBar
+              categories={categories}
+              subcategories={subcategories}
+            />
+            {/* Main product grid */}
+            <MainProduct products={allProducts} />
+          </GridWrapper>
+          {totalPages > 1 && (
+            <Pagination
+              totalPages={pages!.totalPages}
+              currentPage={pages!.currentPage}
+              nextPage={pages?.nextPage}
+              previousPage={pages?.previousPage}
+              pageLink='/products'
+              marginTop='5rem'
+            />
+          )}
+        </Container>
+      </ProductSection>
+    </>
   );
 };
 
