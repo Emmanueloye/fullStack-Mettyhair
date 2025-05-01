@@ -117,9 +117,9 @@ app.use('/api/v1/expenses', expenseRouter);
 
 // import dist from './../../client/dist';
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './../../client/dist', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, './../../client/dist', 'index.html'));
+// });
 
 // mount application wide error handlers
 app.use(notFoundMiddleware);
