@@ -2,6 +2,7 @@ import {
   Outlet,
   redirect,
   ScrollRestoration,
+  useLoaderData,
   useNavigate,
   useNavigation,
 } from 'react-router-dom';
@@ -15,26 +16,28 @@ import { useEffect } from 'react';
 import { authActions } from '../../store/authAction';
 import UserLoader from './UserLoader';
 import { toast } from 'react-toastify';
+import { User } from '../../dtos/userDto';
 
 const AdminLayout = () => {
   const { isAdminSidebarOpen } = useAppSelector((state) => state.adminUI);
+
+  const user = useLoaderData() as User;
+  // console.log(x);
 
   const dispatch = useAppDispatch();
   const { state } = useNavigation();
   const navigate = useNavigate();
 
-  const { data } = useQuery({
-    queryKey: ['user'],
-    queryFn: () => getOnlyData({ url: '/users/me' }),
-  });
+  // const { data } = useQuery({
+  //   queryKey: ['user'],
+  //   queryFn: () => getOnlyData({ url: '/users/me' }),
+  // });
   const {
     data: { contacts },
   } = useQuery({
     queryKey: ['fetchContact', 'unreadMails'],
     queryFn: () => getOnlyData({ url: '/contacts?isRead=false' }),
   });
-
-  const { user } = data;
 
   const logout = async () => {
     await customFetch.delete('/auth/logout');
@@ -76,15 +79,26 @@ export const loader = async () => {
     queryFn: () => getOnlyData({ url: '/contacts?isRead=false' }),
   });
 
-  const resp = await queryClient.ensureQueryData({
-    queryKey: ['user'],
-    queryFn: () => getOnlyData({ url: '/users/me' }),
-  });
+  queryClient.invalidateQueries({ queryKey: ['user'] });
+  const result = await getOnlyData({ url: '/users/me' });
 
-  if (!resp.user.role.split('-').includes('admin')) {
-    queryClient.invalidateQueries({ queryKey: ['user'] });
+  if (result.status === 'fail') {
     return redirect('/');
   }
 
-  return resp;
+  // console.log(result.user.role.split('-'));
+
+  // const resp = await queryClient.ensureQueryData({
+  //   queryKey: ['user'],
+  //   queryFn: () => getOnlyData({ url: '/users/me' }),
+  // });
+
+  if (
+    result.status === 'success' &&
+    !result.user.role.split('-').includes('admin')
+  ) {
+    return redirect('/');
+  }
+
+  return result.user;
 };

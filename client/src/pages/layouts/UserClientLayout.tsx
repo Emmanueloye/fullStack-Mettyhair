@@ -79,6 +79,13 @@ const UserClientLayout = () => {
     }
   }, [dispatch, user]);
 
+  useEffect(() => {
+    if (user) {
+      localStorage.removeItem('xctid');
+      queryClient.invalidateQueries({ queryKey: ['fetchCart'] });
+    }
+  }, [user]);
+
   return (
     <>
       <header className='header'>

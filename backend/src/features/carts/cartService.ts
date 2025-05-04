@@ -74,6 +74,8 @@ export const getUserCarts = async (req: Request, res: Response) => {
   // Update cartid with logged in user if it's available.
   let filterObj = await utils.updateCartQuery(req, Cart);
 
+  // console.log(filterObj);
+
   const getFeatures = new utils.GetRequestAPI(Cart.find(filterObj), req.query)
     .filter()
     .sort()
@@ -83,6 +85,8 @@ export const getUserCarts = async (req: Request, res: Response) => {
 
   const carts = await getFeatures.query;
   const updatedCarts = await utils.mergeCartItems(Cart, carts);
+
+  // console.log(updatedCarts);
 
   // const documentCount = await Cart.find().countDocuments();
 

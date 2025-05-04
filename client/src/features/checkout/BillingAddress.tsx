@@ -13,6 +13,7 @@ import { FaTreeCity } from 'react-icons/fa6';
 import { CityType, CountryType, StateType } from '../../dtos/locationDto';
 import { useState } from 'react';
 import { getOnlyData } from '../../api/requests';
+import { Label } from '../../ui/Input';
 
 const BillingAddress = ({
   user,
@@ -62,120 +63,144 @@ const BillingAddress = ({
       <CheckoutInfoWrapper $dark={isDark}>
         {error && <FormError info={error.message} />}
         <div className='info-grid'>
-          <InputGroup
-            type='text'
-            name='fullName'
-            placeholder='Full name*'
-            icon={<FaUserAlt />}
-            mb='2.5rem'
-            disabled={disabled || false}
-            isDark={isDark}
-            defaultValue={user?.fullName}
-            capitalize={true}
-          />
-          <InputGroup
-            type='email'
-            name='email'
-            placeholder='Email*'
-            icon={<MdMail />}
-            mb='2.5rem'
-            disabled={disabled || false}
-            isDark={isDark}
-            defaultValue={user?.email}
-          />
-          <InputGroup
-            type='text'
-            name='phone'
-            placeholder='Phone*'
-            icon={<FaPhone />}
-            mb='2.5rem'
-            disabled={disabled || false}
-            isDark={isDark}
-            defaultValue={user?.phone}
-          />
-          <InputGroup
-            type='text'
-            name='address'
-            placeholder='Address*'
-            icon={<FaAddressBook />}
-            mb='2.5rem'
-            disabled={disabled || false}
-            isDark={isDark}
-            defaultValue={user?.address}
-          />
-          {/* Country select input */}
-          <FormGroup $height='4.4rem'>
-            <SelectInput
-              name='country'
-              bg={bg || 'var(--grey)'}
-              width='100%'
+          <div>
+            <Label htmlFor='fullname'>full name</Label>
+            <InputGroup
+              type='text'
+              name='fullName'
+              placeholder='Full name*'
+              icon={<FaUserAlt />}
+              mb='2.5rem'
               disabled={disabled || false}
-              onInputChange={handleCountryChange}
-            >
-              <option value='' hidden>
-                select country
-              </option>
-              {countries?.map((item) => (
-                <option value={item._id} key={item._id}>
-                  {item.country}
+              isDark={isDark}
+              defaultValue={user?.fullName}
+              capitalize={true}
+            />
+          </div>
+          <div>
+            <Label htmlFor='email'>email</Label>
+            <InputGroup
+              type='email'
+              name='email'
+              placeholder='Email*'
+              icon={<MdMail />}
+              mb='2.5rem'
+              disabled={disabled || false}
+              isDark={isDark}
+              defaultValue={user?.email}
+            />
+          </div>
+          <div>
+            <Label htmlFor='phone'>phone</Label>
+            <InputGroup
+              type='text'
+              name='phone'
+              placeholder='Phone*'
+              icon={<FaPhone />}
+              mb='2.5rem'
+              disabled={disabled || false}
+              isDark={isDark}
+              defaultValue={user?.phone}
+            />
+          </div>
+          <div>
+            <Label htmlFor='address'>address</Label>
+            <InputGroup
+              type='text'
+              name='address'
+              placeholder='Address*'
+              icon={<FaAddressBook />}
+              mb='2.5rem'
+              disabled={disabled || false}
+              isDark={isDark}
+              defaultValue={user?.address}
+            />
+          </div>
+          {/* Country select input */}
+          <div>
+            <Label htmlFor='country'>country</Label>
+            <FormGroup $height='4.4rem'>
+              <SelectInput
+                name='country'
+                bg={bg || 'var(--grey)'}
+                width='100%'
+                disabled={disabled || false}
+                onInputChange={handleCountryChange}
+              >
+                <option value='' hidden>
+                  select country
                 </option>
-              ))}
-            </SelectInput>
-            <span className='a-icon'>
-              <FaFlag />
-            </span>
-          </FormGroup>
+                {countries?.map((item) => (
+                  <option value={item._id} key={item._id}>
+                    {item.country}
+                  </option>
+                ))}
+              </SelectInput>
+              <span className='a-icon'>
+                <FaFlag />
+              </span>
+            </FormGroup>
+          </div>
 
           {/* State select input */}
-          <FormGroup $height='4.4rem'>
-            <SelectInput
-              name='state'
-              bg={bg || 'var(--grey)'}
-              width='100%'
-              disabled={disabled || false}
-              onInputChange={handleStateChange}
-            >
-              <option value='' hidden>
-                select state
-              </option>
-              {states?.map((item) => (
-                <option value={item._id} key={item._id}>
-                  {item.state}
+          <div>
+            <Label htmlFor='state'>state</Label>
+            <FormGroup $height='4.4rem'>
+              <SelectInput
+                name='state'
+                bg={bg || 'var(--grey)'}
+                width='100%'
+                disabled={disabled || false}
+                onInputChange={handleStateChange}
+              >
+                <option value='' hidden>
+                  select state
                 </option>
-              ))}
-            </SelectInput>
-            <span className='a-icon'>
-              <BiSolidCity />
-            </span>
-          </FormGroup>
-          <FormGroup $height='4.4rem'>
-            <SelectInput
-              name='city'
-              bg={bg || 'var(--grey)'}
-              width='100%'
-              disabled={disabled || false}
-            >
-              <option value='' hidden>
-                select city
-              </option>
-              {cities.map((item) => (
-                <option value={item._id} key={item._id}>
-                  {item.city}
+                {states?.map((item) => (
+                  <option value={item._id} key={item._id}>
+                    {item.state}
+                  </option>
+                ))}
+              </SelectInput>
+              <span className='a-icon'>
+                <BiSolidCity />
+              </span>
+            </FormGroup>
+          </div>
+          <div>
+            <Label htmlFor='city'>city</Label>
+            <FormGroup $height='4.4rem'>
+              <SelectInput
+                name='city'
+                bg={bg || 'var(--grey)'}
+                width='100%'
+                disabled={disabled || false}
+              >
+                <option value='' hidden>
+                  select city
                 </option>
-              ))}
-            </SelectInput>
-            <span className='a-icon'>
-              <FaTreeCity />
-            </span>
-          </FormGroup>
+                {cities.map((item) => (
+                  <option value={item._id} key={item._id}>
+                    {item.city}
+                  </option>
+                ))}
+              </SelectInput>
+              <span className='a-icon'>
+                <FaTreeCity />
+              </span>
+            </FormGroup>
+          </div>
         </div>
-        <TextArea
-          rows={8}
-          placeholder='Note about your order e.g. special note for delivery. This is optional.'
-          disabled={disabled || false}
-          $dark={isDark}
-          name='note'
-        />
+        <div className='mt-3'>
+          <Label htmlFor='note'>note</Label>
+          <TextArea
+            rows={8}
+            placeholder='Note about your order e.g. special note for delivery. This is optional.'
+            disabled={disabled || false}
+            $dark={isDark}
+            name='note'
+          />
+        </div>
       </CheckoutInfoWrapper>
     </div>
   );

@@ -11,6 +11,8 @@ import { getData, queryClient } from '../../api/requests';
 import { useQuery } from '@tanstack/react-query';
 import { CartTypes } from '../../dtos/productsDto';
 import HelmetSEO from '../../features/seo/HelmetSEO';
+import { useOutletContext } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const CartWrapper = styled.section`
   padding-top: 5rem;
@@ -31,6 +33,9 @@ const CartWrapper = styled.section`
 `;
 
 const Cart = () => {
+  const user = useOutletContext();
+  console.log(user);
+
   const {
     data: { carts },
   } = useQuery({
@@ -42,20 +47,27 @@ const Cart = () => {
       }),
   });
 
-  const productTotalCalc = carts.reduce(
+  useEffect(() => {
+    if (user) {
+      localStorage.removeItem('xctid');
+      queryClient.invalidateQueries({ queryKey: ['fetchCart'] });
+    }
+  }, [user]);
+
+  const productTotalCalc = carts?.reduce(
     (acc: { subtotal: number; totalDiscount: number }, cart: CartTypes) => {
       // Calculate discount price per unit.
-      const discountPerUnit = cart.product.discountPrice
-        ? cart.product.sellingPrice - cart.product.discountPrice
+      const discountPerUnit = cart?.product?.discountPrice
+        ? cart?.product?.sellingPrice - cart?.product?.discountPrice
         : 0;
 
       // Calculate subtotal using selling price.
       const subtotal = (acc.subtotal +=
-        cart.product.sellingPrice * cart.quantity);
+        cart?.product?.sellingPrice * cart?.quantity);
 
       // Calculate subtotal using selling price.
       const totalDiscount = (acc.totalDiscount +=
-        discountPerUnit * cart.quantity);
+        discountPerUnit * cart?.quantity);
 
       return { subtotal, totalDiscount };
     },
@@ -80,7 +92,7 @@ const Cart = () => {
                 <h4>Shopping cart</h4>
               </Header>
               {carts?.length > 0 ? (
-                carts.map((cart: CartTypes) => (
+                carts?.map((cart: CartTypes) => (
                   <CartProduct key={cart._id} cart={cart} />
                 ))
               ) : (
@@ -91,10 +103,10 @@ const Cart = () => {
                   url='/'
                 />
               )}
-              {carts.length > 0 && <Coupon />}
+              {carts?.length > 0 && <Coupon />}
             </div>
             {/* Update to receive data dynamically from the parent. */}
-            {carts.length > 0 && (
+            {carts?.length > 0 && (
               <ProductTotal showHeader={true} productTotal={productTotalCalc} />
             )}
           </div>

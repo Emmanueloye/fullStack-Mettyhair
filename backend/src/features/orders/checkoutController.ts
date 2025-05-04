@@ -92,7 +92,7 @@ export const dhl = async (req: Request, res: Response) => {
     res.send(resp.data);
   } catch (error) {
     if (isAxiosError(error)) {
-      console.log(error.response?.data);
+      // console.log(error.response?.data);
 
       res.send(error.response?.data);
     }

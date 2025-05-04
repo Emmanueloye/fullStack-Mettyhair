@@ -33,8 +33,8 @@ export const StatementBox = styled.div`
       }
     }
   }
-  .color-red {
-    color: var(--main-red-700);
+  .color {
+    color: var(--admin-sec-text-color);
   }
   .lines {
     &:nth-of-type(odd) {
@@ -48,7 +48,7 @@ export const StatementBox = styled.div`
   }
   .color {
     /* color: var(--admin-sec-text-color); */
-    color: var(--main-red-300);
+    /* color: var(--main-red-300); */
   }
   .font-bold {
     font-weight: 600;

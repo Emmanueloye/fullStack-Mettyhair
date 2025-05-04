@@ -57,15 +57,15 @@ const Home = () => {
       {/* Hero section */}
       <Hero slides={sliders} />
       {/* category section */}
-      {categories?.length > 1 && <Category categories={categories} />}
+      {categories?.length > 3 && <Category categories={categories} />}
       {/* new arrivals section */}
-      {newArrivels?.length >= 0 && (
+      {newArrivels?.length > 3 && (
         <ProductDisplay products={newArrivels} title='new arrival' />
       )}
       {/* special deal section */}
       <SpecialDeal />
       {/* best seller section */}
-      {bestSeller?.length >= 0 && (
+      {bestSeller?.length > 3 && (
         <ProductDisplay products={bestSeller} title='best seller' />
       )}
     </>

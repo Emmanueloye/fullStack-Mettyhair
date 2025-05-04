@@ -47,9 +47,15 @@ export const updateCartQuery = async (req: Request, Cart: any) => {
   }
 
   // If the user is not signed in, we use cartid coming from request headers
-  if (!req.signedCookies.refreshToken) {
+  if (req.headers.cartid) {
     filterObj = { cartId: req.headers.cartid };
   }
+
+  if (!req.signedCookies.refreshToken && !req.headers.cartid) {
+    filterObj = { cartid: '' };
+  }
+
+  // This deals with users that are not logged in and do not have cart id in the header
 
   return filterObj;
 };

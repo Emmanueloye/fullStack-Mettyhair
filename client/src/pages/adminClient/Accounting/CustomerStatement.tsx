@@ -120,7 +120,7 @@ const CustomerStatement = () => {
             />
           </div>
           <StatementBox id='statement'>
-            <div className='text-center color-red'>
+            <div className='text-center color'>
               <h3>Metty General Merchant</h3>
               <p className='text-center fw-500'>Customer Statement</p>
             </div>

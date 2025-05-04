@@ -100,8 +100,6 @@ export const verifyTransaction = async (
       const orderNumber = uid.rnd();
       const session = await startSession();
 
-      console.log(data);
-
       await session.withTransaction(async () => {
         // Create new order.
         const newOrder = await Order.create({
